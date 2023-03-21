@@ -8,6 +8,10 @@
     "watch":"node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LightCode5794/LuxeWatch.git"
+  },
   "keywords": [
     "LuxeWatch",
     "nodejs",
@@ -17,6 +21,10 @@
   ],
   "author": "HoangTran",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LightCode5794/LuxeWatch/issues"
+  },
+  "homepage": "https://github.com/LightCode5794/LuxeWatch#readme",
   "dependencies": {
     "express": "^4.18.2",
     "express-handlebars": "^7.0.2"
