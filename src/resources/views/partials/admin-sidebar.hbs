@@ -1,0 +1,132 @@
+<section id="sidebar">
+    <div>
+        <div id="sidebar-container" class=" sidebar-container d-flex p-3 flex-column flex-shrink-0  bg-light">
+            <button class="btn btn-close btn-close-sidebar"></button>
+
+            <div
+                class="sidebar-logo d-flex align-items-center text-decoration-none justify-content-between border-bottom m-2">
+
+                <img src="../../assets/images/logo/LogoShopWatch.png" alt="" width="100%">
+
+            </div>
+
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link link-dark d-flex align-items-center" aria-current="page">
+
+                        <i class="nav-link__icon ti-dashboard"></i>
+                        <span class="nav-link__title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn sub-btn nav-link link-dark align-items-center rounded collapsed text-start d-flex justify-content-between"
+                        data-bs-toggle="collapse" data-bs-target="#catalog-collapse" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <i class="nav-link__icon ti-server"></i>
+                            <span class="sub-btn__title">Catalogs</span>
+                        </div>
+
+                        <span class="sub-btn__arrow"><i class="ti-angle-right"></i></span>
+                    </a>
+                    <div class="nav-item__sub-menu collapse" id="catalog-collapse">
+                        <ul class="sub-btn-nav list-unstyled fw-normal">
+                            <li><a href="productsList.html"
+                                    class="sub-btn-nav__item nav-link link-dark rounded">Products List</a>
+                            </li>
+                            <li><a href="categoriesList.html"
+                                    class="sub-btn-nav__item nav-link link-dark rounded">Categories List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="customersList.html" class="nav-link link-dark  d-flex align-items-center"
+                        aria-current="page">
+
+                        <i class="nav-link__icon ti-user"></i>
+                        <span class="nav-link__title">Customerss List</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn sub-btn nav-link link-dark align-items-center rounded collapsed text-start d-flex justify-content-between"
+                        data-bs-toggle="collapse" data-bs-target="#customer-collapse" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <i class="nav-link__icon ti-user"></i>
+                            <span class="sub-btn__title">Customers</span>
+                        </div>
+                        <span class="sub-btn__arrow"><i class="ti-angle-right"></i></span>
+                    </a>
+                    <div class="collapse nav-item__sub-menu" id="customer-collapse">
+                        <ul class="sub-btn-nav list-unstyled fw-normal">
+                            <li><a href="customersList.html"
+                                    class="sub-btn-nav__item nav-link link-dark rounded">Customers List</a>
+                            </li>
+                            <li><a href="#" class="sub-btn-nav__item nav-link link-dark rounded">Customer</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="odersList.html" class="nav-link link-dark  d-flex align-items-center" aria-current="page">
+                        <i class="nav-link__icon ti-shopping-cart-full"></i>
+                        <span class="nav-link__title">Orders List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn sub-btn nav-link link-dark align-items-center rounded collapsed text-start d-flex justify-content-between"
+                        data-bs-toggle="collapse" data-bs-target="#oder-collapse" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <i class="nav-link__icon ti-shopping-cart-full"></i>
+                            <span class="sub-btn__title">Orders</span>
+                        </div>
+                        <span class="sub-btn__arrow"><i class="ti-angle-right"></i></span>
+                    </a>
+                    <div class="collapse nav-item__sub-menu" id="oder-collapse">
+                        <ul class="sub-btn-nav list-unstyled fw-normal">
+                            <li><a href="odersList.html" class="sub-btn-nav__item nav-link link-dark rounded">Orders
+                                    List</a>
+                            </li>
+                            <li><a href="#" class="sub-btn-nav__item nav-link link-dark rounded">Order</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn sub-btn nav-link link-dark align-items-center rounded collapsed text-start d-flex justify-content-between"
+                        data-bs-toggle="collapse" data-bs-target="#staff-collapse" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <i class="nav-link__icon ti-id-badge"></i>
+                            <span class="sub-btn__title">Staffs</span>
+                        </div>
+                        <span class="sub-btn__arrow"><i class="ti-angle-right"></i></span>
+                    </a>
+                    <div class="collapse nav-item__sub-menu" id="staff-collapse">
+                        <ul class="sub-btn-nav list-unstyled fw-normal">
+                            <li><a href="#" class="sub-btn-nav__item nav-link link-dark rounded">Staffs List</a>
+                            </li>
+                            <li><a href="#" class="sub-btn-nav__item nav-link link-dark rounded">Staff</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="admin-drop dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://img.freepik.com/free-vector/flat-customer-support-illustration_23-2148899114.jpg?w=1380&t=st=1670534289~exp=1670534889~hmac=bb999a83002a026b60c324104a2233f750aa17fb936fc01f86ed019ab0ea9654"
+                        alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>Admin</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
