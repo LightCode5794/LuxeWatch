@@ -1,7 +1,6 @@
 @import 'variables';
 @import 'dashboard';
 
-
 // <===========================================================================>
 /* css for side bar */
 .sidebar-container {
@@ -13,12 +12,9 @@
     transition: 0.4s ease;
     transition-property: left;
     z-index: 1000;
-  
-  }
-  
+}
 
 .sidebar-logo {
-
     /* margin-bottom: $height-header); */
     height: $height-header;
 
@@ -39,7 +35,6 @@
         margin-left: 0 !important;
     }
 
-
     .btn-close-sidebar {
         display: block;
     }
@@ -49,7 +44,6 @@
     .footer-container {
         flex-wrap: wrap;
         align-content: center !important;
-
     }
 
     .copyright,
@@ -61,13 +55,11 @@
 @media (max-width: 575px) {
     .search-conatiner {
         border: none !important;
-
     }
 
     .search-field {
         display: none !important;
     }
-
 }
 
 .sub-btn {
@@ -76,17 +68,15 @@
 }
 
 .sub-btn__arrow {
-    transition: transform .2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
-.sub-btn[aria-expanded="true"] {
+.sub-btn[aria-expanded='true'] {
     background-color: gainsboro;
 }
 
-
-.sub-btn[aria-expanded="true"] .sub-btn__arrow {
+.sub-btn[aria-expanded='true'] .sub-btn__arrow {
     transform: rotate(90deg);
-
 }
 
 .sub-btn-nav__item {
@@ -99,24 +89,18 @@
 
 .nav-link__icon {
     font-size: 18px;
-    margin-right: .5rem;
-
+    margin-right: 0.5rem;
 }
 
 .admin-drop {
     height: 3rem;
-
-
-
 }
-
 
 /* content-page */
 #content-page {
     width: auto;
     margin-left: $width-sidebar;
     transition: margin-left 0.4s ease;
-
 }
 
 #main-view {
@@ -130,9 +114,7 @@
     top: 0;
     right: 0;
     z-index: 100;
-
 }
-
 
 .header-container {
     height: $height-header;
@@ -150,7 +132,6 @@
     cursor: pointer;
 }
 
-
 /* search field */
 
 .search-conatiner {
@@ -162,14 +143,12 @@
     align-items: center;
     justify-content: space-evenly;
     margin: auto;
-
 }
 
 .btn-search {
     margin-right: 4px;
     background: transparent;
     border: none;
-
 }
 
 .search-field {
@@ -196,12 +175,10 @@
 /* footer */
 
 .footer-container {
-
     background-color: white;
     height: $height-footer;
     width: calc(100% - #{$width-sidebar});
     width: 100%;
-
 }
 
 .footer-container .copyright,
