@@ -10,6 +10,8 @@ const db = require('./config/db');
 const routes = require('./routes');
 
 const passport = require('passport');
+
+require("./config/passport"); //check sign in before
 require('./config/google');
 
 const app = express();
@@ -66,7 +68,7 @@ app.get(
 
 app.use(express.static(path.join(__dirname, 'public')));
 //routes init
-//routes(app);
+routes(app);
 // app.get('/', (req, res) => {
 //   res.render('admin/dashboard', {layout: 'admin'});
 

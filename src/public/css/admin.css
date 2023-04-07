@@ -33,14 +33,14 @@
   transform: scale(1); }
 
 .card-statistic__delta--rise {
-  color: #47AD24; }
+  color: #47ad24; }
 
 .card-statistic__delta--fall {
-  color: #E42E2E; }
+  color: #e42e2e; }
 
 .card-statistic__caption {
   font-size: 13px;
-  color: #828F99; }
+  color: #828f99; }
 
 /* card active users */
 .saw-pulse__counter {
@@ -57,6 +57,33 @@
 .table-pages-user-actived tr > th:not(:first-child),
 .table-pages-user-actived tr > td:not(:first-child) {
   text-align: right; }
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 1; }
+  .hr-text:before {
+    content: '';
+    background: #818078;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px; }
+  .hr-text:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+    padding: 0 .5em;
+    line-height: 1.5em;
+    color: #818078;
+    background-color: #fcfcfa; }
 
 /* css for side bar */
 .sidebar-container {
@@ -105,12 +132,12 @@
   width: 100%; }
 
 .sub-btn__arrow {
-  transition: transform .2s ease-in-out; }
+  transition: transform 0.2s ease-in-out; }
 
-.sub-btn[aria-expanded="true"] {
+.sub-btn[aria-expanded='true'] {
   background-color: gainsboro; }
 
-.sub-btn[aria-expanded="true"] .sub-btn__arrow {
+.sub-btn[aria-expanded='true'] .sub-btn__arrow {
   transform: rotate(90deg); }
 
 .sub-btn-nav__item {
@@ -121,7 +148,7 @@
 
 .nav-link__icon {
   font-size: 18px;
-  margin-right: .5rem; }
+  margin-right: 0.5rem; }
 
 .admin-drop {
   height: 3rem; }
@@ -188,7 +215,7 @@
   border-radius: 5px;
   border: 2px solid #e6e6e6;
   padding: 8px 16px;
-  background-color: #FF6C60; }
+  background-color: #ff6c60; }
 
 /* css for footer */
 /* footer */
