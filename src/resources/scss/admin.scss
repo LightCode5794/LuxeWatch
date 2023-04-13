@@ -1,6 +1,21 @@
 @import 'variables';
 @import 'dashboard';
 @import 'login';
+
+
+
+//<============================================================================>
+
+#content-page {
+    display: flex;
+    flex-direction:  column;
+    min-height: 100vh;
+    
+    .container-body {
+        flex: 1;
+    }
+}
+
 // <===========================================================================>
 /* css for side bar */
 .sidebar-container {
@@ -24,6 +39,10 @@
 .btn-close-sidebar {
     display: none;
     margin-left: 90%;
+
+    .content-page {
+        flex: 1;
+    }
 }
 
 @media (max-width: 992px) {
@@ -177,8 +196,8 @@
 .footer-container {
     background-color: white;
     height: $height-footer;
-    width: calc(100% - #{$width-sidebar});
     width: 100%;
+    // width: calc(100% - #{$width-sidebar});
 }
 
 .footer-container .copyright,

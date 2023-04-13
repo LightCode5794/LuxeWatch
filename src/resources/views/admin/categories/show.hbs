@@ -1,0 +1,77 @@
+<div class="row page-title">
+    <div class="py-4">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="h3 m-0">Categories</h1>
+            </div>
+            <div class="col-auto fw-bold">
+                <a href="/admin/categories/create" class="btn btn-primary">New category</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card p-2">
+    <div class="widget-table">
+
+        <table id="Categories-table" class="table order-list-tb ">
+            <thead class="text-primary">
+                <tr>
+                    <th> Name</th>
+                    <th> Description </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- oder 1 -->
+                {{#each categories}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-sm btn-muted d-block" id="widget-context-menu-1"
+                                data-bs-toggle="dropdown" aria-expanded="false" aria-label="More"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="3" height="13" fill="currentColor">
+                                    <path
+                                        d="M1.5,8C0.7,8,0,7.3,0,6.5S0.7,5,1.5,5S3,5.7,3,6.5S2.3,8,1.5,8z M1.5,3C0.7,3,0,2.3,0,1.5S0.7,0,1.5,0 S3,0.7,3,1.5S2.3,3,1.5,3z M1.5,10C2.3,10,3,10.7,3,11.5S2.3,13,1.5,13S0,12.3,0,11.5S0.7,10,1.5,10z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('#Categories-table').DataTable({
+                pageLength: 8,
+                lengthMenu: [8, 15, 20, 50, 100],
+                columnDefs: [{
+                    "targets": [2],
+                    "searchable": false,
+                    "orderable": false,
+                    "visible": true
+                }]
+            });
+        });
+    })
+
+</script>

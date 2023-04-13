@@ -85,6 +85,13 @@
     color: #818078;
     background-color: #fcfcfa; }
 
+#content-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; }
+  #content-page .container-body {
+    flex: 1; }
+
 /* css for side bar */
 .sidebar-container {
   position: fixed;
@@ -104,6 +111,8 @@
 .btn-close-sidebar {
   display: none;
   margin-left: 90%; }
+  .btn-close-sidebar .content-page {
+    flex: 1; }
 
 @media (max-width: 992px) {
   .sidebar-container {
@@ -222,7 +231,6 @@
 .footer-container {
   background-color: white;
   height: 5rem;
-  width: calc(100% - 15rem);
   width: 100%; }
 
 .footer-container .copyright,

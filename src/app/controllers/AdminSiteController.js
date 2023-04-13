@@ -2,7 +2,8 @@ const { singleMongooseToObject } = require('../../util/mongoose');
 
 class CoursesController {
     //[GET] /admin/dashboard
-    show(req, res, next) {
+    dashboard(req, res, next) {
+       // res.json(req.params)
         res.render('admin/dashboard', { layout: 'admin' });
     }
 }
