@@ -11,8 +11,8 @@ const cookieParser = require("cookie-parser");
 const passport = require('passport');
 const flash = require("express-flash");
 
-require("./config/passport"); 
-require("./config/google")
+// require("./config/passport"); 
+// require("./config/google")
 
 const app = express();
 const port = 3000;

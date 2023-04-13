@@ -11,10 +11,15 @@ const userSchema = new Schema({
         required: [true, 'email required'],
         unique: [true, 'email already registered'],
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
     firstName: String,
     lastName: String,
     profilePhoto: String,
     password: String,
+
     source: {
         type: String,
         required: [true, 'source not specified'],

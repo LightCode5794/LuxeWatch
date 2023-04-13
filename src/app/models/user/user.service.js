@@ -1,9 +1,10 @@
 const addGoogleUser =
     (User) =>
-    ({ id, email, firstName, lastName, profilePhoto }) => {
+    ({ id, email, isAdmin, firstName, lastName, profilePhoto }) => {
         const user = new User({
             id,
             email,
+            isAdmin,
             firstName,
             lastName,
             profilePhoto,

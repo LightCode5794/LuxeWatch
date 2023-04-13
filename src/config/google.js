@@ -3,9 +3,6 @@ const passport = require('passport');
 const UserService = require("../app/models/user");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //const keys = require('../../keys');
-
-console.log(process.env.CALLBACK_URL);
-
 passport.use(
 
     new GoogleStrategy(
@@ -15,7 +12,7 @@ passport.use(
             callbackURL: process.env.CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
-             //console.log('user profile is: ', profile);
+            //console.log('user profile is: ', profile);
             const id = profile.id;
             const email = profile.emails[0].value;
             const firstName = profile.name.givenName;
@@ -23,6 +20,9 @@ passport.use(
             const profilePhoto = profile.photos[0].value;
             const source = "google";
 
+            const isAdmin = email === process.env.EMAIL_ADMIN;
+            //console.log('check1234', email, process.env.EMAIL_ADMIN, email === process.env.EMAIL_ADMIN)
+            //console.log('check12345', isAdmin)
             const currentUser = await UserService.getUserByEmail({
                 email,
             });
@@ -31,9 +31,11 @@ passport.use(
                 const newUser = await UserService.addGoogleUser({
                     id,
                     email,
+                    isAdmin,
                     firstName,
                     lastName,
                     profilePhoto,
+                    
                 });
                 return done(null, newUser);
             }

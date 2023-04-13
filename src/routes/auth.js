@@ -4,6 +4,10 @@ const passport = require('passport');
 const flash = require("express-flash");
 const session = require('express-session');
 const authController = require('../app/controllers/AuthController');
+const { Cursor } = require('mongoose');
+
+const UserService = require("../app/models/user");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 //config router
 // router.use(
@@ -39,21 +43,22 @@ const authController = require('../app/controllers/AuthController');
 // });
 
 router.get(
-    '/google/callback',
-    passport.authenticate('google', {
-      failureRedirect: '/login',
-      successRedirect: '/admin',
-      failureFlash: true,
-      successFlash: 'Successfully logged in!',
-    })
-  );
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/login',
+   // successRedirect: '/admin',
+    failureFlash: true,
+    successFlash: 'Successfully logged in!',
+  }),
+  authController.loginWithGoogle
+);
 
 
 router.get('/google',
-    passport.authenticate('google', {
-        scope: ['profile', 'email'],
-    })
-);
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  }),
+)
 
 
 
