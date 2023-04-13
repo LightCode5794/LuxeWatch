@@ -182,7 +182,7 @@
 .header-container {
   height: 5rem;
   width: 100%;
-  background-color: inherit;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-around; }
@@ -229,7 +229,7 @@
 /* css for footer */
 /* footer */
 .footer-container {
-  background-color: white;
+  background-color: #fff;
   height: 5rem;
   width: 100%; }
 

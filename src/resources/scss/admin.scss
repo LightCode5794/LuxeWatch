@@ -138,7 +138,7 @@
 .header-container {
     height: $height-header;
     width: 100%;
-    background-color: inherit;
+    background-color: $background-adminPage;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -194,7 +194,7 @@
 /* footer */
 
 .footer-container {
-    background-color: white;
+    background-color: $background-adminPage;
     height: $height-footer;
     width: 100%;
     // width: calc(100% - #{$width-sidebar});
