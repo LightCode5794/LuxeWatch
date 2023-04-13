@@ -24,7 +24,7 @@ class CategoriesController {
         });
     }
 
-    // [GET] /admin/categories/store
+    // [POST] /admin/categories/store
 
     store(req, res, next) {
        
@@ -33,6 +33,30 @@ class CategoriesController {
             .then(res.redirect('/admin/categories'))
             .catch(next);
     }
+
+      //[GET] /admin/categories/:id/edit
+
+      edit(req, res, next) {
+        Category.findById(req.params.id)
+            .then((Category) =>
+                res.render('admin/categories/edit', {
+                    layout: 'admin',
+                    category: singleMongooseToObject(Category),
+                }),
+            )
+            .catch(next);
+    }
+
+    //[PUT] /admin/categories/:id
+    update(req, res, next) {
+      // res.send(req.params.id);
+        Category.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/admin/categories'))
+            .catch(next);
+    }
+
+
+
 }
 
 module.exports = new CategoriesController();

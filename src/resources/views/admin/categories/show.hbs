@@ -17,9 +17,9 @@
         <table id="Categories-table" class="table order-list-tb ">
             <thead class="text-primary">
                 <tr>
+                    <th>No</th>
                     <th> Name</th>
                     <th> Description </th>
-
                     <th></th>
                 </tr>
             </thead>
@@ -27,6 +27,7 @@
                 <!-- oder 1 -->
                 {{#each categories}}
                 <tr>
+                    <td>{{sum @index 1}}</td>
                     <td>{{this.name}}</td>
                     <td>{{this.description}}</td>
 
@@ -41,7 +42,7 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="/admin/categories/{{this._id}}/edit">Edit</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -56,8 +57,6 @@
     </div>
 </div>
 
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $(document).ready(function () {
@@ -65,7 +64,7 @@
                 pageLength: 8,
                 lengthMenu: [8, 15, 20, 50, 100],
                 columnDefs: [{
-                    "targets": [2],
+                    "targets": [3],
                     "searchable": false,
                     "orderable": false,
                     "visible": true

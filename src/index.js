@@ -10,6 +10,7 @@ const routes = require('./routes');
 const cookieParser = require("cookie-parser");
 const passport = require('passport');
 const flash = require("express-flash");
+const methodOverride = require('method-override');
 
 // require("./config/passport"); 
 // require("./config/google")
@@ -17,7 +18,7 @@ const flash = require("express-flash");
 const app = express();
 const port = 3000;
 
-
+// config cookie
 app.use(cookieParser());
 app.use(
     session({
@@ -33,7 +34,16 @@ app.use(flash());
 db.connect();
 
 // template engine
-app.engine('hbs', engine({ extname: '.hbs' }));
+app.engine(
+    'hbs',
+    engine({
+        extname: '.hbs',
+        // Specify helpers which are only registered on this instance.
+        helpers: {
+            sum: (a, b) => a + b,
+        },
+    })
+);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
@@ -50,6 +60,7 @@ app.use(
 );
 
 app.use(express.json()); // Xử lý post dữ liệu từ các thằng như XMLHttpRequest, fetch, axios,
+app.use(methodOverride('_method')); // override method of form request
 
 //cấu hình đọc file tĩnh
 app.use(express.static(path.join(__dirname, 'public')));
