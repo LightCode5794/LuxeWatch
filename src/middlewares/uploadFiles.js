@@ -1,5 +1,5 @@
 
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('../config/cloudinary')
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 var multer = require('multer'); // middleware for uploading files
@@ -13,11 +13,11 @@ const path = require("path");
 //         cb(null, `${file.fieldname}-${Date.now()}`)
 //     }
 // });
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET
-});
+// cloudinary.config({
+//     cloud_name: process.env.CLOUDINARY_NAME,
+//     api_key: process.env.CLOUDINARY_KEY,
+//     api_secret: process.env.CLOUDINARY_SECRET
+// });
 
 const storage = new CloudinaryStorage({
     cloudinary,

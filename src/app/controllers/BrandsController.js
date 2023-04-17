@@ -3,7 +3,7 @@ const { multipleMongooseToObject } = require('../../util/mongoose');
 const Brand = require('../models/brand/brand.model');
 const path = require('path');
 const fs = require('fs');
-
+const cloudinary = require('../../config/cloudinary');
 
 class BranchController {
     //[GET] /admin/brands
@@ -28,15 +28,21 @@ class BranchController {
 
     // [POST] /admin/branchs/store
 
-    store(req, res, next) {
+    async store(req, res, next) {
+
 
         if (!req.file) {
             next(new Error('No file uploaded!'));
             return;
         }
+        // Upload image to cloudinary
+        //const result = await cloudinary.uploader.upload(req.file.path);
+
+        //res.send(req.file.path);
         const newBrand = new Brand({
             name: req.body.nameBrand,
-            imgUrl: req.file.path
+            imgUrl: req.file.path,
+            cloudinary_id: req.file.filename,
         })
         newBrand.save()
             .then(() => res.redirect('/admin/brands'))
