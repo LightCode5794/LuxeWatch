@@ -10,7 +10,7 @@
 
 <div class="card p-2">
 
-    <form method="post" action="/admin/categories/store">
+    <form method="POST" action="/admin/categories/store">
         <div class="form-group pb-3">
             <label class="form-label">Category Name:</label>
             <input name="name" type="text" class="form-control " required>
@@ -19,9 +19,9 @@
             <label class="form-label">Category Description:</label>
             <textarea name="description" class="form-control required" rows="4" required></textarea>
         </div>
-        <div class="form-group pb-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-danger">Reset</button>
+        <div class="form-group pb-3 float-end me-3">
+            <button type="reset" class="btn btn-danger me-3">Reset</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </div>
     </form>
 

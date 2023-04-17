@@ -1,0 +1,14 @@
+td {
+    vertical-align: middle;
+
+    .table-column {
+        display: flex;
+        align-items: center;
+    }
+
+    .product-img {
+        width: 80px;
+        margin-right: 16px;
+    }
+
+}

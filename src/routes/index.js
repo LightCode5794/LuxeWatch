@@ -3,7 +3,7 @@ const loginRouter = require('./login');
 const authRouter = require('./auth');
 const categoriesRouter = require('./categories');
 const adminRoutes = require('./admin');
-//const { isLoggedIn } = require('../middlewares/auth');
+const { isLoggedIn } = require('../middlewares/auth');
 
 function routes(app) {
     // app.use('/', meRouter);
@@ -16,7 +16,7 @@ function routes(app) {
 
     // })
     // app.use('/admin/categories', categoriesRouter);
-    app.use('/admin',  adminRoutes);
+    app.use('/admin', adminRoutes);
     app.use('/login', loginRouter);
     app.use('/auth', authRouter);
 }

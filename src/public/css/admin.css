@@ -85,12 +85,22 @@
     color: #818078;
     background-color: #fcfcfa; }
 
+td {
+  vertical-align: middle; }
+  td .table-column {
+    display: flex;
+    align-items: center; }
+  td .product-img {
+    width: 80px;
+    margin-right: 16px; }
+
 #content-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh; }
   #content-page .container-body {
-    flex: 1; }
+    flex: 1;
+    padding-bottom: 16px; }
 
 /* css for side bar */
 .sidebar-container {
