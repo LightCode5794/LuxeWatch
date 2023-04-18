@@ -16,7 +16,7 @@ function routes(app) {
 
     // })
     // app.use('/admin/categories', categoriesRouter);
-    app.use('/admin', adminRoutes);
+    app.use('/admin', isLoggedIn, adminRoutes);
     app.use('/login', loginRouter);
     app.use('/auth', authRouter);
 }
