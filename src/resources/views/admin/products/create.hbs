@@ -56,13 +56,93 @@
                         </div>
                         <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div>
                     </div>
+                    <div class="card p-5">
+                        <div class="mb-5">
+                            <h2 class="mb-0 fs-exact-18">Inventory</h2>
+                        </div>
+                        <div class="row g-4">
+                            <div class="mb-4"><label for="form-product/sku" class="form-label">SKU</label><input
+                                    type="text" class="form-control" id="form-product/sku" value="SCREW150">
+                            </div>
+
+                            <div><label for="form-product/quantity" class="form-label">Stock quantity</label><input
+                                    type="number" class="form-control" id="form-product/quantity" value="18">
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div>
+                    </div>
+                    <div class="card p-5">
+                        <div class="mb-5">
+                            <h2 class="mb-0 fs-exact-18">Images</h2>
+                        </div>
+                        <div class="row g-4">
+                            <input type="file" id="img-selector" name="imagesProduct" class="form-control"
+                                accept="image/*" required>
+                            <div id="preview"></div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
             <!-- Total oders -->
             <div class="col col-md-4 d-flex">
-                <div class="card card-statistic flex-grow-1 p-3">
+                {{!-- <div class="card card-statistic flex-grow-1 p-3">
+
+                </div> --}}
+                <div class="card-body p-5">
+                    <div class="mb-5">
+                        <h2 class="mb-0 fs-exact-18">Tags</h2>
+                    </div>
+                    <select class="form-control js-example-tokenizer" multiple="multiple">
+                        <option selected="selected">orange</option>
+                        <option>white</option>
+                        <option selected="selected">purple</option>
+                    </select>
                 </div>
             </div>
         </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        //funtion for preview images
+        function previewImages() {
+
+            var preview = document.querySelector('#preview');
+
+            if (this.files) {
+                [].forEach.call(this.files, readAndPreview);
+            }
+
+            function readAndPreview(file) {
+
+                // File type validator based on the extension 
+                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    return alert(file.name + " is not an image");
+                }
+
+                var reader = new FileReader();
+
+                reader.addEventListener("load", function () {
+                    var image = new Image();
+                    image.height = 100;
+                    image.title = file.name;
+                    image.src = this.result;
+                    preview.appendChild(image);
+                });
+
+                reader.readAsDataURL(file);
+
+            }
+
+        }
+        document.querySelector('#img-selector').addEventListener("change", previewImages);
+
+        //funtion for select tags
+        $(".js-example-tokenizer").select2({
+            tags: true,
+            tokenSeparators: [',', ' '],
+            
+        })
+    })
+</script>

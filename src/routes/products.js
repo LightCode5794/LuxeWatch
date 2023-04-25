@@ -9,8 +9,14 @@ const categoriesController = require('../app/controllers/CategoriesController');
 // router.get('/create', categoriesController.create);
 // router.post('/store', categoriesController.store);
 // router.get('/', categoriesController.show);
-router.get('/', (req, res) => {
-    res.render('/admin/products/create');
+// router.get('/', (req, res) => {
+//     res.render('/admin/products/create');
+// });
+
+router.get('/create', (req, res) => {
+    res.render('admin/products/create', {
+        layout: 'admin',
+    });
 });
 
 module.exports = router;
