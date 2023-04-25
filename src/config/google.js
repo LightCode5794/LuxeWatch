@@ -1,11 +1,10 @@
 const passport = require('passport');
 //const User = require('../../models/user/user.model');
-const UserService = require("../app/models/user");
+const UserService = require('../app/models/user');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 //const keys = require('../../keys');
 
 passport.use(
-
     new GoogleStrategy(
         {
             clientID: process.env.CLIENT_ID,
@@ -19,7 +18,7 @@ passport.use(
             const firstName = profile.name.givenName;
             const lastName = profile.name.familyName;
             const profilePhoto = profile.photos[0].value;
-            const source = "google";
+            const source = 'google';
 
             const isAdmin = email === process.env.EMAIL_ADMIN;
             //console.log('check1234', email, process.env.EMAIL_ADMIN, email === process.env.EMAIL_ADMIN)
@@ -36,12 +35,11 @@ passport.use(
                     firstName,
                     lastName,
                     profilePhoto,
-                    
                 });
                 return done(null, newUser);
             }
 
-            if (currentUser.source != "google") {
+            if (currentUser.source != 'google') {
                 //return error
                 return done(null, false, {
                     message: `You have previously signed up with a different signin method`,

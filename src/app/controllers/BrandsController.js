@@ -11,11 +11,10 @@ class BranchController {
         // res.json(req.params)
         Brand.find()
             .then((brands) => {
-                res.render('admin/brands/show',
-                    {
-                        layout: 'admin',
-                        brands: multipleMongooseToObject(brands),
-                    })
+                res.render('admin/brands/show', {
+                    layout: 'admin',
+                    brands: multipleMongooseToObject(brands),
+                });
             })
             .catch(next);
     }
@@ -29,8 +28,6 @@ class BranchController {
     // [POST] /admin/branchs/store
 
     async store(req, res, next) {
-
-
         if (!req.file) {
             next(new Error('No file uploaded!'));
             return;
@@ -43,10 +40,11 @@ class BranchController {
             name: req.body.nameBrand,
             imgUrl: req.file.path,
             cloudinary_id: req.file.filename,
-        })
-        newBrand.save()
+        });
+        newBrand
+            .save()
             .then(() => res.redirect('/admin/brands'))
-            .catch(next)
+            .catch(next);
     }
 
     //[GET] /admin/brands/:id/edit

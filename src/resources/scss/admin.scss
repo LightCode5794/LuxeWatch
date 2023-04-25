@@ -3,16 +3,13 @@
 @import 'login';
 @import '_brandShow';
 
-
-
 //<============================================================================>
 
 #content-page {
     display: flex;
-    flex-direction:  column;
+    flex-direction: column;
     min-height: 100vh;
-   
-    
+
     .container-body {
         flex: 1;
         padding-bottom: 16px;

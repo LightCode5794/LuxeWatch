@@ -1,9 +1,8 @@
-
-const cloudinary = require('../config/cloudinary')
+const cloudinary = require('../config/cloudinary');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 var multer = require('multer'); // middleware for uploading files
-const path = require("path");
+const path = require('path');
 
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -24,14 +23,14 @@ const storage = new CloudinaryStorage({
     allowedFormats: ['jpg', 'png'],
     filename: function (req, file, cb) {
         cb(null, file.originalname);
-    }
+    },
 });
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
         let ext = path.extname(file.originalname);
-        if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
-            cb(new Error("Unsupported file type!"), false);
+        if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
+            cb(new Error('Unsupported file type!'), false);
             return;
         }
         cb(null, true);

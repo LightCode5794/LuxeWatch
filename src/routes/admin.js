@@ -6,8 +6,13 @@ const authRouter = require('./auth');
 const categoriesRouter = require('./categories');
 const brandsRouter = require('./brands');
 
-adminRoutes.use('/brands', brandsRouter)
+adminRoutes.use('/brands', brandsRouter);
 adminRoutes.use('/categories', categoriesRouter);
-adminRoutes.use('/', adminSiteRouter);
+//adminRoutes.use('/', adminSiteRouter);
+adminRoutes.get('/', (req, res) => {
+    res.render('admin/products/create', {
+        layout: 'admin',
+    });
+});
 
-module.exports = adminRoutes
+module.exports = adminRoutes;

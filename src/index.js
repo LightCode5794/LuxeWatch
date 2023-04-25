@@ -7,12 +7,12 @@ const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const db = require('./config/db');
 const routes = require('./routes');
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const flash = require("express-flash");
+const flash = require('express-flash');
 const methodOverride = require('method-override');
 
-// require("./config/passport"); 
+// require("./config/passport");
 // require("./config/google")
 
 const app = express();
@@ -42,7 +42,7 @@ app.engine(
         helpers: {
             sum: (a, b) => a + b,
         },
-    })
+    }),
 );
 
 app.set('view engine', 'hbs');

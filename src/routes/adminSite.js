@@ -4,7 +4,6 @@ const router = app.Router();
 
 const adminSiteController = require('../app/controllers/AdminSiteController');
 
-
 router.use('/', adminSiteController.dashboard);
 
 module.exports = router;
