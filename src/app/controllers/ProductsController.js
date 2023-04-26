@@ -1,7 +1,8 @@
 const { singleMongooseToObject } = require('../../util/mongoose');
 const { multipleMongooseToObject } = require('../../util/mongoose');
 const Product = require('../models/product/product.model');
-
+const Category = require('../models/category/category.model');
+const Brand = require('../models/brand/brand.model');
 class ProductsController {
     //[GET] /admin/categories
     show(req, res, next) {
@@ -19,10 +20,21 @@ class ProductsController {
         });
     }
     // [GET] /admin/categories/create
-    create(req, res, next) {
-        res.render('admin/products/create', {
-            layout: 'admin',
-        });
+    async create(req, res, next) {
+        try {
+            const categories = await Category.find({});
+            const brands = await Brand.find({})
+            //res.send(categories)
+            res.render('admin/products/create', {
+                layout: 'admin',
+                categories: multipleMongooseToObject(categories),
+                brands: multipleMongooseToObject(brands),
+            });
+        }
+        catch (err) {
+            res.status(401).send(err.message);
+        }
+
     }
 
     // [POST] /admin/categories/store

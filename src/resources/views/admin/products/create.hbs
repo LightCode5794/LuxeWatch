@@ -33,11 +33,13 @@
                                 <label for="form-product/brand" class="form-label">Brand</label>
                                 {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
                                     placeholder="Ex: Rolex"> --}}
-                                <select id='brand' name="brand">
-                                    <option value='facebook'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Facebook
+                              
+                                <select id="brand" name="brand">
+                                      {{#each brands}}
+                                    <option value='{{this._id}}'
+                                        data-thumbnail="{{this.imgUrl}}">{{this.name}}
                                     </option>
-                                    <option value='twitter'
+                                    {{!-- <option value='twitter'
                                         data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Twitter</option>
                                     <option value='linkedin'
                                         data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Linkedin
@@ -46,19 +48,23 @@
                                         data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Google Plus
                                     </option>
                                     <option value='vimeo'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Vimeo</option>
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Vimeo</option> --}}
+                                         {{/each}}
                                 </select>
+                               
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/category" class="form-label">Category</label>
                                 {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
                                     placeholder="Ex: Rolex"> --}}
                                 <select id='category' name="category">
-                                    <option value='facebook'>Facebook</option>
-                                    <option value='twitter'>Twitter</option>
+                                       {{#each categories}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                    {{!-- <option value='twitter'>Twitter</option>
                                     <option value='linkedin'>Linkedin</option>
                                     <option value='google_plus'>Google Plus</option>
-                                    <option value='vimeo'>Vimeo</option>
+                                    <option value='vimeo'>Vimeo</option> --}}
+                                    {{/each}}
                                 </select>
                             </div>
                             <div class="mb-4">
@@ -220,20 +226,20 @@
                 templateSelection: formatBrand,
 
                 //  escapeMarkup: function(m) { return m; }
-            });
+            })
         });
 
         function formatBrand(brand) {
             if (!brand.id) { return brand.text; }
             var originalOption = brand.element;
             const $brand = $(
-                `<span class= "d-flex"><img style="width: 16px; margin-right: 16px" src="${$(originalOption).data('thumbnail')}" /> ${brand.text}</span>`
+                `<span class= "d-flex align-items-center"><img style="width: 48px; margin-right: 16px" src="${$(originalOption).data('thumbnail')}" /> ${brand.text}</span>`
             );
             return $brand;
         }
 
         //select category
-         $(document).ready(function () {
+        $(document).ready(function () {
             $("#category").select2({
                 width: '100%',
             });
