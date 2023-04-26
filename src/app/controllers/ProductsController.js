@@ -2,22 +2,25 @@ const { singleMongooseToObject } = require('../../util/mongoose');
 const { multipleMongooseToObject } = require('../../util/mongoose');
 const Product = require('../models/product/product.model');
 
-class CategoriesController {
+class ProductsController {
     //[GET] /admin/categories
     show(req, res, next) {
         // res.json(req.params)
-        Product.find()
-            .then((categories) => {
-                res.render('admin/categories/show', {
-                    layout: 'admin',
-                    categories: multipleMongooseToObject(categories),
-                });
-            })
-            .catch(next);
+        // Product.find()
+        //     .then((categories) => {
+        //         res.render('admin/categories/show', {
+        //             layout: 'admin',
+        //             categories: multipleMongooseToObject(categories),
+        //         });
+        //     })
+        //     .catch(next);
+        res.render('admin/products/show', {
+            layout: 'admin',
+        });
     }
     // [GET] /admin/categories/create
     create(req, res, next) {
-        res.render('admin/categories/create', {
+        res.render('admin/products/create', {
             layout: 'admin',
         });
     }
@@ -51,4 +54,4 @@ class CategoriesController {
     }
 }
 
-module.exports = new CategoriesController();
+module.exports = new ProductsController();

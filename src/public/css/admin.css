@@ -80,7 +80,7 @@
     position: relative;
     display: inline-block;
     color: black;
-    padding: 0 .5em;
+    padding: 0 0.5em;
     line-height: 1.5em;
     color: #818078;
     background-color: #fcfcfa; }
@@ -100,7 +100,8 @@ td {
   min-height: 100vh; }
   #content-page .container-body {
     flex: 1;
-    padding-bottom: 16px; }
+    padding-bottom: 16px;
+    background: #adb5bd; }
 
 /* css for side bar */
 .sidebar-container {

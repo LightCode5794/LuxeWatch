@@ -5,7 +5,7 @@
                 <h1 class="h3 m-0">Products</h1>
             </div>
             <div class="col-auto fw-bold">
-                <a href="#" class="btn btn-primary">New Product</a>
+                <a href="/admin/products/create" class="btn btn-primary">New Product</a>
             </div>
         </div>
     </div>
@@ -601,3 +601,20 @@
         </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('#products-table').DataTable({
+                pageLength: 8,
+                lengthMenu: [5, 10, 20, 50, 100],
+                columnDefs: [{
+                    "targets": [5],
+                    "searchable": false,
+                    "orderable": false,
+                    "visible": true
+                }]
+            });
+        });
+    })
+</script>

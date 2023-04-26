@@ -2,7 +2,7 @@ const app = require('express');
 const router = app.Router();
 const { isLoggedIn } = require('../middlewares/auth');
 
-const categoriesController = require('../app/controllers/CategoriesController');
+const productsController = require('../app/controllers/ProductsController');
 
 // router.get('/:id/edit', categoriesController.edit);
 // router.put('/:id', categoriesController.update);
@@ -12,11 +12,7 @@ const categoriesController = require('../app/controllers/CategoriesController');
 // router.get('/', (req, res) => {
 //     res.render('/admin/products/create');
 // });
-
-router.get('/create', (req, res) => {
-    res.render('admin/products/create', {
-        layout: 'admin',
-    });
-});
+router.get('/show', productsController.show)
+router.get('/create',  productsController.create);
 
 module.exports = router;

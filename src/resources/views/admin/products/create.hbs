@@ -1,106 +1,171 @@
 <section id="main-view">
     <div class="container">
-        <div class="row dashboard-title">
-            <div class="py-5">
-                <div class="row g-4 align-items-center">
-                    <div class="col">
-                        <h1 class="h3 m-0">Add Products</h1>
+        <form method="POST" action="/admin/brands/store" enctype="multipart/form-data">
+            <div class="row dashboard-title">
+                <div class="py-5">
+                    <div class="row g-4 align-items-center">
+                        <div class="col">
+                            <h1 class="h3 m-0">Add Products</h1>
+                        </div>
+                        <div class="col-auto d-flex">
+                            <div class="form-group p-2 float-end me-2">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-auto d-flex">
-                        <select class="form-select me-3">
-                            <option selected="">1 December, 2023</option>
+                </div>
+            </div>
+            <div class="row content-dashboard g-4 g-xl-4">
+                <!-- total sell -->
+                <div class="col col-md-8 ">
+                    {{!-- basic information --}}
+                    <div class="mb-2">
+                        <div class="card p-4 mb-3">
+                            <div class="mb-2">
+                                <h4>Basic information</h4>
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="form-product/name" name="name"
+                                    placeholder="Brandix Screwdriver SCREW150">
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/brand" class="form-label">Brand</label>
+                                {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
+                                    placeholder="Ex: Rolex"> --}}
+                                <select id='brand' name="brand">
+                                    <option value='facebook'
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Facebook
+                                    </option>
+                                    <option value='twitter'
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Twitter</option>
+                                    <option value='linkedin'
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Linkedin
+                                    </option>
+                                    <option value='google_plus'
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Google Plus
+                                    </option>
+                                    <option value='vimeo'
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Vimeo</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/category" class="form-label">Category</label>
+                                {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
+                                    placeholder="Ex: Rolex"> --}}
+                                <select id='category' name="category">
+                                    <option value='facebook'>Facebook</option>
+                                    <option value='twitter'>Twitter</option>
+                                    <option value='linkedin'>Linkedin</option>
+                                    <option value='google_plus'>Google Plus</option>
+                                    <option value='vimeo'>Vimeo</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/slug" class="form-label">Slug</label>
+                                <div class="input-group--sa-slug input-group">
+                                    <span class="input-group-text"
+                                        id="form-product/slug-addon">https://example.com/products/
+                                    </span>
+                                    <input type="text" class="form-control" id="form-product/slug"
+                                        aria-describedby="form-product/slug-addon form-product/slug-help"
+                                        placeholder="Ex: brandix-screwdriver-screw150">
+                                </div>
+                                <div id="form-product/slug-help" class="form-text">Unique human-readable product
+                                    identifier.
+                                    No longer than 255 characters.</div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/dial" class="form-label">Dial</label>
+
+                                <input type="text" class="form-control" id="form-product/dial"
+                                    placeholder="Ex: Ivory lacquered, gold applied Breguet numerals">
+
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/case" class="form-label">Case</label>
+
+                                <textarea class="form-control" id="form-product/case"
+                                    placeholder="Ex: Rose gold. Interchangeable solid and sapphire crystal case backs. Water-resistant to 30 m. Case diameter: 39 mm. Height: 9.71 mm."></textarea>
+
+                            </div>
+                            <div class="mb-4">
+                                <label for="form-product/strap" class="form-label">Strap</label>
+
+                                <textarea class="form-control" id="form-product/strap"
+                                    placeholder="Ex: Alligator strap with square scales, hand-stitched, shiny dark chestnut. Fold-over clasp."></textarea>
+
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="form-product/description" class="form-label">Description</label>
+                                <textarea id="form-product/description"
+                                    class="sa-quill-control form-control sa-quill-control--ready"
+                                    rows="8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.</textarea>
+
+                            </div>
+                        </div>
+                        <div class="card p-5 mb-3">
+                            <div class="mb-2">
+                                <h4>Pricing</h4>
+                            </div>
+                            <div class="row g-4">
+                                <div class="col"><label for="form-product/price" class="form-label">Price</label><input
+                                        type="number" class="form-control" id="form-product/price" value="1499"></div>
+                                <div class="col"><label for="form-product/old-price" class="form-label">Old
+                                        price</label><input type="number" class="form-control"
+                                        id="form-product/old-price">
+                                </div>
+                            </div>
+                            {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
+                        </div>
+                        <div class="card p-5  mb-3">
+                            <div class="mb-2">
+                                <h4>Inventory</h4>
+                            </div>
+                            <div class="row g-4">
+                                <div class="mb-4"><label for="form-product/sku" class="form-label">SKU</label><input
+                                        type="text" class="form-control" id="form-product/sku" value="SCREW150">
+                                </div>
+
+                                <div><label for="form-product/quantity" class="form-label">Stock quantity</label><input
+                                        type="number" class="form-control" id="form-product/quantity" value="18">
+                                </div>
+                            </div>
+                            {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
+                        </div>
+                        <div class="card p-5  mb-3">
+                            <div class="mb-2">
+                                <h4>Images</h4>
+                            </div>
+                            <div class="row g-4">
+                                <input type="file" id="img-selector" name="imagesProduct" class="form-control"
+                                    accept="image/*" required>
+                                <div id="preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Total oders -->
+                <div class="col col-md-4">
+                    {{!-- <div class="card   p-3">
+
+                    </div> --}}
+                    <div class="card p-2">
+                        <div class="mb-2">
+                            <h4>Tags</h4>
+                        </div>
+                        <select class="form-control js-example-tokenizer" multiple="multiple">
+                            <option selected="selected">orange</option>
+                            <option>white</option>
+                            <option selected="selected">purple</option>
                         </select>
-                        <a href="#" class="btn btn-primary">Export</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row content-dashboard g-4 g-xl-4">
-            <!-- total sell -->
-            <div class="col col-md-8 d-flex">
-                {{!-- basic information --}}
-                <div class="card card-statistic flex-grow-1 p-3">
-                    <div class="card p-4">
-                        <div class="mb-5">
-                            <h2 class="mb-0 fs-exact-18">Basic information</h2>
-                        </div>
-                        <div class="mb-4"><label for="form-product/name" class="form-label">Name</label><input
-                                type="text" class="form-control" id="form-product/name"
-                                value="Brandix Screwdriver SCREW150"></div>
-                        <div class="mb-4"><label for="form-product/slug" class="form-label">Slug</label>
-                            <div class="input-group--sa-slug input-group"><span class="input-group-text"
-                                    id="form-product/slug-addon">https://example.com/products/</span><input type="text"
-                                    class="form-control" id="form-product/slug"
-                                    aria-describedby="form-product/slug-addon form-product/slug-help"
-                                    value="brandix-screwdriver-screw150"></div>
-                            <div id="form-product/slug-help" class="form-text">Unique human-readable product identifier.
-                                No longer than 255 characters.</div>
-                        </div>
-                        <div class="mb-4"><label for="form-product/description"
-                                class="form-label">Description</label><textarea id="form-product/description"
-                                class="sa-quill-control form-control sa-quill-control--ready"
-                                rows="8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.</textarea>
-
-                        </div>
-                    </div>
-                    <div class="card p-5">
-                        <div class="mb-5">
-                            <h2 class="mb-0 fs-exact-18">Pricing</h2>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col"><label for="form-product/price" class="form-label">Price</label><input
-                                    type="number" class="form-control" id="form-product/price" value="1499"></div>
-                            <div class="col"><label for="form-product/old-price" class="form-label">Old
-                                    price</label><input type="number" class="form-control" id="form-product/old-price">
-                            </div>
-                        </div>
-                        <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div>
-                    </div>
-                    <div class="card p-5">
-                        <div class="mb-5">
-                            <h2 class="mb-0 fs-exact-18">Inventory</h2>
-                        </div>
-                        <div class="row g-4">
-                            <div class="mb-4"><label for="form-product/sku" class="form-label">SKU</label><input
-                                    type="text" class="form-control" id="form-product/sku" value="SCREW150">
-                            </div>
-
-                            <div><label for="form-product/quantity" class="form-label">Stock quantity</label><input
-                                    type="number" class="form-control" id="form-product/quantity" value="18">
-                            </div>
-                        </div>
-                        <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div>
-                    </div>
-                    <div class="card p-5">
-                        <div class="mb-5">
-                            <h2 class="mb-0 fs-exact-18">Images</h2>
-                        </div>
-                        <div class="row g-4">
-                            <input type="file" id="img-selector" name="imagesProduct" class="form-control"
-                                accept="image/*" required>
-                            <div id="preview"></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- Total oders -->
-            <div class="col col-md-4 d-flex">
-                {{!-- <div class="card card-statistic flex-grow-1 p-3">
-
-                </div> --}}
-                <div class="card-body p-5">
-                    <div class="mb-5">
-                        <h2 class="mb-0 fs-exact-18">Tags</h2>
-                    </div>
-                    <select class="form-control js-example-tokenizer" multiple="multiple">
-                        <option selected="selected">orange</option>
-                        <option>white</option>
-                        <option selected="selected">purple</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+        </form>
+    </div>
 </section>
 
 <script>
@@ -142,7 +207,37 @@
         $(".js-example-tokenizer").select2({
             tags: true,
             tokenSeparators: [',', ' '],
-            
+
         })
+
+        //select brand 
+        $(document).ready(function () {
+            $("#brand").select2({
+                width: '100%',
+                //formatResult: formatBrand,
+                // formatSelection: formatBrand,
+                templateResult: formatBrand,
+                templateSelection: formatBrand,
+
+                //  escapeMarkup: function(m) { return m; }
+            });
+        });
+
+        function formatBrand(brand) {
+            if (!brand.id) { return brand.text; }
+            var originalOption = brand.element;
+            const $brand = $(
+                `<span class= "d-flex"><img style="width: 16px; margin-right: 16px" src="${$(originalOption).data('thumbnail')}" /> ${brand.text}</span>`
+            );
+            return $brand;
+        }
+
+        //select category
+         $(document).ready(function () {
+            $("#category").select2({
+                width: '100%',
+            });
+        });
+
     })
 </script>
