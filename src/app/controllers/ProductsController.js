@@ -1,18 +1,20 @@
 const { singleMongooseToObject } = require('../../util/mongoose');
 const { multipleMongooseToObject } = require('../../util/mongoose');
+const mongoose = require('mongoose');
 const Product = require('../models/product/product.model');
 const Category = require('../models/category/category.model');
 const Brand = require('../models/brand/brand.model');
 const Tag = require('../models/tag/tag.model');
 class ProductsController {
-    //[GET] /admin/categories
+
+    //[GET] /admin/products
     show(req, res, next) {
         // res.json(req.params)
         // Product.find()
-        //     .then((categories) => {
-        //         res.render('admin/categories/show', {
+        //     .then((products) => {
+        //         res.render('admin/products/show', {
         //             layout: 'admin',
-        //             categories: multipleMongooseToObject(categories),
+        //             products: multipleMongooseToObject(products),
         //         });
         //     })
         //     .catch(next);
@@ -20,13 +22,13 @@ class ProductsController {
             layout: 'admin',
         });
     }
-    // [GET] /admin/categories/create
+    // [GET] /admin/products/create
     async create(req, res, next) {
         try {
             const categories = await Category.find({});
             const brands = await Brand.find({});
             const tags = await Tag.find({});
-            //res.send(categories)
+            //res.send(products)
             res.render('admin/products/create', {
                 layout: 'admin',
                 categories: multipleMongooseToObject(categories),
@@ -42,38 +44,46 @@ class ProductsController {
 
     // [POST] /admin/products/store
 
-    store(req, res, next) {
-    
-       if (!req.files) {
-        next(new Error('No files uploaded!'));
-        return;
-    }
-    // Upload image to cloudinary
-    //const result = await cloudinary.uploader.upload(req.file.path);
+    async store(req, res, next) {
+        try {
+            // if (!req.files) {
+            //     next(new Error('No files uploaded!'));
+            //     return;
+            // }
+            const { tags, ...rest} = req.body;
+           
+            const newTags = tags.filter(tag => !mongoose.isValidObjectId(tag)).map(tag => ({name: tag}));
+            const dataTags = tags.filter(tag => mongoose.isValidObjectId(tag));
+           
+            const newTagsId =  await Tag.insertMany(newTags)
+                                        .then(tags => tags.map(tag => tag._id));
+                    
+            const newProduct = new Product({
+                ...rest,
+                tags:[...dataTags, ...newTagsId],
+                images: req.files.map(file => file.path),
+            });
+            //res.send(newProduct);
+            await newProduct.save();
+            res.redirect('/admin/products');
+            // newProduct
+            //     .save()
+            //     .then(() => res.redirect('/admin/products'))
+            //     .catch(next);
+        }
+        catch (err) {
+            res.status(401).send(err);
+        }
 
-    //res.send(req.file.path);
-    // const newProduct = {
-    //     ...req.body,
-    //     images: req.files.map(file => file.path),
-    // }
-    
-    const newProduct = new Product({
-        ...req.body,
-        images: req.files.map(file => file.path),
-    });
-    
-    newProduct
-        .save()
-        .then(() => res.send(newProduct))
-        .catch(next);
+
     }
 
-    //[GET] /admin/categories/:id/edit
+    //[GET] /admin/products/:id/edit
 
     edit(req, res, next) {
         Product.findById(req.params.id)
             .then((Product) =>
-                res.render('admin/categories/edit', {
+                res.render('admin/products/edit', {
                     layout: 'admin',
                     Product: singleMongooseToObject(Product),
                 }),
@@ -81,11 +91,11 @@ class ProductsController {
             .catch(next);
     }
 
-    //[PUT] /admin/categories/:id
+    //[PUT] /admin/products/:id
     update(req, res, next) {
         // res.send(req.params.id);
         Product.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/admin/categories'))
+            .then(() => res.redirect('/admin/products'))
             .catch(next);
     }
 }
