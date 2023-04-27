@@ -3,6 +3,7 @@ const { multipleMongooseToObject } = require('../../util/mongoose');
 const Product = require('../models/product/product.model');
 const Category = require('../models/category/category.model');
 const Brand = require('../models/brand/brand.model');
+const Tag = require('../models/tag/tag.model');
 class ProductsController {
     //[GET] /admin/categories
     show(req, res, next) {
@@ -23,12 +24,14 @@ class ProductsController {
     async create(req, res, next) {
         try {
             const categories = await Category.find({});
-            const brands = await Brand.find({})
+            const brands = await Brand.find({});
+            const tags = await Tag.find({});
             //res.send(categories)
             res.render('admin/products/create', {
                 layout: 'admin',
                 categories: multipleMongooseToObject(categories),
                 brands: multipleMongooseToObject(brands),
+                tags: multipleMongooseToObject(tags),
             });
         }
         catch (err) {
@@ -37,11 +40,32 @@ class ProductsController {
 
     }
 
-    // [POST] /admin/categories/store
+    // [POST] /admin/products/store
 
     store(req, res, next) {
-        const newCategory = new Product(req.body);
-        newCategory.save().then(res.redirect('/admin/categories')).catch(next);
+    
+       if (!req.files) {
+        next(new Error('No files uploaded!'));
+        return;
+    }
+    // Upload image to cloudinary
+    //const result = await cloudinary.uploader.upload(req.file.path);
+
+    //res.send(req.file.path);
+    // const newProduct = {
+    //     ...req.body,
+    //     images: req.files.map(file => file.path),
+    // }
+    
+    const newProduct = new Product({
+        ...req.body,
+        images: req.files.map(file => file.path),
+    });
+    
+    newProduct
+        .save()
+        .then(() => res.send(newProduct))
+        .catch(next);
     }
 
     //[GET] /admin/categories/:id/edit

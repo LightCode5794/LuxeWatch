@@ -6,10 +6,6 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        sku: {
-            type: String,
-            required: true,
-        },
         brand: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Brand'
@@ -18,10 +14,15 @@ const productSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category'
         },
+        slug: {
+            type: String,
+            required: true,
+        },
         dial: {
             type: String,
             required: true,
         },
+        
         case: {
             type: String,
             required: true,
@@ -30,21 +31,33 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        funtions: {
+        description: {
             type: String,
-            required: true,
         },
         price: {
             type: Number,
             required: true,
         },
-        description: {
+          
+        currency: {
             type: String,
         },
-        tags: {
-            type: Array,
+        sku: {
+            type: String,
             required: true,
-        }
+        },
+        tags: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+        
+        // funtions: {
+        //     type: String,
+        //     required: true,
+        // },
+      
+        images: {
+            type: Array,
+
+        },
+       
     },
     { timestamps: true },
 );

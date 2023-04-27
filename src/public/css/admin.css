@@ -98,6 +98,11 @@ td {
   height: fit-content !important;
   padding: 4px 36px 4px 0px !important; }
 
+#loaderDiv {
+  text-align: center;
+  margin-top: 25%;
+  transform: translateY(-50%); }
+
 #content-page {
   display: flex;
   flex-direction: column;

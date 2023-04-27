@@ -1,6 +1,6 @@
 <section id="main-view">
     <div class="container">
-        <form method="POST" action="/admin/brands/store" enctype="multipart/form-data">
+        <form id="form-product" method="POST" action="/admin/products/store" enctype="multipart/form-data">
             <div class="row dashboard-title">
                 <div class="py-5">
                     <div class="row g-4 align-items-center">
@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-auto d-flex">
                             <div class="form-group p-2 float-end me-2">
-                                <button type="submit" class="btn btn-primary">Add</button>
+                                <button type="submit" class="btn btn-primary btn-add--product">Add</button>
                             </div>
                         </div>
                     </div>
@@ -33,11 +33,12 @@
                                 <label for="form-product/brand" class="form-label">Brand</label>
                                 {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
                                     placeholder="Ex: Rolex"> --}}
-                              
-                                <select id="brand" name="brand">
-                                      {{#each brands}}
-                                    <option value='{{this._id}}'
-                                        data-thumbnail="{{this.imgUrl}}">{{this.name}}
+
+                                <select id="brand" name="brand"  class="form-select" data-placeholder="Select an brand"
+                                    data-allow-clear="true" required>
+                                    <option></option>
+                                    {{#each brands}}
+                                    <option value='{{this._id}}' data-thumbnail="{{this.imgUrl}}">{{this.name}}
                                     </option>
                                     {{!-- <option value='twitter'
                                         data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Twitter</option>
@@ -48,17 +49,20 @@
                                         data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Google Plus
                                     </option>
                                     <option value='vimeo'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Vimeo</option> --}}
-                                         {{/each}}
+                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Vimeo</option>
+                                    --}}
+                                    {{/each}}
                                 </select>
-                               
+
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/category" class="form-label">Category</label>
                                 {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
                                     placeholder="Ex: Rolex"> --}}
-                                <select id='category' name="category">
-                                       {{#each categories}}
+                                <select id='category' name="category" class="form-select" data-placeholder="Select an category"
+                                    data-allow-clear="true" required>
+                                    <option></option>
+                                    {{#each categories}}
                                     <option value="{{this._id}}">{{this.name}}</option>
                                     {{!-- <option value='twitter'>Twitter</option>
                                     <option value='linkedin'>Linkedin</option>
@@ -73,7 +77,7 @@
                                     <span class="input-group-text"
                                         id="form-product/slug-addon">https://example.com/products/
                                     </span>
-                                    <input type="text" class="form-control" id="form-product/slug"
+                                    <input type="text" class="form-control" id="form-product/slug" name="slug"
                                         aria-describedby="form-product/slug-addon form-product/slug-help"
                                         placeholder="Ex: brandix-screwdriver-screw150">
                                 </div>
@@ -84,28 +88,28 @@
                             <div class="mb-4">
                                 <label for="form-product/dial" class="form-label">Dial</label>
 
-                                <input type="text" class="form-control" id="form-product/dial"
+                                <input type="text" class="form-control" id="form-product/dial" name="dial"
                                     placeholder="Ex: Ivory lacquered, gold applied Breguet numerals">
 
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/case" class="form-label">Case</label>
 
-                                <textarea class="form-control" id="form-product/case"
+                                <textarea class="form-control" id="form-product/case" name="case"
                                     placeholder="Ex: Rose gold. Interchangeable solid and sapphire crystal case backs. Water-resistant to 30 m. Case diameter: 39 mm. Height: 9.71 mm."></textarea>
 
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/strap" class="form-label">Strap</label>
 
-                                <textarea class="form-control" id="form-product/strap"
+                                <textarea class="form-control" id="form-product/strap" name="strap"
                                     placeholder="Ex: Alligator strap with square scales, hand-stitched, shiny dark chestnut. Fold-over clasp."></textarea>
 
                             </div>
 
                             <div class="mb-4">
                                 <label for="form-product/description" class="form-label">Description</label>
-                                <textarea id="form-product/description"
+                                <textarea id="form-product/description" name="description"
                                     class="sa-quill-control form-control sa-quill-control--ready"
                                     rows="8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.</textarea>
 
@@ -116,12 +120,22 @@
                                 <h4>Pricing</h4>
                             </div>
                             <div class="row g-4">
-                                <div class="col"><label for="form-product/price" class="form-label">Price</label><input
-                                        type="number" class="form-control" id="form-product/price" value="1499"></div>
-                                <div class="col"><label for="form-product/old-price" class="form-label">Old
+                                <div class="col">
+                                    <label for="form-product/price" class="form-label">Price</label>
+                                    <div class="input-group mb-3">
+                                        <input type="number" class="form-control flex-1" id="form-product/price"
+                                            name="price">
+                                        <select class="form-select" name="currency" id="currency">
+                                            <option value="USD">USD</option>
+                                            <option value="VND">VND</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                {{!-- <div class="col"><label for="form-product/old-price" class="form-label">Old
                                         price</label><input type="number" class="form-control"
                                         id="form-product/old-price">
-                                </div>
+                                </div> --}}
                             </div>
                             {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
                         </div>
@@ -130,13 +144,15 @@
                                 <h4>Inventory</h4>
                             </div>
                             <div class="row g-4">
-                                <div class="mb-4"><label for="form-product/sku" class="form-label">SKU</label><input
-                                        type="text" class="form-control" id="form-product/sku" value="SCREW150">
+                                <div class="mb-4">
+                                    <label for="form-product/sku" class="form-label">SKU</label>
+                                    <input type="text" class="form-control" id="form-product/sku" name="sku">
                                 </div>
 
-                                <div><label for="form-product/quantity" class="form-label">Stock quantity</label><input
-                                        type="number" class="form-control" id="form-product/quantity" value="18">
-                                </div>
+                                {{!-- <div>
+                                    <label for="form-product/quantity" class="form-label">Stock quantity</label>
+                                    <input type="number" class="form-control" id="form-product/quantity" name="stock">
+                                </div> --}}
                             </div>
                             {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
                         </div>
@@ -145,8 +161,8 @@
                                 <h4>Images</h4>
                             </div>
                             <div class="row g-4">
-                                <input type="file" id="img-selector" name="imagesProduct" class="form-control"
-                                    accept="image/*" required>
+                                <input type="file" multiple="multiple" id="img-selector" name="imagesProduct[]"
+                                    class="form-control" accept="image/*" required>
                                 <div id="preview"></div>
                             </div>
                         </div>
@@ -162,10 +178,10 @@
                         <div class="mb-2">
                             <h4>Tags</h4>
                         </div>
-                        <select class="form-control js-example-tokenizer" multiple="multiple">
-                            <option selected="selected">orange</option>
-                            <option>white</option>
-                            <option selected="selected">purple</option>
+                        <select class="form-control js-example-tokenizer" multiple="multiple" name="tags[]">
+                            {{#each tags}}
+                            <option value="{{this._id}}">{{this.name}}</option>
+                            {{/each}}
                         </select>
                     </div>
                 </div>
@@ -173,6 +189,11 @@
         </form>
     </div>
 </section>
+<div id="loaderDiv">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -220,6 +241,7 @@
         $(document).ready(function () {
             $("#brand").select2({
                 width: '100%',
+
                 //formatResult: formatBrand,
                 // formatSelection: formatBrand,
                 templateResult: formatBrand,
@@ -244,6 +266,15 @@
                 width: '100%',
             });
         });
+        $('#loaderDiv').hide();
+        $("#form-product").submit(function (e) {
+            e.preventDefault();
+            $('#main-view').hide();
+            $('#loaderDiv').show();
+            this.submit();
 
+        })
     })
+
+
 </script>
