@@ -9,18 +9,18 @@ class ProductsController {
 
     //[GET] /admin/products
     show(req, res, next) {
-        // res.json(req.params)
-        // Product.find()
-        //     .then((products) => {
-        //         res.render('admin/products/show', {
-        //             layout: 'admin',
-        //             products: multipleMongooseToObject(products),
-        //         });
-        //     })
-        //     .catch(next);
-        res.render('admin/products/show', {
-            layout: 'admin',
-        });
+        Product.find()
+            .populate('brand')
+            .populate('category')
+            .populate('tags')
+            .then((products) => {
+                res.render('admin/products/show', {
+                    layout: 'admin',
+                    products: multipleMongooseToObject(products),
+                });
+               
+            })
+            .catch(next);
     }
     // [GET] /admin/products/create
     async create(req, res, next) {
@@ -50,26 +50,25 @@ class ProductsController {
             //     next(new Error('No files uploaded!'));
             //     return;
             // }
-            const { tags, ...rest} = req.body;
-           
-            const newTags = tags.filter(tag => !mongoose.isValidObjectId(tag)).map(tag => ({name: tag}));
+            const { tags, ...rest } = req.body;
+
+            const newTags = tags.filter(tag => !mongoose.isValidObjectId(tag)).map(tag => ({ name: tag }));
             const dataTags = tags.filter(tag => mongoose.isValidObjectId(tag));
-           
-            const newTagsId =  await Tag.insertMany(newTags)
-                                        .then(tags => tags.map(tag => tag._id));
-                    
+
+            //crate new tags and get id new tags
+            const newTagsId = await Tag.insertMany(newTags)
+                .then(tags => tags.map(tag => tag._id));
+
+            //create new product
             const newProduct = new Product({
                 ...rest,
-                tags:[...dataTags, ...newTagsId],
+                tags: [...dataTags, ...newTagsId],
                 images: req.files.map(file => file.path),
             });
-            //res.send(newProduct);
+
             await newProduct.save();
             res.redirect('/admin/products');
-            // newProduct
-            //     .save()
-            //     .then(() => res.redirect('/admin/products'))
-            //     .catch(next);
+
         }
         catch (err) {
             res.status(401).send(err);

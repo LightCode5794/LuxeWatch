@@ -21,12 +21,16 @@ const path = require('path');
 const storage = new CloudinaryStorage({
     cloudinary,
     allowedFormats: ['jpg', 'png'],
+    params: {
+        folder: 'DoAn1',
+    },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
     },
 });
 const upload = multer({
     storage: storage,
+
     fileFilter: (req, file, cb) => {
         let ext = path.extname(file.originalname);
         if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {

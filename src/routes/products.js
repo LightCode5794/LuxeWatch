@@ -12,6 +12,9 @@ const upload = require('../middlewares/uploadFiles');
 // router.get('/', (req, res) => {
 //     res.render('/admin/products/create');
 // });
+
+
+
 router.post('/store',upload.array('imagesProduct[]', 8), productsController.store)
 router.get('/create',  productsController.create);
 router.get('/', productsController.show)
