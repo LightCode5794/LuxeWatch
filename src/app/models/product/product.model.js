@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        
+
         case: {
             type: String,
             required: true,
@@ -40,7 +40,7 @@ const productSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-          
+
         currency: {
             type: String,
         },
@@ -48,18 +48,27 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        tags: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
-        
+        status: {
+            type: String,
+            required: true,
+
+        },
+        tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+
         // funtions: {
         //     type: String,
         //     required: true,
         // },
-      
+        thumbnail: {
+            type: String,
+            required: true,
+        },
+
         images: {
             type: Array,
-
+           // required: true,
         },
-       
+
     },
     { timestamps: true },
 );

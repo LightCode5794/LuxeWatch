@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const widthSidebar = sidebar.offsetWidth; //getComputedStyle(document.documentElement).getPropertyValue('--width-sidebar');
     let btnCloseSidebar = document.querySelector('.btn-close-sidebar');
 
-    console.log(menuBtn);
-
     menuBtn.addEventListener('click', () => {
         //open sidebar
         if (sidebar.offsetLeft < 0) {

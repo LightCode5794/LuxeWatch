@@ -3,6 +3,7 @@ const loginRouter = require('./login');
 const authRouter = require('./auth');
 const categoriesRouter = require('./categories');
 const adminRoutes = require('./admin');
+const clientRoutes = require('./client');
 const { isLoggedIn } = require('../middlewares/auth');
 
 function routes(app) {
@@ -17,9 +18,8 @@ function routes(app) {
     // })
     // app.use('/admin/categories', categoriesRouter);
     app.use('/admin', adminRoutes);
-
-    app.use('/login', loginRouter);
-
+   // app.use('/login', loginRouter);
     app.use('/auth', authRouter);
+    app.use('/', clientRoutes);
 }
 module.exports = routes;

@@ -18,7 +18,7 @@ class ProductsController {
                     layout: 'admin',
                     products: multipleMongooseToObject(products),
                 });
-               
+
             })
             .catch(next);
     }
@@ -50,7 +50,11 @@ class ProductsController {
             //     next(new Error('No files uploaded!'));
             //     return;
             // }
-            const { tags, ...rest } = req.body;
+            //res.send(req.files);
+            //return;
+            const { status, tags, thumbnail, images, ...rest } = req.body;
+
+            const newStatus = status? 'Published' : 'Hidden';
 
             const newTags = tags.filter(tag => !mongoose.isValidObjectId(tag)).map(tag => ({ name: tag }));
             const dataTags = tags.filter(tag => mongoose.isValidObjectId(tag));
@@ -62,11 +66,14 @@ class ProductsController {
             //create new product
             const newProduct = new Product({
                 ...rest,
+                status: newStatus,
                 tags: [...dataTags, ...newTagsId],
-                images: req.files.map(file => file.path),
+                thumbnail: req.files['thumbnail'][0].path,
+                images: req.files['imagesProduct[]'].map(file => file.path),
             });
 
             await newProduct.save();
+
             res.redirect('/admin/products');
 
         }

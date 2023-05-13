@@ -13,10 +13,13 @@ const upload = require('../middlewares/uploadFiles');
 //     res.render('/admin/products/create');
 // });
 
-
-
-router.post('/store',upload.array('imagesProduct[]', 8), productsController.store)
-router.get('/create',  productsController.create);
+const cpUpload = upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'imagesProduct[]', maxCount: 8 },
+]);
+// upload.array('imagesProduct[]', 8)
+router.post('/store', cpUpload, productsController.store)
+router.get('/create', productsController.create);
 router.get('/', productsController.show)
 
 module.exports = router;

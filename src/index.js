@@ -11,6 +11,11 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
+const Handlebars = require("handlebars");
+const MomentHandler = require("handlebars.moment");
+const NumeralHelper = require("handlebars.numeral");
+
+
 
 // require("./config/passport");
 // require("./config/google")
@@ -34,6 +39,8 @@ app.use(flash());
 db.connect();
 
 // template engine
+MomentHandler.registerHelpers(Handlebars);
+NumeralHelper.registerHelpers(Handlebars);
 app.engine(
     'hbs',
     engine({
@@ -41,6 +48,7 @@ app.engine(
         // Specify helpers which are only registered on this instance.
         helpers: {
             sum: (a, b) => a + b,
+            multiply: (a, b) => a * b,
         },
     }),
 );

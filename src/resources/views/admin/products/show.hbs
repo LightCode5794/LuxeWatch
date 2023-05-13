@@ -18,10 +18,12 @@
                 <tr>
                     <th> No.</th>
                     <th> Product </th>
+                    <th> Code</th>
                     <th> Brand</th>
                     <th> Category</th>
                     <th> Stock</th>
                     <th> Price</th>
+                    <th> Status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,19 +33,22 @@
                     <td>{{sum @index 1}}</td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <img class="product-img" src="{{this.images.[0]}}" alt="" style="width: 50px">
+                            <img class="product-img" src="{{this.thumbnail}}" alt="" style="width: 50px">
                             <p class="m-0">{{this.name}}</p>
                         </div>
 
                     </td>
-                    <td> <img  src="{{this.brand.imgUrl}}" alt="" style="width: 60px"></td>
+                    <td>{{this.code}}</td>
+
+                    <td> <img src="{{this.brand.imgUrl}}" alt="" style="width: 60px"></td>
                     <td>{{this.category.name}}</td>
                     <td>
                         <div class="d-flex fs-6">
                             <div class="badge badge-sa-success">3 In Stock</div>
                         </div>
                     </td>
-                    <td>{{this.price}}</td>
+                    <td>{{number this.price "0,0.00" }} VND</td>
+                    <td>{{this.status}}</td>
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn btn-sm btn-muted d-block" id="widget-context-menu-1"
@@ -56,7 +61,8 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
                                 <li>
-                                    <p class="dropdown-item btn"> Update</p>
+                                    <p class="dropdown-item btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                        data-bs-nameProduct="{{this.name}}" data-bs-idProduct="{{this._id}}"> Import</p>
                                 </li>
                                 <li><a class="dropdown-item" href="#">View/Edit</a></li>
                                 <li>
@@ -72,21 +78,96 @@
             </tbody>
         </table>
     </div>
+
 </div>
+
+<!-- Modal -->
+<form name="importOder-form" id="importOder-form" method="POST">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Import product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <label class="fw-bold" for="form-quantity" class="form-label">Name Product</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control nameProductInput" disabled>
+                    </div>
+
+                    <label class="fw-bold" for="form-quantity" class="form-label">Quantity</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="quantity">
+                    </div>
+
+                    <label class="fw-bold" for="form-quantity" class="form-label">Unit Price</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="unitPrice" aria-label="Amount (to the nearest dollar)">
+                        <span class="input-group-text">.00</span>
+                        <span class="input-group-text">VNĐ</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="btn-save-importOrder">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+        //table
         $(document).ready(function () {
             $('#products-table').DataTable({
                 pageLength: 8,
                 lengthMenu: [5, 10, 20, 50, 100],
                 columnDefs: [{
-                    "targets": [6],
+                    "targets": [8],
                     "searchable": false,
                     "orderable": false,
                     "visible": true
                 }]
             });
         });
+
+        //handle modal
+        let productId;
+        const exampleModal = document.getElementById('staticBackdrop')
+        const importOderForm = document.getElementById('importOder-form')
+       
+        if (exampleModal) {
+            exampleModal.addEventListener('show.bs.modal', event => {
+                // Button that triggered the modal
+                const button = event.relatedTarget
+                // Extract info from data-bs-* attributes
+                productId = button.getAttribute('data-bs-idProduct')
+                const nameProduct = button.getAttribute('data-bs-nameProduct')
+
+                // If necessary, you could initiate an Ajax request here
+                // and then do the updating in a callback.
+
+                // Update the modal's content.
+                const nameProductInput = exampleModal.querySelector('.modal-body .nameProductInput')
+                //const modalBodyInput = exampleModal.querySelector('.modal-body input')
+                nameProductInput.value = nameProduct;
+                //modalBodyInput.value = recipient
+            })
+            const btnSaveImportOder = exampleModal.querySelector('#btn-save-importOrder')
+            btnSaveImportOder.onclick = function () {
+                importOderForm.action = ` /admin/importOders/store/${productId}`
+                importOderForm.submit();
+            }
+           
+
+
+        }
+
+
     })
 </script>
