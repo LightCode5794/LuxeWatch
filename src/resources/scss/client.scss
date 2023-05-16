@@ -3,13 +3,14 @@
 @import 'clientHeader';
 @import 'clientFooter';
 @import 'clientSidebar';
+@import 'home';
 
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    -webkit-box-sizing: border-box; 
 }
 
 body {

@@ -1,1 +1,333 @@
-<h1>HOME PAGE</h1>
+<!-- content -->
+<section class="content">
+    <section id="slider">
+        <div class="slideshow-container">
+
+            <div class="mySlides" style="background-image: url('/imgs/sliders/slider1.jpg');">
+            </div>
+
+            <div class="mySlides" style="background-image: url('/imgs/sliders/slider2.jpg') ;">
+            </div>
+
+            <div class="mySlides" style="background-image: url('/imgs/sliders/slider3.jpg');">
+            </div>
+            <div class="mySlides" style="background-image: url('/imgs/sliders/slider4.jpg');">
+            </div>
+            <div class="mySlides" style="background-image: url('/imgs/sliders/slider5.jpg');">
+            </div>
+        </div>
+        <div class="btn-shop">
+            <a href="watches.html">Shop now</a>
+        </div>
+    </section>
+    <!-- gender watch -->
+
+    <section class="gender-categorize">
+        <div class="gender-categorize-item">
+
+            {{!-- <img src="/imgs/categories/manWatch.jpg" alt=""> --}}
+            <div class="gender-item-box" style="background-image: url('/imgs/categories/manWatch.jpg') ;">
+
+            </div>
+            <a class="text-item " href="#">Man Watches
+                <div id="border-bottom"></div>
+            </a>
+
+            <!-- </div> -->
+        </div>
+        <div class="gender-categorize-item">
+            <div class="gender-item-box" style="background-image: url('/imgs/categories/test.jpg') ;">
+
+            </div>
+            <a class="text-item " href="sdfasdf.html">
+                Women Watches
+                <div id="border-bottom"></div>
+            </a>
+            {{!-- <img src="/imgs/categories/womanWatch.jpg" alt=""> --}}
+
+            <!-- </div> -->
+        </div>
+    </section>
+
+    <!-- brands -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-title">
+                <h2>
+                    <span>Bands</span>
+                </h2>
+                <a href="#">View All</a>
+            </div>
+
+            <!-- Flickity HTML init -->
+            <div class="carousel js-flickity"
+                data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1}'>
+                {{#each brands}}
+                <div class="carousel-cell">
+                    <div class="box-image">
+                        <a href="brands.html">
+                            <img class="carousel-cell-image brand-image" data-flickity-lazyload="{{this.imgUrl}}"
+                                alt="tulip">
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- product new -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-title">
+                <h2>
+                    <span>2023 Watches</span>
+                </h2>
+                <p>Products with high class</p>
+            </div>
+            <div class="content-containter">
+                <!-- Flickity HTML init -->
+                <div class="carousel js-flickity"
+                    data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1}'>
+                    {{#each products}}
+                    <div class="carousel-cell" data-name="product-01">
+                        <div class="box-image">
+                            <a href="product.html">
+                                <img class="carousel-cell-image product-image"
+                                    data-flickity-lazyload="{{this.thumbnail}}" alt="tulip">
+
+                            </a>
+                            <div class="quick-view">
+                                <a href="#" class="text">
+                                    Quick view
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="box-caption">
+
+                            <a class="product-name" href="product.html">{{this.name}}</a>
+                            <p class="product-price">
+                                {{number this.price "0,0.00" }} VND
+                            </p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="content-section">
+        <div class="testimonial-container">
+            <div class="container">
+                <div class="content-title">
+                    <h2>
+                        <span>Testimonials</span>
+                    </h2>
+                    <p>Hear reviews from customers who have used our products</p>
+                </div>
+                <div class="content-containter">
+                    <!-- Flickity HTML init -->
+                    <div class="carousel js-flickity"
+                        data-flickity='{"wrapAround": true, "contain": true,  "lazyLoad": 2, "autoPlay": true}'>
+
+                        <!-- customer 1 -->
+                        <div class="testimonial-cell">
+                            <p class="testiomotinal-caption">
+                                <sup><i class="fa-solid fa-quote-left"></i></sup>
+
+                                It's been with me through three jets, two type ratings, and my first Atlantic
+                                and Hawaii crossings - can't wait to start wearing it again!
+
+                                <sup><i class="fa-solid fa-quote-right"></i></sup>
+                            </p>
+                            <div class="infor-customer">
+                                <img data-flickity-lazyload="../assets/images/Customer/HoangTran.jpg" alt="">
+                                <div class="infor-text">
+                                    <h2 class="name">Hoang Tran</h2>
+                                    <p class="job">Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- customer 2 -->
+                        <div class="testimonial-cell">
+                            <p class="testiomotinal-caption">
+                                <sup><i class="fa-solid fa-quote-left"></i></sup>
+                                It's been with me through three jets, two type ratings, and my first Atlantic
+                                and Hawaii crossings - can't wait to start wearing it again!
+                                <sup><i class="fa-solid fa-quote-right"></i></sup>
+                            </p>
+                            <div class="infor-customer">
+                                <img data-flickity-lazyload="../assets/images/Customer/AnBui.jpg" alt="">
+                                <div class="infor-text">
+                                    <h2 class="name">An Bui</h2>
+                                    <p class="job">Rich kid</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- customer 3 -->
+                        <div class="testimonial-cell">
+                            <p class="testiomotinal-caption">
+                                <sup><i class="fa-solid fa-quote-left"></i></sup>
+                                It's been with me through three jets, two type ratings, and my first Atlantic
+                                and Hawaii crossings - can't wait to start wearing it again!
+                                <sup><i class="fa-solid fa-quote-right"></i></sup>
+                            </p>
+                            <div class="infor-customer">
+                                <img data-flickity-lazyload="../assets/images/Customer/customer3.jpg" alt="">
+                                <div class="infor-text">
+                                    <h2 class="name">Calvin Reeves</h2>
+                                    <p class="job">Model</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- customer 4 -->
+                        <div class="testimonial-cell">
+                            <p class="testiomotinal-caption">
+                                <sup><i class="fa-solid fa-quote-left"></i></sup>
+                                It's been with me through three jets, two type ratings, and my first Atlantic
+                                and Hawaii crossings - can't wait to start wearing it again!
+                                <sup><i class="fa-solid fa-quote-right"></i></sup>
+                            </p>
+                            <div class="infor-customer">
+                                <img data-flickity-lazyload="../assets/images/Customer/customer5.jpg" alt="">
+                                <div class="infor-text">
+                                    <h2 class="name">Calvin Reeves</h2>
+                                    <p class="job">Actor</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- customer 5 -->
+                        <div class="testimonial-cell">
+                            <p class="testiomotinal-caption">
+                                <sup><i class="fa-solid fa-quote-left"></i></sup>
+                                It's been with me through three jets, two type ratings, and my first Atlantic
+                                and Hawaii crossings - can't wait to start wearing it again!
+                                <sup><i class="fa-solid fa-quote-right"></i></sup>
+                            </p>
+                            <div class="infor-customer">
+                                <img data-flickity-lazyload="../assets/images/Customer/customer3.jpg" alt="">
+                                <div class="infor-text">
+                                    <h2 class="name">Calvin Reeves</h2>
+                                    <p class="job">Singer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- <section class="content-section">
+        <div class="container">
+            <div class="content-title">
+                <h2>
+                    <span>limited edition</span>
+                </h2>
+                <p>Watches with rare uniqueness</p>
+            </div>
+            <div class="content-container">
+                <!-- Flickity HTML init -->
+                <div class="carousel js-flickity"
+                    data-flickity='{"wrapAround": true,"freeScroll": true, "contain": true,  "lazyLoad": 2, "initialIndex": 2}'>
+                    <!-- product 1 -->
+                    <div class="carousel-cell">
+                        <div href="#" class="box-image">
+                            <a href="product.html">
+                                <img class="carousel-cell-image"
+                                    data-flickity-lazyload="../assets/images/scrollview/limited-product/product-01.jpg"
+                                    alt="tulip" />
+                            </a>
+                            <div class="quick-view">
+                                <a href="#" class="text">
+                                    Quick view
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-caption">
+
+                            <a class="product-name" href="product.html">Rolex Daytona Unicorn 6265 </a>
+                            <p class="product-price">
+                                $5,000,000.00
+                                <my-rating></my-rating>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section> --}}
+
+    <!-- Latest Blog -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-title">
+                <h2>
+                    <span>Latest Blog</span>
+                </h2>
+                <p>Watches with contemporary fashion</p>
+            </div>
+            <div class="content-containter">
+                <div class="content-blogs">
+                    <!-- blog 1 -->
+                    <div class="blog-item">
+                        <div class="blog-image" style="background-image: url('../assets/images/Blog/blog1.jpg');">
+                        </div>
+                        <div class="blog-item-text">
+                            <span><i class="ti-calendar"></i> 21 November 2022</span>
+                            <h5>What Curling Irons Are The Best Ones</h5>
+                            <a class="hover-underline-animation" href="blog.html">Read More</a>
+                        </div>
+                    </div>
+                    <!-- blog 2 -->
+                    <div class="blog-item">
+                        <div class="blog-image" style="background-image: url('../assets/images/Blog/blog2.jpg');">
+                        </div>
+                        <div class="blog-item-text">
+                            <span><i class="ti-calendar"></i> 21 November 2022</span>
+                            <h5>What Curling Irons Are The Best Ones</h5>
+                            <a class="hover-underline-animation" href="blog.html">Read More</a>
+                        </div>
+                    </div>
+                    <!-- blog 3 -->
+                    <div class="blog-item">
+
+                        <div class="blog-image" style="background-image: url('../assets/images/Blog/blog3.jpg');">
+
+                        </div>
+
+                        <div class="blog-item-text">
+                            <span><i class="ti-calendar"></i> 21 November 2022</span>
+                            <h5>What Curling Irons Are The Best Ones</h5>
+                            <a class="hover-underline-animation" href="blog.html">Read More</a>
+                        </div>
+                    </div>
+                </div>
+    </section>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('.slideshow-container').slick({
+                dots: true,
+                cssEase: 'ease-in',
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                pauseOnHover: false,
+                pauseOnFocus: false,
+
+            });
+
+        });
+
+    })
+</script>

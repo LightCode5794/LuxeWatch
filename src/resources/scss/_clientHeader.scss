@@ -189,7 +189,7 @@ p {
     color: $color-text-hover;
 }
 
-.actived-page.hover-underline-animation::after {
+a.actived-page.hover-underline-animation::after {
     transform: scaleX(1);
 }
 
