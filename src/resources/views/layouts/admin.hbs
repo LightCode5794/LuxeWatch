@@ -22,20 +22,23 @@
 
     <!-- custom css for this page -->
     <link rel="stylesheet" href="/css/admin.css">
+
+  
+
 </head>
 
 <body>
-        {{> admin-sidebar}}
-        <div id="content-page">
-            {{> admin-header}}
-            <div class="container-xxl container-body">
+    {{> admin-sidebar}}
+    <div id="content-page">
+        {{> admin-header}}
+        <div class="container-xxl container-body">
 
-                {{{body}}}
+            {{{body}}}
 
-            </div>
-
-            {{> admin-footer}}
         </div>
+
+        {{> admin-footer}}
+    </div>
     </div>
 
 

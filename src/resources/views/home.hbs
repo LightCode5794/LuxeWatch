@@ -54,14 +54,15 @@
         <div class="container">
             <div class="content-title">
                 <h2>
-                    <span>Bands</span>
+                    <span>Brands</span>
                 </h2>
-                <a href="#">View All</a>
+                <a class="view-all-link"
+                    href="#">View All</a>
             </div>
 
             <!-- Flickity HTML init -->
             <div class="carousel js-flickity"
-                data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1}'>
+                data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1, "pageDots": false}'>
                 {{#each brands}}
                 <div class="carousel-cell">
                     <div class="box-image">
@@ -90,18 +91,18 @@
             <div class="content-containter">
                 <!-- Flickity HTML init -->
                 <div class="carousel js-flickity"
-                    data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1}'>
+                    data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1, "pageDots": false}'>
                     {{#each products}}
                     <div class="carousel-cell" data-name="product-01">
                         <div class="box-image">
-                            <a href="product.html">
+                            <a href="/products/{{this.slug}}">
                                 <img class="carousel-cell-image product-image"
                                     data-flickity-lazyload="{{this.thumbnail}}" alt="tulip">
 
                             </a>
                             <div class="quick-view">
-                                <a href="#" class="text">
-                                    Quick view
+                                <a href="/products/{{this.slug}}" class="text">
+                                     View
                                 </a>
                             </div>
 
@@ -121,7 +122,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="content-section">
+    {{!-- <section class="content-section">
         <div class="testimonial-container">
             <div class="container">
                 <div class="content-title">
@@ -221,7 +222,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{!-- <section class="content-section">
         <div class="container">
@@ -278,7 +279,7 @@
                 <div class="content-blogs">
                     <!-- blog 1 -->
                     <div class="blog-item">
-                        <div class="blog-image" style="background-image: url('../assets/images/Blog/blog1.jpg');">
+                        <div class="blog-image" style="background-image: url('/imgs/blogs/blog1.jpg');">
                         </div>
                         <div class="blog-item-text">
                             <span><i class="ti-calendar"></i> 21 November 2022</span>
@@ -288,7 +289,7 @@
                     </div>
                     <!-- blog 2 -->
                     <div class="blog-item">
-                        <div class="blog-image" style="background-image: url('../assets/images/Blog/blog2.jpg');">
+                        <div class="blog-image" style="background-image: url('/imgs/blogs/blog2.jpg');">
                         </div>
                         <div class="blog-item-text">
                             <span><i class="ti-calendar"></i> 21 November 2022</span>
@@ -299,7 +300,7 @@
                     <!-- blog 3 -->
                     <div class="blog-item">
 
-                        <div class="blog-image" style="background-image: url('../assets/images/Blog/blog3.jpg');">
+                        <div class="blog-image" style="background-image: url('/imgs/blogs/blog3.jpg');">
 
                         </div>
 

@@ -1,0 +1,212 @@
+<link rel="stylesheet" href="/css/customCarousel.css">
+
+
+<div class="container mt-5  mb-5">
+    <div class="row showcase-row">
+        {{#with product}}
+        <div class="col-12 col-lg-7  product-gallery">
+            <div class="row me-0">
+                <div class="order-lg-2 col-12 col-lg-9">
+                    <!-- Flickity HTML init -->
+                    <div class="carousel ">
+                        <div class="carousel-cell">
+                            <img class="carousel-cell-image" data-flickity-lazyload="{{thumbnail}}" alt="img-product" />
+                        </div>
+
+                        {{#each images}}
+                        <div class="carousel-cell">
+                            <img class="carousel-cell-image" data-flickity-lazyload="{{this}}" alt="img-product" />
+                        </div>
+                        {{/each}}
+
+                    </div>
+                </div>
+                <div class="order-lg-1 col-12 col-lg-3">
+                    <div class="carousel-nav">
+
+                        <div class="img-mini">
+                            <img src="{{thumbnail}}" alt="" class="is-nav-selected">
+                        </div>
+                        {{#each images}}
+                        <div class="img-mini">
+                            <img src="{{this}}" alt="">
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5 product-infomation d-flex flex-column justify-content-evenly">
+
+
+            <div class="summary-top text-center">
+                <h1 class="product_title mb-3 ">{{name}}</h1>
+
+                <p class="price mb-3">
+                    <span class="amount ">
+                        <span>{{number price "0,0.00" }} VND</span>
+                    </span>
+                    <my-rating></my-rating>
+                </p>
+                <div class="short-description">
+                    <div class="entry-content">
+                        <p>{{description}}</p>
+                    </div>
+                </div>
+                <div class="read-more-content text-start">
+                    <h5>Dial: </h5>
+                    <p>{{dial}}</p>
+                    <h5 class="mt-2">Case: </h5>
+                    <p>{{case}}</p>
+                    <h5 class="mt-2">Strap: </h5>
+                    <p>{{strap}}</p>
+                </div>
+                 <a  class="read-more" title="Read More">Read More</a>
+            </div>
+            <div class="summary-content mt-3">
+                <form class="cart"
+                    action="https://datatables.net/forums/discussion/70557/got-two-errors-uncaught-typeerror-cannot-set-properties-of-undefined-setting-dt-cellindex    "
+                    method="post" enctype="multipart/form-data">
+                    <div class="cart-container">
+                        <div class="quantity">
+                            <span class="minus">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-minus">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </span>
+
+                            <input type="number" class="qty-text" id="qty-text" step="1" min="1" name="quantity-input"
+                                value="1" title="Qty" placeholder="" inputmode="numeric" autocomplete="off">
+                            <span class="plus">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-plus">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </span>
+                        </div>
+                        <button type="submit" name="add-to-cart" value="3803" class="btn-dark btn btn-add-to-cart">Add
+                            to cart</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="summary-bottom mt-3">
+                <div class="menu-divider"></div>
+                <div class="product_meta mt-3 mb-3">
+                    <span class="sku_wrapper">Code: <span class="sku">5207P</span></span>
+                    <span class="posted_in ms-3">Category:
+                        <a href="watches.html" rel="tag">Men</a>
+                    </span>
+                    <span class="brand ms-3">Brand:
+                        <a href="watches.html" rel="tag">{{brand.name}}</a>
+                    </span>
+                </div>
+                <div class="menu-divider"></div>
+                <div class="tags mt-3 mb-3">
+                    <span class="tags_wrapper d-flex align-items-center flex-wrap ">Tags:
+                        {{#each tags}}
+                        <a href="ádfasdfsdf"><span class="badge bg-secondary ms-2">{{this.name}}</span></a>
+                        {{/each}}
+                    </span>
+                </div>
+                {{!-- <div class="menu-divider"></div>
+                <div class="post-share mt-3">
+                    <ul class="social-icons">
+                        <li class="fs-6" style="color: grey;">Share</li>
+                        <li><i class="fa-brands fa-square-facebook"></i></li>
+                        <li><i class="fa-brands fa-twitter"></i></li>
+                        <li><i class="fa-brands fa-square-instagram"></i></li>
+                        <li><i class="fa-brands fa-pinterest"></i></li>
+                    </ul>
+                </div> --}}
+
+            </div>
+        </div>
+        {{/with}}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var $carousel = $('.carousel').flickity({
+            lazyLoad: 3,
+            initialIndex: 0,
+            pageDots: false,
+
+        });
+
+        var $carouselNav = $('.carousel-nav');
+        var $carouselNavCells = $carouselNav.find('.img-mini');
+
+        $carouselNav.on('click', '.img-mini', function (event) {
+            var index = $(event.currentTarget).index();
+            $carousel.flickity('select', index);
+        });
+
+        var flkty = $carousel.data('flickity');
+        var navTop = $carouselNav.position().top;
+        var navCellHeight = $carouselNavCells.height();
+        var navHeight = $carouselNav.height();
+
+        $carousel.on('select.flickity', function () {
+            // set selected nav cell
+            $carouselNav.find('.is-nav-selected').removeClass('is-nav-selected');
+            var $selected = $carouselNavCells.eq(flkty.selectedIndex)
+                .addClass('is-nav-selected');
+            // scroll nav
+            var scrollY = $selected.position().top +
+                $carouselNav.scrollTop() - (navHeight + navCellHeight) / 2;
+            $carouselNav.animate({
+                scrollTop: scrollY
+            });
+        });
+
+
+        function dynamicallyLoadScript(url) {
+            var script = document.createElement("script");  // create a script DOM node
+            script.src = url;  // set its src to the provided URL
+
+            document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+        }
+
+        // event for add select num of product
+
+        $('.plus').on('click', incrementValue);
+        $('.minus').on('click', decrementValue);
+
+
+        function incrementValue() {
+            var value = parseInt(document.getElementById('qty-text').value, 10);
+            value = isNaN(value) ? 0 : value;
+            //if (value < 10) {
+            value++;
+            document.getElementById('qty-text').value = value;
+            //  }
+        }
+        function decrementValue() {
+            var value = parseInt(document.getElementById('qty-text').value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value > 1) {
+                value--;
+                document.getElementById('qty-text').value = value;
+            }
+
+        }
+
+        //function for read more content
+        $('.read-more').click(function () {
+            $(this).prev().slideToggle('0.3s', 'linear');
+            if (($(this).text()) == "Read More") {
+                $(this).text("Read Less");
+            } else {
+                $(this).text("Read More");
+            }
+        });
+    });
+</script>

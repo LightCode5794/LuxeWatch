@@ -4,6 +4,8 @@
 @import 'clientFooter';
 @import 'clientSidebar';
 @import 'home';
+@import 'viewProduct';
+
 
 
 * {
@@ -23,7 +25,7 @@ body {
     cursor: pointer;
 }
 .hover-underline-animation {
-    display: inline-block;
+    // display: inline-block;
     position: relative;
     /* padding-bottom: 4px; */
 }
