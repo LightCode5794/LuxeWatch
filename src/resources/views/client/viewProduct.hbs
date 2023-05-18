@@ -99,9 +99,9 @@
             <div class="summary-bottom mt-3">
                 <div class="menu-divider"></div>
                 <div class="product_meta mt-3 mb-3">
-                    <span class="sku_wrapper">Code: <span class="sku">5207P</span></span>
+                    <span class="sku_wrapper">Code: <span class="sku">{{code}}</span></span>
                     <span class="posted_in ms-3">Category:
-                        <a href="watches.html" rel="tag">Men</a>
+                        <a href="watches.html" rel="tag">{{category.name}}</a>
                     </span>
                     <span class="brand ms-3">Brand:
                         <a href="watches.html" rel="tag">{{brand.name}}</a>
@@ -201,7 +201,7 @@
 
         //function for read more content
         $('.read-more').click(function () {
-            $(this).prev().slideToggle('0.3s', 'linear');
+            $(this).prev().slideToggle(200, 'linear');
             if (($(this).text()) == "Read More") {
                 $(this).text("Read Less");
             } else {

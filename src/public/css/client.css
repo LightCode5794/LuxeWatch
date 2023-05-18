@@ -686,8 +686,7 @@ img {
 
 .carousel-cell {
   width: 100%;
-  margin-right: 10px;
-  border-radius: 5px;
+  margin-right: 12px;
   text-align: center; }
 
 .flickity-slider {
@@ -740,7 +739,6 @@ img {
 .carousel-cell .box-image {
   display: inline-block;
   width: 100%;
-  overflow: hidden;
   position: relative; }
 
 .box-image .carousel-cell-image {
@@ -769,12 +767,14 @@ img {
   text-align: center;
   border-radius: 32px;
   transition: all 0.3s;
-  background-color: #ddd; }
+  background-color: #ddd;
+  opacity: 0; }
 
 .box-image:hover .carousel-cell-image {
   transform: scale(1.05); }
 
 .box-image:hover .quick-view {
+  opacity: 1;
   top: 84%; }
 
 .quick-view .text {

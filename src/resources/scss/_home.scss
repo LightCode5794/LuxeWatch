@@ -406,8 +406,7 @@ img {
 
 .carousel-cell {
     width: 100%;
-    margin-right: 10px;
-    border-radius: 5px;
+    margin-right: 12px;
     text-align: center;
 
 }
@@ -478,7 +477,7 @@ img {
 .carousel-cell .box-image {
     display: inline-block;
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
 }
 
@@ -516,6 +515,7 @@ img {
     border-radius: 32px;
     transition: all 0.3s;
     background-color: #ddd;
+    opacity: 0;
 
 }
 
@@ -525,6 +525,7 @@ img {
 }
 
 .box-image:hover .quick-view {
+    opacity: 1;
     top: 84%;
 }
 
