@@ -76,8 +76,10 @@
 
                         </div>
                     </li>
-                    <li class="icon-cart">
-                        <div><i class="fa-solid fa-cart-shopping"></i></div>
+                    <li  data-bs-toggle="modal" data-bs-target="#cartModal">
+
+                        <i class="fa-solid fa-cart-shopping icon-cart"></i>
+
                     </li>
 
                     <li class="icon-hamburger">
@@ -91,4 +93,60 @@
 
     </div>
 
+</div>
+
+{{!-- cart modal --}}
+<div class="modal fade" id="cartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" >
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h4 class="modal-title fw-bold" id="cartModalLabel">
+                    Your Shopping Cart
+                </h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body table-responsive">
+              
+                <table class="table table-image">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Total</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody class="show-cart">
+                        <tr>
+                            <td class="w-25">
+                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png"
+                                    class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Vans Sk8-Hi MTE Shoes</td>
+                            <td>89$</td>
+                            <td class="qty">
+                                <input type="number" class="form-control" value="1">
+                                </td>
+                            <td>178$</td>
+                            <td>
+                                <a href="#" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end">
+                    <h5>Total: <span class="total-cart">89$</span></h5>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark">Checkout</button>
+            </div>
+        </div>
+    </div>
 </div>

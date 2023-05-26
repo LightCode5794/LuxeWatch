@@ -11,7 +11,7 @@ class AuthController {
     loginWithGoogle(req, res, next) {
         if (req.user.email === process.env.EMAIL_ADMIN) {
             res.redirect('/admin');
-        } else res.send('cliet side');
+        } else res.redirect('/');
     }
 }
 

@@ -311,3 +311,35 @@ a.actived-page.hover-underline-animation::after {
     }
 
 }
+
+
+// cart modal
+.table-image {
+  
+  thead {
+    td, th {
+      border: 0;
+      color: #666;
+      font-size: 1rem;
+    }
+  }
+  
+  td, th {
+    vertical-align: middle;
+    text-align: center;
+    
+    &.qty {
+        text-align: center;
+       max-width: 8rem;
+       min-width: 8rem;;
+    }
+  }
+}
+
+.total-cart {
+  margin-left: 1rem;
+}
+
+.modal-footer {
+  padding-top: 0rem;
+}
