@@ -153,6 +153,7 @@ $('.add-to-cart').click(function (event) {
   var img = $(this).data('img');
   shoppingCart.addItemToCart(name, code, img, price, 1);
   displayCart();
+  checkElementCart();
 });
 
 // Clear items
@@ -160,6 +161,7 @@ $('.clear-cart').click(function () {
   shoppingCart.clearCart();
   displayCart();
 });
+
 
 
 function displayCart() {
@@ -207,11 +209,14 @@ function displayCart() {
   $('.total-count').html(shoppingCart.totalCount());
 }
 
+
+
 // Delete item button
 
 $('.show-cart').on("click", ".delete-item", function (event) {
   var code = $(this).data('code')
   shoppingCart.removeItemFromCartAll(code);
+  checkElementCart();
   displayCart();
 })
 
@@ -236,6 +241,20 @@ $('.show-cart').on("change", ".item-count", function (event) {
   var count = Number($(this).val());
   shoppingCart.setCountForItem(code, count);
   displayCart();
+ 
 });
 
 displayCart();
+
+//check nums element of cart
+function checkElementCart() {
+  const btnCheckout = $('.btn-checkout');
+ 
+  if(shoppingCart.listCart().length == 0) {
+    btnCheckout.prop('disabled', true);
+  }
+  else {
+    btnCheckout.prop('disabled', false);
+  }
+}
+checkElementCart();
