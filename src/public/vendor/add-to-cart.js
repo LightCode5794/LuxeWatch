@@ -107,20 +107,20 @@ var shoppingCart = (function () {
     for (var item in cart) {
       totalCart += cart[item].price * cart[item].count;
     }
-    return Number(totalCart.toFixed(2));
+    return totalCart;
   }
 
   // List cart
   obj.listCart = function () {
     var cartCopy = [];
     for (i in cart) {
-      item = cart[i];
+      const item = cart[i];
       itemCopy = {};
       for (p in item) {
         itemCopy[p] = item[p];
 
       }
-      itemCopy.total = Number(item.price * item.count).toFixed(2);
+      itemCopy.total = item.price * item.count;
       cartCopy.push(itemCopy)
     }
     return cartCopy;
@@ -177,31 +177,33 @@ function displayCart() {
     //   + "<td>" + cartArray[i].total + "</td>" 
     //   +  "</tr>";
     output += `
-    <tr>
-    <td>
+    <li>
+  <div class="d-flex flex-nowrap align-items-center gap-3 fs-6">
+    <div>
       <img src="${cartArray[i].img}"
-        class="img-fluid img-thumbnail" alt="Sheep" style ="width: 100px; min-width: 80px">
-  </td>
-  <td>${cartArray[i].name}</td>
-  <td>${cartArray[i].price.toFixed(2)}</td>
-  <td class="qty">
-    <div class = "input-group">
-      <button class='minus-item input-group-addon btn btn-dark' data-code="${cartArray[i].code}">-</button>
-      <input type='number' class='item-count form-control' data-code='${cartArray[i].code}' value='${cartArray[i].count}'>
-      <button class='plus-item btn btn-dark input-group-addon' data-code="${cartArray[i].code}">+</button>
+        class="img-fluid img-thumbnail" alt="Sheep" style="width: 100px; min-width: 80px"/>
     </div>
-  </td>
-    <td style="min-width: 150px">${cartArray[i].total}</td>
-  <td>
-
+    <div class="d-flex flex-column  flex-grow-1 gap-3 ">
+      <div>${cartArray[i].name}</div>
+      <div>${cartArray[i].price.toLocaleString(undefined, {minimumFractionDigits: 2})} VNĐ</div>
+      <div class="qty">
+        <div class="input-group">
+          <button class='minus-item input-group-addon btn btn-dark' data-code="${cartArray[i].code}">-</button>
+          <input type='number' class='item-count form-control' data-code='${cartArray[i].code}' value='${cartArray[i].count}'/>
+            <button class='plus-item btn btn-dark input-group-addon' data-code="${cartArray[i].code}">+</button>
+        </div>
+      </div>
+      <div style="min-width: 150px">${cartArray[i].total.toLocaleString(undefined, {minimumFractionDigits: 2})} VNĐ</div>
+    </div>
     <button class='delete-item btn btn-danger btn-sm' data-code="${cartArray[i].code}">X</button>
-  </td>
-    </tr>
+  </div>
+</li>
+<hr/>
   
     `
   }
   $('.show-cart').html(output);
-  $('.total-cart').html(shoppingCart.totalCart().toFixed(2) + ' VNĐ');
+  $('.total-cart').html(shoppingCart.totalCart().toLocaleString(undefined, {minimumFractionDigits: 2}) + ' VNĐ');
   $('.total-count').html(shoppingCart.totalCount());
 }
 

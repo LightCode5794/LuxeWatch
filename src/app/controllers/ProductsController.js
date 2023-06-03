@@ -46,12 +46,6 @@ class ProductsController {
 
     async store(req, res, next) {
         try {
-            // if (!req.files) {
-            //     next(new Error('No files uploaded!'));
-            //     return;
-            // }
-            //res.send(req.files);
-            //return;
             const { status, tags, thumbnail, images, ...rest } = req.body;
 
             const newStatus = status? 'Published' : 'Hidden';
