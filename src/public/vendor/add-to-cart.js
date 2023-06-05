@@ -6,11 +6,12 @@ var shoppingCart = (function () {
   // =============================
   // Private methods and propeties
   // =============================
-  cart = [];
+  let cart = [];
 
   // Constructor
   class Item {
-    constructor(name, code, img, price, count) {
+    constructor(id, name, code, img, price, count) {
+      this.id = id;
       this.name = name;
       this.code = code;
       this.price = price;
@@ -39,7 +40,7 @@ var shoppingCart = (function () {
   var obj = {};
 
   // Add to cart
-  obj.addItemToCart = function (name, code, img, price, count) {
+  obj.addItemToCart = function (id, name, code, img, price, count) {
 
     for (var item in cart) {
       if (cart[item].code === code) {
@@ -48,7 +49,7 @@ var shoppingCart = (function () {
         return;
       }
     }
-    var item = new Item(name, code, img, price, count);
+    var item = new Item(id, name, code, img, price, count);
     cart.push(item);
     saveCart();
   }
@@ -113,10 +114,10 @@ var shoppingCart = (function () {
   // List cart
   obj.listCart = function () {
     var cartCopy = [];
-    for (i in cart) {
+    for (let i in cart) {
       const item = cart[i];
-      itemCopy = {};
-      for (p in item) {
+      let itemCopy = {};
+      for (let p in item) {
         itemCopy[p] = item[p];
 
       }
@@ -151,7 +152,8 @@ $('.add-to-cart').click(function (event) {
   var price = Number($(this).data('price'));
   var code = $(this).data('code');
   var img = $(this).data('img');
-  shoppingCart.addItemToCart(name, code, img, price, 1);
+  var id = $(this).data('id');
+  shoppingCart.addItemToCart(id, name, code, img, price, 1);
   displayCart();
   checkElementCart();
 });
@@ -230,7 +232,7 @@ $('.show-cart').on("click", ".minus-item", function (event) {
 // +1
 $('.show-cart').on("click", ".plus-item", function (event) {
   var code = $(this).data('code')
-  shoppingCart.addItemToCart('', code, '', 0, 0);
+  shoppingCart.addItemToCart('','', code, '', 0, 0);
   displayCart();
 })
 
@@ -256,5 +258,29 @@ function checkElementCart() {
   else {
     btnCheckout.prop('disabled', false);
   }
+}
+
+  function addDataProduct() {
+  
+    const productArr = shoppingCart.listCart().map(item => ({
+        product: item.id,
+        count: item.count,
+    }))
+    //console.log(productArr)
+    const productListInput = $('#productList');
+    const totalPrice = $('#totalPrice');
+    if(productListInput) {
+       productListInput.val(JSON.stringify( productArr ));
+      // $('input:hidden[name="productList[]"]').val(JSON.stringify( productArr ).replace(/\\/g, ''));
+      
+      // console.log(productListInput.val());
+    }
+    if(totalPrice) {
+      totalPrice.val(shoppingCart.totalCart());
+     // console.log(totalPrice);
+    }
+  }
+export {
+  addDataProduct
 }
 checkElementCart();

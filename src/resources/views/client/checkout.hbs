@@ -2,7 +2,7 @@
   <div class="row pt-5">
     <div class="col-md-4 order-md-2 mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Your cart</span>
+        <span class="">Your Cart</span>
         <span class="badge badge-secondary badge-pill">3</span>
       </h4>
       <div class="product-cart">
@@ -47,59 +47,65 @@
           <strong>$20</strong>
         </li>
       </ul> --}}
-   
-        <h5>Total: <span class="total-cart">89$</span></h5>
-      
 
-      <form class="card p-2">
+      <h5>Total: <span class="total-cart">89$</span></h5>
+
+
+      {{!-- <form class="card p-2">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Promo code">
           <div class="input-group-append">
             <button type="submit" class="btn btn-secondary">Redeem</button>
           </div>
         </div>
-      </form>
+      </form> --}}
     </div>
-    <div class="col-md-8 order-md-1">
-      <h4 class="mb-3">Billing address</h4>
-      <form class="needs-validation" novalidate>
+    <div class="col-md-8 order-md-1 mb-51">
+      <h4 class="mb-4">Billing Address</h4>
+      <form class="needs-validation" method="POST" action="/checkout/store" id="form-checkout">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-6 mb-4">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
           </div>
         </div>
-
-
-        <div class="mb-3">
-          <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com">
+        <div class="mb-4">
+          <label for="phoneNumber">Phone Number </label>
+          <input type="phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="" required>
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
+          <label for="email">Email <span class="text-muted">(Optional)</span></label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+
+        <div class="mb-4">
           <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+          <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+          <input type="text" class="form-control" id="address2" name="adress2" placeholder="Apartment or suite">
         </div>
 
         {{!-- <div class="row">
@@ -131,6 +137,7 @@
             </div>
           </div>
         </div> --}}
+        {{!--
         <hr class="mb-4">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="same-address">
@@ -140,10 +147,11 @@
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="save-info">
           <label class="custom-control-label" for="save-info">Save this information for next time</label>
-        </div>
-        <hr class="mb-4">
+        </div> --}}
+        {{!--
+        <hr class="mb-4"> --}}
 
-        <h4 class="mb-3">Payment</h4>
+        {{!-- <h4 class="mb-3">Payment</h4>
 
         <div class="d-block my-3">
           <div class="custom-control custom-radio">
@@ -191,19 +199,38 @@
               Security code required
             </div>
           </div>
-        </div>
+        </div> --}}
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+        <div class="d-flex justify-content-end mb-5">
+          <button class="btn btn-primary btn-dark btn-lg btn-block" type="submit" id="oderBtn">Oder</button>
+        </div>
+        {{!-- hidden form for list of product --}}
+        <input type="hidden" name="productList" id="productList">
+        {{!-- hidden form for total of product--}}
+        <input type="hidden" name="totalPrice" id="totalPrice">
       </form>
     </div>
   </div>
 
-  <footer class="my-5 pt-5 text-muted text-center text-small">
+  {{!-- <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2017-2019 Company Name</p>
     <ul class="list-inline">
       <li class="list-inline-item"><a href="#">Privacy</a></li>
       <li class="list-inline-item"><a href="#">Terms</a></li>
       <li class="list-inline-item"><a href="#">Support</a></li>
     </ul>
-  </footer>
+  </footer> --}}
 </div>
+<script type="module">
+  import { addDataProduct } from "/vendor/add-to-cart.js"
+  const oderBtn = $('#oderBtn');
+  const formCheckout = $('#form-checkout');
+  formCheckout.on('submit', function (e) {
+    e.preventDefault();
+    addDataProduct();
+    this.submit()
+  })
+
+
+
+</script>

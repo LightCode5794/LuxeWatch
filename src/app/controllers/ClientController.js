@@ -4,28 +4,11 @@ const Product = require('../models/product/product.model');
 const Category = require('../models/category/category.model');
 const Brand = require('../models/brand/brand.model');
 const Tag = require('../models/tag/tag.model');
+const SaleOder = require('../models/saleOder/saleOder.model');
 
 class ClientController {
-    //[GET]
-    async home(req, res, next) {
-        try {
-            const products = await Product.find()
-                .populate('brand')
-                .populate('category')
-                .populate('tags');
-            const brands = await Brand.find();
-
-            res.render('home', {
-                brands: multipleMongooseToObject(brands),
-                products: multipleMongooseToObject(products),
-            });
-
-        } catch (err) {
-            res.status(401).send(err.message);
-        }
-    }
      //[GET]/checkout
-     async checkout(req, res, next) {
+      show(req, res, next) {
         res.render('client/checkout')
         // try {
         //     const products = await Product.find()
@@ -42,6 +25,19 @@ class ClientController {
         // } catch (err) {
         //     res.status(401).send(err.message);
         // }
+    }
+    // [POST]/checkout/store
+    store(req, res, next) {
+       
+        
+        const newOderData = {
+            ...req.body,
+            productList: JSON.parse(req.body.productList)
+        }
+
+        const newOder = new SaleOder(newOderData);
+        newOder.save();
+        res.json(newOder);
     }
 
 }
