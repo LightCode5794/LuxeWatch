@@ -4,6 +4,8 @@ const router = app.Router();
 
 const clientSiteController = require('../app/controllers/ClientSiteController');
 
+router.use('/login',clientSiteController.login)
 router.use('/', clientSiteController.home);
+
 
 module.exports = router;

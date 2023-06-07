@@ -6,7 +6,7 @@ const Brand = require('../models/brand/brand.model');
 const Tag = require('../models/tag/tag.model');
 
 class ClientSiteController {
-    //[GET] /admin/dashboard
+    //[GET] /
     async home(req, res, next) {
         try {
             const products = await Product.find()
@@ -18,12 +18,16 @@ class ClientSiteController {
             res.render('home', {
                 brands: multipleMongooseToObject(brands),
                 products: multipleMongooseToObject(products),
+                user: singleMongooseToObject(req.user),
             });
 
         } catch (err) {
             res.status(401).send(err.message);
         }
 
+    }
+    login(req, res, next) {
+        res.render('login');
     }
 }
 

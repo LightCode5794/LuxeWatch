@@ -15,10 +15,8 @@ const Handlebars = require("handlebars");
 const MomentHandler = require("handlebars.moment");
 const NumeralHelper = require("handlebars.numeral");
 
-
-
-// require("./config/passport");
-// require("./config/google")
+require("./config/passport");
+require("./config/google")
 
 const app = express();
 const port = 3000;

@@ -3,7 +3,6 @@ const clientRoutes = app.Router();
 const clientSiteRouter = require('./clientSite');
 const checkoutController = require('./checkout');
 const viewProductRouter = require('./viewProduct');
-const loginRouter = require('./login');
 const authRouter = require('./auth');
 
 clientRoutes.use('/products', viewProductRouter);

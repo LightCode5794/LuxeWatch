@@ -9,13 +9,14 @@ class ViewProductController {
 
     //[GET] /products/:slug
     show(req, res, next) {
-        
+        console.log(req.user);
         Product.findOne({ slug: req.params.slug })
             .populate('brand')
             .populate('category')
             .populate('tags')
             .then((product) => res.render('client/viewProduct', {
-                product: singleMongooseToObject(product)
+                product: singleMongooseToObject(product),
+                user: singleMongooseToObject(req.user)
             }))
             .catch(next)
     }

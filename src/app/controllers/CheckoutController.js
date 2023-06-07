@@ -7,9 +7,11 @@ const Tag = require('../models/tag/tag.model');
 const SaleOder = require('../models/saleOder/saleOder.model');
 
 class ClientController {
-     //[GET]/checkout
-      show(req, res, next) {
-        res.render('client/checkout')
+    //[GET]/checkout
+    show(req, res, next) {
+        res.render('client/checkout', {
+            user: singleMongooseToObject(req.user)
+        })
         // try {
         //     const products = await Product.find()
         //         .populate('brand')
@@ -28,8 +30,8 @@ class ClientController {
     }
     // [POST]/checkout/store
     store(req, res, next) {
-       
-        
+
+
         const newOderData = {
             ...req.body,
             productList: JSON.parse(req.body.productList)

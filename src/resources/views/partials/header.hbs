@@ -8,18 +8,45 @@
                     <p><i class="fa-solid fa-phone"></i> 012343569 </p>
                 </div>
 
-                <div class="right-top-bar">
+                <div class="right-top-bar d-flex">
 
                     <!--  account -->
                     <div class="menu-top-bar account">
-
-                        <a href="#">My Account <i class="arrow-down-icon fa-solid fa-caret-down"></i></a>
-                        <ul class="sub-menu-top-bar">
-                            <li><a href="#">My Account </a> </li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="login.html">Register</a></li>
+                        {{#if user}}
+                        {{!-- <div class="dropdown text-end">
+                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
+                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{user.profilePhoto}}" alt="mdo" width="32" height="32"
+                                    class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="#">My account</a></li>
+                                <li><a class="dropdown-item" href="#">Checkout</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </div> --}}
+                        <a href="#" class="d-flex align-items-center gap-1">
+                            <img src="{{user.profilePhoto}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                            <p>{{user.firstName}}</p>
+                            <i class="arrow-down-icon fa-solid fa-caret-down"></i>
+                        </a>
+                        <ul class="sub-menu-top-bar" style="left: 50%;">
+                            <li><a href="#"> My account </a> </li>
                             <li><a href="#">Checkout</a></li>
+                            <li><a href="#">Sign out</a></li>
                         </ul>
+
+                        {{else}}
+                        <a href="#">Login<i class="arrow-down-icon fa-solid fa-caret-down"></i></a>
+                        <ul class="sub-menu-top-bar">
+                            <li><a href="/login"> Login </a> </li>
+                            <li><a href="login.html">Checkout</a></li>
+                        </ul>
+                        {{/if}}
+
                     </div>
                     <!-- languages -->
                     <div class="menu-top-bar languages">
@@ -62,7 +89,6 @@
                     <li><a class="hover-underline-animation" href="blog.html">Blog</a></li>
                     <li><a class="hover-underline-animation" href="contact.html">Contact</a></li>
                 </ul>
-
             </div>
             <div class="nav-icon-menu">
                 <ul>
