@@ -24,8 +24,9 @@
   .product-item {
     .image-container {
       text-align: center;
-      max-height: 360px;
-
+      max-height: 340px;
+      min-height: 340px;
+      overflow: hidden;
       a {
         display: inline-block;
         width: 50%;

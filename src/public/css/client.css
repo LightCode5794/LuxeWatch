@@ -1008,7 +1008,9 @@ img {
       color: #FF6C60; }
   .grid-products .product-item .image-container {
     text-align: center;
-    max-height: 360px; }
+    max-height: 340px;
+    min-height: 340px;
+    overflow: hidden; }
     .grid-products .product-item .image-container a {
       display: inline-block;
       width: 50%; }
