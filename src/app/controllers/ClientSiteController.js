@@ -13,8 +13,11 @@ class ClientSiteController {
             const products = await Product.find()
                 .populate('brand')
                 .populate('category')
-                .populate('tags');
-            const brands = await Brand.find();
+                .populate('tags')
+                .sort({'date': -1})
+                .limit(10)
+            const brands = await Brand.find().sort({'date': -1})
+            //.limit(5);
 
             res.render('home', {
                 brands: multipleMongooseToObject(brands),
@@ -55,6 +58,24 @@ class ClientSiteController {
         try {
             const category = await Category.findOne({name: req.params.name});
             const products = await Product.find({category: category})
+             //res.json(products);
+            
+            res.render('client/search', {
+                query: req.params.name,
+                products: multipleMongooseToObject(products),
+                user: singleMongooseToObject(req.user),
+            });
+
+        } catch (err) {
+            res.status(401).send(err.message);
+        }
+
+    }
+      //[GET] /tags/:name
+      async  productByTag(req, res, next) {
+        try {
+            const tag = await Tag.findOne({name: req.params.name});
+            const products = await Product.find({tags: tag})
              //res.json(products);
             
             res.render('client/search', {

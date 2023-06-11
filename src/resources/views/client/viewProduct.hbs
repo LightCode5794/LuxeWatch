@@ -103,17 +103,17 @@
                 <div class="product_meta mt-3 mb-3">
                     <span class="sku_wrapper">Code: <span class="sku">{{code}}</span></span>
                     <span class="posted_in ms-3">Category:
-                        <a href="watches.html" rel="tag">{{category.name}}</a>
+                        <a href="/categories/{{category.name}}" rel="tag">{{category.name}}</a>
                     </span>
                     <span class="brand ms-3">Brand:
-                        <a href="watches.html" rel="tag">{{brand.name}}</a>
+                        <a href="/brands/{{brand.name}}" rel="tag">{{brand.name}}</a>
                     </span>
                 </div>
                 <div class="menu-divider"></div>
                 <div class="tags mt-3 mb-3">
                     <span class="tags_wrapper d-flex align-items-center flex-wrap ">Tags:
                         {{#each tags}}
-                        <a href="ádfasdfsdf"><span class="badge bg-secondary ms-2">{{this.name}}</span></a>
+                        <a href="/tags/{{this.name}}"><span class="badge bg-secondary ms-2">{{this.name}}</span></a>
                         {{/each}}
                     </span>
                 </div>
