@@ -66,7 +66,7 @@
                 {{#each brands}}
                 <div class="carousel-cell">
                     <div class="box-image">
-                        <a href="brands.html">
+                        <a href="/brands/{{this.name}}">
                             <img class="carousel-cell-image brand-image" data-flickity-lazyload="{{this.imgUrl}}"
                                 alt="tulip">
                         </a>
@@ -93,22 +93,21 @@
                 <div class="carousel js-flickity"
                     data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 1, "pageDots": false}'>
                     {{#each products}}
-                    <div class="carousel-cell" data-name="product-01">
+                    <div class="carousel-cell xx" data-name="product-01">
                         <div class="box-image">
                             <a href="/products/{{this.slug}}">
                                 <img class="carousel-cell-image product-image"
                                     data-flickity-lazyload="{{this.thumbnail}}" alt="tulip">
 
                             </a>
-                            <div class="quick-view">
+                            {{!-- <div class="quick-view">
                                 <a href="/products/{{this.slug}}" class="text">
                                      View
                                 </a>
-                            </div>
+                            </div> --}}
 
                         </div>
                         <div class="box-caption">
-
                             <a class="product-name" href="/products/{{this.slug}}">{{this.name}}</a>
                             <p class="product-price">
                                 {{number this.price "0,0.00" }} VND
@@ -120,151 +119,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials -->
-    {{!-- <section class="content-section">
-        <div class="testimonial-container">
-            <div class="container">
-                <div class="content-title">
-                    <h2>
-                        <span>Testimonials</span>
-                    </h2>
-                    <p>Hear reviews from customers who have used our products</p>
-                </div>
-                <div class="content-containter">
-                    <!-- Flickity HTML init -->
-                    <div class="carousel js-flickity"
-                        data-flickity='{"wrapAround": true, "contain": true,  "lazyLoad": 2, "autoPlay": true}'>
-
-                        <!-- customer 1 -->
-                        <div class="testimonial-cell">
-                            <p class="testiomotinal-caption">
-                                <sup><i class="fa-solid fa-quote-left"></i></sup>
-
-                                It's been with me through three jets, two type ratings, and my first Atlantic
-                                and Hawaii crossings - can't wait to start wearing it again!
-
-                                <sup><i class="fa-solid fa-quote-right"></i></sup>
-                            </p>
-                            <div class="infor-customer">
-                                <img data-flickity-lazyload="../assets/images/Customer/HoangTran.jpg" alt="">
-                                <div class="infor-text">
-                                    <h2 class="name">Hoang Tran</h2>
-                                    <p class="job">Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- customer 2 -->
-                        <div class="testimonial-cell">
-                            <p class="testiomotinal-caption">
-                                <sup><i class="fa-solid fa-quote-left"></i></sup>
-                                It's been with me through three jets, two type ratings, and my first Atlantic
-                                and Hawaii crossings - can't wait to start wearing it again!
-                                <sup><i class="fa-solid fa-quote-right"></i></sup>
-                            </p>
-                            <div class="infor-customer">
-                                <img data-flickity-lazyload="../assets/images/Customer/AnBui.jpg" alt="">
-                                <div class="infor-text">
-                                    <h2 class="name">An Bui</h2>
-                                    <p class="job">Rich kid</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- customer 3 -->
-                        <div class="testimonial-cell">
-                            <p class="testiomotinal-caption">
-                                <sup><i class="fa-solid fa-quote-left"></i></sup>
-                                It's been with me through three jets, two type ratings, and my first Atlantic
-                                and Hawaii crossings - can't wait to start wearing it again!
-                                <sup><i class="fa-solid fa-quote-right"></i></sup>
-                            </p>
-                            <div class="infor-customer">
-                                <img data-flickity-lazyload="../assets/images/Customer/customer3.jpg" alt="">
-                                <div class="infor-text">
-                                    <h2 class="name">Calvin Reeves</h2>
-                                    <p class="job">Model</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- customer 4 -->
-                        <div class="testimonial-cell">
-                            <p class="testiomotinal-caption">
-                                <sup><i class="fa-solid fa-quote-left"></i></sup>
-                                It's been with me through three jets, two type ratings, and my first Atlantic
-                                and Hawaii crossings - can't wait to start wearing it again!
-                                <sup><i class="fa-solid fa-quote-right"></i></sup>
-                            </p>
-                            <div class="infor-customer">
-                                <img data-flickity-lazyload="../assets/images/Customer/customer5.jpg" alt="">
-                                <div class="infor-text">
-                                    <h2 class="name">Calvin Reeves</h2>
-                                    <p class="job">Actor</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- customer 5 -->
-                        <div class="testimonial-cell">
-                            <p class="testiomotinal-caption">
-                                <sup><i class="fa-solid fa-quote-left"></i></sup>
-                                It's been with me through three jets, two type ratings, and my first Atlantic
-                                and Hawaii crossings - can't wait to start wearing it again!
-                                <sup><i class="fa-solid fa-quote-right"></i></sup>
-                            </p>
-                            <div class="infor-customer">
-                                <img data-flickity-lazyload="../assets/images/Customer/customer3.jpg" alt="">
-                                <div class="infor-text">
-                                    <h2 class="name">Calvin Reeves</h2>
-                                    <p class="job">Singer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    {{!-- <section class="content-section">
-        <div class="container">
-            <div class="content-title">
-                <h2>
-                    <span>limited edition</span>
-                </h2>
-                <p>Watches with rare uniqueness</p>
-            </div>
-            <div class="content-container">
-                <!-- Flickity HTML init -->
-                <div class="carousel js-flickity"
-                    data-flickity='{"wrapAround": true,"freeScroll": true, "contain": true,  "lazyLoad": 2, "initialIndex": 2}'>
-                    <!-- product 1 -->
-                    <div class="carousel-cell">
-                        <div href="#" class="box-image">
-                            <a href="product.html">
-                                <img class="carousel-cell-image"
-                                    data-flickity-lazyload="../assets/images/scrollview/limited-product/product-01.jpg"
-                                    alt="tulip" />
-                            </a>
-                            <div class="quick-view">
-                                <a href="#" class="text">
-                                    Quick view
-                                </a>
-                            </div>
-                        </div>
-                        <div class="box-caption">
-
-                            <a class="product-name" href="product.html">Rolex Daytona Unicorn 6265 </a>
-                            <p class="product-price">
-                                $5,000,000.00
-                                <my-rating></my-rating>
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </section> --}}
 
     <!-- Latest Blog -->
     <section class="content-section">

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-require('mongoose-currency').loadType(mongoose);
+
 
 const saleOderSchema = new mongoose.Schema(
     {
@@ -36,7 +36,7 @@ const saleOderSchema = new mongoose.Schema(
             required: true,
         },
         user: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,   
             ref: 'User',
         },
         totalPrice: {

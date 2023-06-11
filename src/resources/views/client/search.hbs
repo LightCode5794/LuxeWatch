@@ -1,0 +1,27 @@
+<div class="search-content">
+    <div class="container pt-3 pb-3 search-content">
+        <p><strong>Tìm kiếm: </strong> {{query}} </p>
+        </ul>
+    </div>
+</div>
+
+
+<div class="container mb-3 mt-3">
+    <div class="grid-products  row">
+        {{#each products}}
+        <div class="product-item col-12 col-md-6 col-lg-4 pt-5 pb-5" > 
+                <div class="image-container">
+                    <a href="/products/{{this.slug}}">
+                        <img  src="{{this.thumbnail}}" alt="tulip">
+                    </a>
+                </div>
+                <div class="box-caption pt-5">
+                    <a class="product-name" href="/products/{{this.slug}}">{{this.name}}</a>
+                    <p class="product-price">
+                        {{number this.price "0,0.00" }} VND
+                    </p>
+                </div>   
+        </div>
+        {{/each}}
+    </div>
+</div>

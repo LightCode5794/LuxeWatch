@@ -26,8 +26,28 @@ class ClientSiteController {
         }
 
     }
+    //[GET] /login
     login(req, res, next) {
         res.render('login');
+    }
+
+    //[GET] /brand/:name
+    async  productByBrand(req, res, next) {
+        try {
+            const brand = await Brand.findOne({name: req.params.name});
+            const products = await Product.find({brand: brand})
+            // res.json(products);
+            
+            res.render('client/search', {
+                query: req.params.name,
+                products: multipleMongooseToObject(products),
+                user: singleMongooseToObject(req.user),
+            });
+
+        } catch (err) {
+            res.status(401).send(err.message);
+        }
+
     }
 }
 

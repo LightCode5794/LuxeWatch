@@ -735,25 +735,22 @@ img {
   .carousel-cell {
     width: 24%; } }
 
-.carousel-cell .box-image {
+.box-image {
   display: inline-block;
   width: 100%;
   position: relative; }
-
-.box-image .carousel-cell-image {
-  display: block;
-  height: auto !important;
-  margin: 0 auto;
-  max-width: 100%;
-  opacity: 0;
-  -webkit-transition: opacity 0.4s;
-  transition: opacity, transform 0.4s; }
-
-.box-image .brand-image {
-  max-height: 200px; }
-
-.box-image .product-image {
-  max-height: 360px; }
+  .box-image .carousel-cell-image {
+    display: block;
+    height: auto !important;
+    margin: 0 auto;
+    max-width: 100%;
+    opacity: 0;
+    -webkit-transition: opacity 0.4s;
+    transition: opacity, transform 0.4s; }
+  .box-image .brand-image {
+    max-height: 200px; }
+  .box-image .product-image {
+    max-height: 360px; }
 
 .box-image .quick-view {
   position: absolute;
@@ -994,6 +991,33 @@ img {
 .product-cart {
   max-height: 500px;
   overflow: auto; }
+
+.search-content {
+  background-color: #000;
+  color: #fff; }
+
+.card {
+  margin-bottom: 1rem; }
+
+.grid-products {
+  text-align: center; }
+  .grid-products a {
+    color: #000;
+    transition: all 0.3s; }
+    .grid-products a:hover {
+      color: #FF6C60; }
+  .grid-products .product-item .image-container {
+    text-align: center;
+    max-height: 360px; }
+    .grid-products .product-item .image-container a {
+      display: inline-block;
+      width: 50%; }
+      .grid-products .product-item .image-container a img {
+        vertical-align: middle;
+        width: 100%;
+        transition: all 0.3s; }
+        .grid-products .product-item .image-container a img:hover {
+          transform: scale(1.05); }
 
 * {
   padding: 0;

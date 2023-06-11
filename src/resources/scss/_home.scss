@@ -204,13 +204,15 @@ img {
     margin: 16px;
     width: 100%;
     position: relative;
+
     .gender-item-box {
         padding-top: 54%;
         background-size: cover;
         background-repeat: no-repeat;
         transition: transform 0.3s ease-out;
-       
+
     }
+
     &:hover {
         .gender-item-box {
             transform: scale(1.05);
@@ -337,12 +339,14 @@ img {
     flex-direction: column;
     align-items: center;
     padding-bottom: 16px;
+
     .view-all-link {
         transition: all 0.3s ease-out;
         color: #797979;
+
         &:hover {
             color: $color-text-hover;
-           
+
         }
     }
 }
@@ -421,8 +425,9 @@ img {
     color: #000000;
     font-family: $font-web;
     font-size: 15px;
-   
+
     transition: all 0.3s ease-out;
+
     &:hover {
         color: $color-text-hover;
     }
@@ -459,14 +464,18 @@ img {
 }
 
 
-.carousel-cell .box-image {
+// .carousel-cell .box-image {
+//     display: inline-block;
+//     width: 100%;
+//     // overflow: hidden;
+//     position: relative;
+// }
+.box-image {
     display: inline-block;
     width: 100%;
     // overflow: hidden;
     position: relative;
-}
 
-.box-image {
     .carousel-cell-image {
         display: block;
         height: auto !important;
