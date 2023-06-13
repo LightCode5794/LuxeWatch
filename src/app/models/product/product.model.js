@@ -75,6 +75,7 @@ const productSchema = new mongoose.Schema(
 
 // add plugins
 mongoose.plugin(slug);
+productSchema.indexes({'$**': 'text'});
 
 const Product = mongoose.model('Product', productSchema);
 

@@ -10,6 +10,7 @@ const tagSchema = new mongoose.Schema(
     { timestamps: true },
 );
 
+tagSchema.indexes({'$**': 'text'});
 const Tag = mongoose.model('Tag', tagSchema);
 
 module.exports = Tag;
