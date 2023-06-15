@@ -40,10 +40,6 @@ const productSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-
-        currency: {
-            type: String,
-        },
         code: {
             type: String,
             required: true,
@@ -55,19 +51,12 @@ const productSchema = new mongoose.Schema(
         },
         tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 
-        // funtions: {
-        //     type: String,
-        //     required: true,
-        // },
         thumbnail: {
-            type: String,
-            required: true,
+            path: String,
+            filename: String,
         },
 
-        images: {
-            type: Array,
-           // required: true,
-        },
+        images: [{ path: String, filename: String }],
 
     },
     { timestamps: true },
@@ -75,7 +64,7 @@ const productSchema = new mongoose.Schema(
 
 // add plugins
 mongoose.plugin(slug);
-productSchema.indexes({'$**': 'text'});
+productSchema.indexes({ '$**': 'text' });
 
 const Product = mongoose.model('Product', productSchema);
 

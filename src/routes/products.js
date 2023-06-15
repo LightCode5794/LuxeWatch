@@ -18,6 +18,7 @@ const cpUpload = upload.fields([
     { name: 'imagesProduct[]', maxCount: 8 },
 ]);
 // upload.array('imagesProduct[]', 8)
+router.get('/:id/edit', productsController.edit)
 router.post('/store', cpUpload, productsController.store)
 router.get('/create', productsController.create);
 router.get('/', productsController.show)

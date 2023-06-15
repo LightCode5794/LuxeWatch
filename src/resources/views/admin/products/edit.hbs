@@ -1,6 +1,8 @@
 <section id="main-view">
     <div class="container">
-        <form id="form-product" method="POST" action="/admin/products/store" enctype="multipart/form-data">
+        {{#with product}}
+        <form id="form-product" method="POST" action="/admin/products/{{_id}}?_method=PUT"
+            enctype="multipart/form-data">
             <div class="row dashboard-title">
                 <div class="py-5">
                     <div class="row g-4 align-items-center">
@@ -9,6 +11,7 @@
                         </div>
                         <div class="col-auto d-flex">
                             <div class="form-group p-2 float-end me-2">
+                                <button type="reset" class="btn btn-danger me-3">Reset</button>
                                 <button type="submit" class="btn btn-primary btn-add--product">Add</button>
                             </div>
                         </div>
@@ -27,51 +30,32 @@
                             <div class="mb-4">
                                 <label for="form-product/name" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="form-product/name" name="name"
-                                    placeholder="Brandix Screwdriver SCREW150">
+                                    placeholder="Brandix Screwdriver SCREW150" value="{{name}}" required>
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/brand" class="form-label">Brand</label>
                                 {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
                                     placeholder="Ex: Rolex"> --}}
 
-                                <select id="brand" name="brand"  class="form-select" data-placeholder="Select an brand"
+                                <select id="brand" name="brand" class="form-select" data-placeholder="Select an brand"
                                     data-allow-clear="true" required>
                                     <option></option>
                                     {{#each brands}}
                                     <option value='{{this._id}}' data-thumbnail="{{this.imgUrl}}">{{this.name}}
                                     </option>
-                                    {{!-- <option value='twitter'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Twitter</option>
-                                    <option value='linkedin'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Linkedin
-                                    </option>
-                                    <option value='google_plus'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Google Plus
-                                    </option>
-                                    <option value='vimeo'
-                                        data-thumbnail="https://glot.io/static/img/c.svg?etag=ZaoLBh_p">Vimeo</option>
-                                    --}}
                                     {{/each}}
                                 </select>
 
                             </div>
                             <div class="mb-4">
-                                <label for="form-product/category" class="form-label">Category</label>
-                                {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
-                                    placeholder="Ex: Rolex"> --}}
-                                <select id='category' name="category" class="form-select" data-placeholder="Select an category"
-                                    data-allow-clear="true" required>
-                                    <option></option>
-                                    {{#each categories}}
-                                    <option value="{{this._id}}">{{this.name}}</option>
-                                    {{!-- <option value='twitter'>Twitter</option>
-                                    <option value='linkedin'>Linkedin</option>
-                                    <option value='google_plus'>Google Plus</option>
-                                    <option value='vimeo'>Vimeo</option> --}}
-                                    {{/each}}
-                                </select>
+
+                                <label for="form-product/code" class="form-label">Code</label>
+                                <input type="text" class="form-control" id="form-product/code" name="code"
+                                    value="{{code}}" required>
+
                             </div>
-                            <div class="mb-4">
+
+                            {{!-- <div class="mb-4">
                                 <label for="form-product/slug" class="form-label">Slug</label>
                                 <div class="input-group--sa-slug input-group">
                                     <span class="input-group-text"
@@ -79,39 +63,43 @@
                                     </span>
                                     <input type="text" class="form-control" id="form-product/slug" name="slug"
                                         aria-describedby="form-product/slug-addon form-product/slug-help"
-                                        placeholder="Ex: brandix-screwdriver-screw150">
+                                        placeholder="Ex: brandix-screwdriver-screw150" required>
                                 </div>
                                 <div id="form-product/slug-help" class="form-text">Unique human-readable product
                                     identifier.
                                     No longer than 255 characters.</div>
-                            </div>
+                            </div> --}}
                             <div class="mb-4">
                                 <label for="form-product/dial" class="form-label">Dial</label>
 
-                                <input type="text" class="form-control" id="form-product/dial" name="dial"
-                                    placeholder="Ex: Ivory lacquered, gold applied Breguet numerals">
+                                {{!-- <input type="text" class="form-control" id="form-product/dial" name="dial"
+                                    placeholder="Ex: Ivory lacquered, gold applied Breguet numerals" required> --}}
+                                <textarea class="form-control" id="form-product/dial" name="dial"
+                                    required>{{dial}}</textarea>
 
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/case" class="form-label">Case</label>
 
                                 <textarea class="form-control" id="form-product/case" name="case"
-                                    placeholder="Ex: Rose gold. Interchangeable solid and sapphire crystal case backs. Water-resistant to 30 m. Case diameter: 39 mm. Height: 9.71 mm."></textarea>
+                                    placeholder="Ex: Rose gold. Interchangeable solid and sapphire crystal case backs. Water-resistant to 30 m. Case diameter: 39 mm. Height: 9.71 mm."
+                                    required> {{case}}</textarea>
 
                             </div>
                             <div class="mb-4">
                                 <label for="form-product/strap" class="form-label">Strap</label>
 
                                 <textarea class="form-control" id="form-product/strap" name="strap"
-                                    placeholder="Ex: Alligator strap with square scales, hand-stitched, shiny dark chestnut. Fold-over clasp."></textarea>
+                                    placeholder="Ex: Alligator strap with square scales, hand-stitched, shiny dark chestnut. Fold-over clasp."
+                                    required>{{strap}}</textarea>
 
                             </div>
 
                             <div class="mb-4">
                                 <label for="form-product/description" class="form-label">Description</label>
                                 <textarea id="form-product/description" name="description"
-                                    class="sa-quill-control form-control sa-quill-control--ready"
-                                    rows="8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.</textarea>
+                                    class="sa-quill-control form-control sa-quill-control--ready" rows="4"
+                                    required>{{description}}</textarea>
 
                             </div>
                         </div>
@@ -124,10 +112,10 @@
                                     <label for="form-product/price" class="form-label">Price</label>
                                     <div class="input-group mb-3">
                                         <input type="number" class="form-control flex-1" id="form-product/price"
-                                            name="price">
+                                            name="price" value="{{price}}">
                                         <select class="form-select" name="currency" id="currency">
-                                            <option value="USD">USD</option>
                                             <option value="VND">VND</option>
+                                            <option value="USD">USD</option>
                                         </select>
                                     </div>
 
@@ -139,54 +127,97 @@
                             </div>
                             {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
                         </div>
-                        <div class="card p-5  mb-3">
+                        {{!-- <div class="card p-5  mb-3">
                             <div class="mb-2">
                                 <h4>Inventory</h4>
                             </div>
                             <div class="row g-4">
                                 <div class="mb-4">
-                                    <label for="form-product/sku" class="form-label">SKU</label>
-                                    <input type="text" class="form-control" id="form-product/sku" name="sku">
+                                    <label for="form-product/code" class="form-label">Code</label>
+                                    <input type="text" class="form-control" id="form-product/code" name="code" required>
                                 </div>
 
-                                {{!-- <div>
+                                <div>
                                     <label for="form-product/quantity" class="form-label">Stock quantity</label>
                                     <input type="number" class="form-control" id="form-product/quantity" name="stock">
-                                </div> --}}
+                                </div>
                             </div>
-                            {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
-                        </div>
+                            <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div>
+                        </div> --}}
+
                         <div class="card p-5  mb-3">
                             <div class="mb-2">
-                                <h4>Images</h4>
+                                <h4>Media</h4>
                             </div>
-                            <div class="row g-4">
-                                <input type="file" multiple="multiple" id="img-selector" name="imagesProduct[]"
-                                    class="form-control" accept="image/*" >
-                                <div id="preview"></div>
-                            </div>
+                            {{!-- <div class="upload__box">
+                                <div class="upload__btn-box">
+
+                                    <input type="file" multiple="" data-max_length="20" name="imagesProduct[]"
+                                        class="upload__inputfile form-control" accept="image/*" required>
+
+                                </div>
+                                <div class="upload__img-wrap mt-2"></div>
+                            </div> --}}
+                            <input type="file" class="form-control" name="imagesProduct[]" multiple id="upload-img" />
+                            <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
                         </div>
                     </div>
 
                 </div>
-                <!-- Total oders -->
                 <div class="col col-md-4">
-                    {{!-- <div class="card   p-3">
-
-                    </div> --}}
                     <div class="card p-2">
+                        <div class="mb-2">
+                            <h4>Thumbnail</h4>
+                        </div>
+                        <input type="file" class="form-control" name="thumbnail" id="upload-thumnail" />
+                        <div class="img-thumbs img-thumbs-hidden" id="thumbnail-preview"></div>
+
+                    </div>
+                    <div class="card p-2 mt-4">
+                        <div class="mb-2">
+                            <h4>Status</h4>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" value="true" id="vPublished"
+                                checked>
+                            <label class="form-check-label" for="vPublished">
+                                Published
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="false" name="status" id="vHidden">
+                            <label class="form-check-label" for="vHidden">
+                                Hidden
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card p-2 mt-4">
+                        <label for="form-product/category" class="form-label">Category</label>
+                        <select id='category' name="category" class="form-select" data-placeholder="Select an category"
+                            data-allow-clear="true" required>
+                            <option></option>
+                            {{#each categories}}
+                            <option value="{{this._id}}">{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="card p-2 mt-4">
                         <div class="mb-2">
                             <h4>Tags</h4>
                         </div>
-                        <select class="form-control js-example-tokenizer" multiple="multiple" name="tags[]">
+                        <select class="form-control tags" multiple="multiple" name="tags[]" required>
                             {{#each tags}}
                             <option value="{{this._id}}">{{this.name}}</option>
                             {{/each}}
                         </select>
                     </div>
+
+
                 </div>
             </div>
         </form>
+        {{/with}}
     </div>
 </section>
 <div id="loaderDiv">
@@ -197,43 +228,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        //funtion for preview images
-        function previewImages() {
-
-            var preview = document.querySelector('#preview');
-
-            if (this.files) {
-                [].forEach.call(this.files, readAndPreview);
-            }
-
-            function readAndPreview(file) {
-
-                // File type validator based on the extension 
-                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                    return alert(file.name + " is not an image");
-                }
-
-                var reader = new FileReader();
-
-                reader.addEventListener("load", function () {
-                    var image = new Image();
-                    image.height = 100;
-                    image.title = file.name;
-                    image.src = this.result;
-                    preview.appendChild(image);
-                });
-
-                reader.readAsDataURL(file);
-
-            }
-
-        }
-        document.querySelector('#img-selector').addEventListener("change", previewImages);
-
         //funtion for select tags
-        $(".js-example-tokenizer").select2({
+        $(".tags").select2({
             tags: true,
-            tokenSeparators: [',', ' '],
+            tokenSeparators: [','],
 
         })
 
@@ -241,13 +239,8 @@
         $(document).ready(function () {
             $("#brand").select2({
                 width: '100%',
-
-                //formatResult: formatBrand,
-                // formatSelection: formatBrand,
                 templateResult: formatBrand,
                 templateSelection: formatBrand,
-
-                //  escapeMarkup: function(m) { return m; }
             })
         });
 

@@ -48,7 +48,7 @@ class ProductsController {
         try {
             const { status, tags, thumbnail, images, ...rest } = req.body;
 
-            const newStatus = status? 'Published' : 'Hidden';
+            const newStatus = status ? 'Published' : 'Hidden';
 
             const newTags = tags.filter(tag => !mongoose.isValidObjectId(tag)).map(tag => ({ name: tag }));
             const dataTags = tags.filter(tag => mongoose.isValidObjectId(tag));
@@ -62,10 +62,11 @@ class ProductsController {
                 ...rest,
                 status: newStatus,
                 tags: [...dataTags, ...newTagsId],
-                thumbnail: req.files['thumbnail'][0].path,
-                images: req.files['imagesProduct[]'].map(file => file.path),
+                thumbnail: req.files['thumbnail'][0],
+                images: req.files['imagesProduct[]'],
             });
 
+            // res.json(newProduct);
             await newProduct.save();
 
             res.redirect('/admin/products');
@@ -80,15 +81,45 @@ class ProductsController {
 
     //[GET] /admin/products/:id/edit
 
-    edit(req, res, next) {
-        Product.findById(req.params.id)
-            .then((Product) =>
-                res.render('admin/products/edit', {
-                    layout: 'admin',
-                    Product: singleMongooseToObject(Product),
-                }),
-            )
-            .catch(next);
+    async edit(req, res, next) {
+
+        try {
+
+            const categories = await Category.find({});
+            const brands = await Brand.find({});
+            const tags = await Tag.find({});
+            const product = await Product.findById(req.params.id)
+                .populate('brand')
+                .populate('category')
+                .populate('tags')
+
+            res.render('admin/products/edit', {
+                layout: 'admin',
+              
+                categories: multipleMongooseToObject(categories),
+                brands: multipleMongooseToObject(brands),
+                tags: multipleMongooseToObject(tags),
+                product: singleMongooseToObject(product),
+            })
+
+        } catch (error) {
+            res.send(error.message);
+        }
+
+        // Product.findById(req.params.id)
+        //     .populate('brand')
+        //     .populate('category')
+        //     .populate('tags')
+        //     .then((product) =>
+        //         res.render('admin/products/edit', {
+        //             layout: 'admin',
+        //             product: singleMongooseToObject(product),
+        //             categories: multipleMongooseToObject(categories),
+        //             brands: multipleMongooseToObject(brands),
+        //             tags: multipleMongooseToObject(tags),
+        //         }),
+        //     )
+        //     .catch(next);
     }
 
     //[PUT] /admin/products/:id

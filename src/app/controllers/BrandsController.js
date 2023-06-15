@@ -79,9 +79,7 @@ class BranchController {
             await Brand.findByIdAndUpdate(req.params.id, data, {
                 new: true
             });
-
-            res.json(data);
-            // res.redirect()
+            res.redirect('/admin/brands')
 
         } catch (error) {
             res.send(404, error.message);
