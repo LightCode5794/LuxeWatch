@@ -48,6 +48,9 @@ app.engine(
         helpers: {
             sum: (a, b) => a + b,
             multiply: (a, b) => a * b,
+            json: function (obj) {
+                return JSON.stringify(obj);
+            }
         },
     }),
 );

@@ -1,6 +1,6 @@
 <section id="main-view">
     <div class="container">
-        {{#with product}}
+        {{#product}}
         <form id="form-product" method="POST" action="/admin/products/{{_id}}?_method=PUT"
             enctype="multipart/form-data">
             <div class="row dashboard-title">
@@ -40,7 +40,7 @@
                                 <select id="brand" name="brand" class="form-select" data-placeholder="Select an brand"
                                     data-allow-clear="true" required>
                                     <option></option>
-                                    {{#each brands}}
+                                    {{#each @root.brands}}
                                     <option value='{{this._id}}' data-thumbnail="{{this.imgUrl}}">{{this.name}}
                                     </option>
                                     {{/each}}
@@ -197,7 +197,7 @@
                         <select id='category' name="category" class="form-select" data-placeholder="Select an category"
                             data-allow-clear="true" required>
                             <option></option>
-                            {{#each categories}}
+                            {{#each @root.categories}}
                             <option value="{{this._id}}">{{this.name}}</option>
                             {{/each}}
                         </select>
@@ -207,7 +207,7 @@
                             <h4>Tags</h4>
                         </div>
                         <select class="form-control tags" multiple="multiple" name="tags[]" required>
-                            {{#each tags}}
+                            {{#each @root.tags}}
                             <option value="{{this._id}}">{{this.name}}</option>
                             {{/each}}
                         </select>
@@ -217,7 +217,7 @@
                 </div>
             </div>
         </form>
-        {{/with}}
+        {{/product}}
     </div>
 </section>
 <div id="loaderDiv">
