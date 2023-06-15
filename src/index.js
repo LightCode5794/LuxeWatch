@@ -15,6 +15,7 @@ const Handlebars = require("handlebars");
 const MomentHandler = require("handlebars.moment");
 const NumeralHelper = require("handlebars.numeral");
 
+
 require("./config/passport");
 require("./config/google")
 
@@ -73,6 +74,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// parse form-data
+//app.use(multer().any());
 
 //routes init
 

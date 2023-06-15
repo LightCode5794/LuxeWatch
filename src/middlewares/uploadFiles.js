@@ -30,8 +30,11 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({
     storage: storage,
-
     fileFilter: (req, file, cb) => {
+        // const objKeys = Object.keys(req.body);
+        // if (objKeys.includes('oldSource')) {
+        //     return;
+        // }
         let ext = path.extname(file.originalname);
         if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
             cb(new Error('Unsupported file type!'), false);
@@ -40,5 +43,6 @@ const upload = multer({
         cb(null, true);
     },
 });
+
 
 module.exports = upload;

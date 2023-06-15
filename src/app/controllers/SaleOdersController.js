@@ -6,24 +6,32 @@ class SaleOdersController {
     //[GET] /admin/saleOder
     show(req, res, next) {
         // res.json(req.params)
-        SaleOder.find()
+
+        SaleOder.find({})
+            .populate('productList.product', 'price')
             .then((saleOders) => {
+                const saleOdersObj = saleOders.map((saleOder) => ({
+                    ...saleOder.toObject(),
+                    total: saleOder.productList.reduce((sum, item) => sum + item.product.price * item.count, 0)
+                }));
                 res.render('admin/saleOders/show', {
                     layout: 'admin',
-                    saleOders: multipleMongooseToObject(saleOders),
+                    saleOders: saleOdersObj,
+
                 });
+                // res.json(saleOdersObj)
             })
             .catch(next);
     }
 
     // [POST] /admin/saleOders/store
     store(req, res, next) {
-       // res.send({...req.body, ...req.params});
-         const newsaleOder = new saleOder({
+        // res.send({...req.body, ...req.params});
+        const newsaleOder = new saleOder({
             product: req.params.idProduct,
             ...req.body,
-         });
-         newsaleOder.save() 
+        });
+        newsaleOder.save()
             .then(() => res.redirect('/admin/saleOders'))
             .catch(next);
     }

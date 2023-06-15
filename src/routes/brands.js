@@ -6,12 +6,13 @@ const fs = require('fs');
 const path = require('path');
 const upload = require('../middlewares/uploadFiles');
 
-const branchController = require('../app/controllers/BrandsController');
+const brandsController = require('../app/controllers/BrandsController');
 
-router.get('/:id/edit', branchController.edit);
-router.put('/:id', branchController.update);
-router.get('/create', branchController.create);
-router.post('/store', upload.single('imageBrand'), branchController.store);
-router.get('/', branchController.show);
+
+router.get('/:id/edit', brandsController.edit);
+router.put('/:id',  upload.single('imageBrand') ,brandsController.update);
+router.get('/create', brandsController.create);
+router.post('/store', upload.single('imageBrand'), brandsController.store);
+router.get('/', brandsController.show);
 
 module.exports = router;

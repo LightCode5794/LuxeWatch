@@ -50,21 +50,46 @@ class BranchController {
     //[GET] /admin/brands/:id/edit
     edit(req, res, next) {
         Brand.findById(req.params.id)
-            .then((Brand) =>
+            .then((brand) =>
                 res.render('admin/brands/edit', {
                     layout: 'admin',
-                    Brand: singleMongooseToObject(Brand),
+                    brand: singleMongooseToObject(brand),
                 }),
             )
             .catch(next);
     }
 
     //[PUT] /admin/brands/:id
-    update(req, res, next) {
-        // res.send(req.params.id);
-        Brand.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/admin/brands'))
-            .catch(next);
+    async update(req, res, next) {
+        //res.json(req.body);
+        try {
+            let brand = await Brand.findById(req.params.id);
+            // Delete image from cloudinary
+
+            const data = {
+                name: req.body.nameBrand || brand.name,
+            }
+            if (req.body.oldSource) {
+                await cloudinary.uploader.destroy(brand.cloudinary_id);
+                data.cloudinary_id = req.file.filename || brand.cloudinary_id;
+                data.imgUrl = req.file.path || brand.imgUrl;
+            }
+            // Upload new image to cloudinary
+
+            await Brand.findByIdAndUpdate(req.params.id, data, {
+                new: true
+            });
+
+            res.json(data);
+            // res.redirect()
+
+        } catch (error) {
+            res.send(404, error.message);
+        }
+        // // res.send(req.params.id);
+        // Brand.updateOne({ _id: req.params.id }, req.body)
+        //     .then(() => res.redirect('/admin/brands'))
+        //     .catch(next);
     }
 }
 

@@ -24,14 +24,14 @@
             </thead>
             <tbody>
                 <!-- oder 1 -->
-                {{#each importOders}}
+                {{#each saleOders}}
                 <tr>
                     <td>{{sum @index 1}}</td>
-                    <th>{{this.lastName this.firstName}}</th>
+                    <td>{{this.lastName}} {{this.firstName}}</td>
                     <td>{{moment this.createdAt format="DD/MM/YYYY"}}</td>
                     <td>{{this.status}}</td>
-                    {{!-- <td>{{number  this.unitPrice "0,0.00" }} VNĐ</td> --}}
-                    <td>{{number (multiply this.quantity this.unitPrice) "0,0.00" }} VNĐ</td>
+                    {{!-- <td>{{number this.unitPrice "0,0.00" }} VNĐ</td> --}}
+                    <td>{{number this.total "0,0.00" }} VNĐ</td>
 
                     <td>
                         <div class="dropdown">

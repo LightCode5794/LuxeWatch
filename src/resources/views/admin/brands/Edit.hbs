@@ -1,0 +1,88 @@
+<div class="row page-title">
+    <div class="py-4">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="h3 m-0">Add Brands</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card p-2 pb-0 m-1">
+    {{#with brand}}
+    <form method="POST" action="/admin/brands/{{_id}}?_method=PUT" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+            <label class="input-group-text">LOGO</label>
+            <input type="file" id="imageBrand" name="imageBrand" class="form-control" accept="image/*">
+        </div>
+        <div class="image-brand-container border border-info mb-3 d-flex just justify-content-center"
+            style="height: 205px; width: 205px">
+            <img id="imageBrandShow" src="{{imgUrl}}" alt="No image choosed 200x200"
+                style="max-height:200px; max-width:200px" data-id="{{cloudinary_id
+}}" />
+            <input type="hidden" name="oldSource" id="oldSource">
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Name</span>
+            <input id="nameBrand" name="nameBrand" type="text" aria-label="Last name" class="form-control"
+                value="{{name}}">
+        </div>
+        <div class="form-group p-2 float-end me-2">
+            <button type="reset" id="resetBtn" class="btn btn-danger me-3">Reset</button>
+            <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+        </div>
+    </form>
+    {{/with}}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputBrand = document.getElementById('imageBrand');
+        const imageShow = document.querySelector('#imageBrandShow');
+        const resetBtn = document.querySelector('#resetBtn');
+        const saveBtn = document.querySelector('#saveBtn');
+        const oldSourceInput = document.getElementById('oldSource');
+
+
+        // oldSourceInput.addEventListener('change', function() {
+        //    if(oldSourceInput.value != '') {
+        //       saveBtn.classList.remove('disabled');
+        //   }
+        //    else saveBtn.classList.add('disabled');
+        //  })
+        //imageShow.style.display = 'none';
+        const oldSource = imageShow.getAttribute('src');
+        resetBtn.addEventListener('click', function () {
+            imageShow.setAttribute('src', oldSource);
+            oldSourceInput.value = undefined;
+            console.log(oldSourceInput.value)
+        });
+
+
+        inputBrand.onchange = function (e) {
+            //imageShow.style.display = 'block';
+
+            if (e.target.files && e.target.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (rd) {
+
+
+                    imageShow.setAttribute('src', rd.target.result);
+                    //imageShow.width = "200";
+                    //imageShow.height = "200";
+                    // console.log(imageShow);     
+                };
+
+                reader.readAsDataURL(e.target.files[0]);
+                oldSourceInput.value = imageShow.getAttribute('data-id');
+                console.log(oldSourceInput.value)
+
+            }
+        }
+
+    })
+
+
+</script>

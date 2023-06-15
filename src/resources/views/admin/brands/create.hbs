@@ -12,17 +12,17 @@
     <form method="POST" action="/admin/brands/store" enctype="multipart/form-data">
         <div class="input-group mb-3">
             <label class="input-group-text">LOGO</label>
-            <input type="file" id="imageBrand" name="imageBrand" class="form-control"
-                accept="image/*" required>
-
+            <input type="file" id="imageBrand" name="imageBrand" class="form-control" accept="image/*" required>
+        </div>
+        <div class="image-brand-container border border-info mb-3 d-flex just justify-content-center" style="height: 205px; width: 205px">
+            <img id="imageBrandShow" src="#"  alt="No image choosed 200x200"/>
         </div>
         <div class="input-group">
-            <img id="imageBrandShow" src="#" />
             <span class="input-group-text">Name</span>
             <input id="nameBrand" name="nameBrand" type="text" aria-label="Last name" class="form-control" required>
         </div>
         <div class="form-group p-2 float-end me-2">
-            <button type="reset" class="btn btn-danger me-3">Reset</button>
+            <button type="reset" id="resetBtn" class="btn btn-danger me-3">Reset</button>
             <button type="submit" class="btn btn-primary">Add</button>
         </div>
 
@@ -33,11 +33,15 @@
     document.addEventListener('DOMContentLoaded', function () {
         const inputBrand = document.getElementById('imageBrand');
         const imageShow = document.querySelector('#imageBrandShow');
+        const resetBtn = document.querySelector('#resetBtn');
 
-        imageShow.style.display = 'none';
+        //imageShow.style.display = 'none';
+        resetBtn.addEventListener('click', function () {
+            imageShow.setAttribute('src', '');
+        });
 
         inputBrand.onchange = function (e) {
-            imageShow.style.display = 'block';
+            //imageShow.style.display = 'block';
 
             if (e.target.files && e.target.files[0]) {
 
@@ -45,11 +49,11 @@
 
                 reader.onload = function (rd) {
 
-                   
+
                     imageShow.setAttribute('src', rd.target.result);
-                    imageShow.width = "50";
-                    imageShow.height = "50";
-                    console.log(imageShow);
+                    //imageShow.width = "200";
+                    //imageShow.height = "200";
+                   // console.log(imageShow);
                 };
 
                 reader.readAsDataURL(e.target.files[0]);
