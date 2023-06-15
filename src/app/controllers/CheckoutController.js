@@ -36,6 +36,7 @@ class ClientController {
             ...req.body,
             productList: JSON.parse(req.body.productList),
             user: req.user ? req.user._id : null ,
+            status: 'Pending',
         }
 
         const newOder = new SaleOder(newOderData);

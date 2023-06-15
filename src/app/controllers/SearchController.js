@@ -18,6 +18,8 @@ class SearchController {
         try {
 
             const query = { $text: { $search: req.query.q } };
+            const products = await Product.find(query);
+
             // const products = await Product.aggregate([
             //     {
             //         $match: {
@@ -47,54 +49,54 @@ class SearchController {
             // ])
 
 
-            const products = await Product.find()
-                .select('-__v -createdAt -updatedAt -images -thumbnail -slug -price -currency -status -code')
-                .populate('tags', '-_id -__v -createdAt -updatedAt')
-                .populate('category', '-_id -__v -createdAt -updatedAt')
-                .populate('brand', '-_id -__v -createdAt -updatedAt -imgUrl -cloudinary_id')
+            // const products = await Product.find()
+            //     .select('-__v -createdAt -updatedAt -images -thumbnail -slug -price -currency -status -code')
+            //     .populate('tags', '-_id -__v -createdAt -updatedAt')
+            //     .populate('category', '-_id -__v -createdAt -updatedAt')
+            //     .populate('brand', '-_id -__v -createdAt -updatedAt -imgUrl -cloudinary_id')
 
-            function getContent(product) {
-                let valuesArray = Object.values(product);
-                let stringContent = '';
+            // function getContent(product) {
+            //     let valuesArray = Object.values(product);
+            //     let stringContent = '';
 
-                for (let i in valuesArray) {
+            //     for (let i in valuesArray) {
 
-                    if (typeof valuesArray[i] === 'string' || typeof valuesArray[i] === 'number') {
+            //         if (typeof valuesArray[i] === 'string' || typeof valuesArray[i] === 'number') {
 
-                        stringContent += valuesArray[i] + ' ';
-                    }
+            //             stringContent += valuesArray[i] + ' ';
+            //         }
 
-                }
-                stringContent += product['category'].name + ' ' + product['category'].description + ' ';
-                const tagsArr = Object.values(product['tags']);
-                tagsArr.forEach(tag => stringContent += tag.name + ' ')
-                // console.log(stringContent);
-                return stringContent;
-            }
+            //     }
+            //     stringContent += product['category'].name + ' ' + product['category'].description + ' ';
+            //     const tagsArr = Object.values(product['tags']);
+            //     tagsArr.forEach(tag => stringContent += tag.name + ' ')
+            //     // console.log(stringContent);
+            //     return stringContent;
+            // }
 
-            const documents = products.map(product => ({
-                id: product._id,
-                content: getContent(product.toObject())
-            }))
+            // const documents = products.map(product => ({
+            //     id: product._id,
+            //     content: getContent(product.toObject())
+            // }))
 
-            const queryObject = {
-                id: 0,
-                content: req.query.q,
-            }
-            documents.push(queryObject)
+            // const queryObject = {
+            //     id: 0,
+            //     content: req.query.q,
+            // }
+            // documents.push(queryObject)
 
-            //train
-            recommender.train(documents);
-            const similarDocuments = recommender.getSimilarDocuments('0', 0, 100);
+            // //train
+            // recommender.train(documents);
+            // const similarDocuments = recommender.getSimilarDocuments('0', 0, 100);
 
            
-            const idsProduct = similarDocuments.map(item => item.id);
-            const productsFound = await Product.find().where('_id').in(idsProduct);
-           // res.json(similarDocuments);
+            // const idsProduct = similarDocuments.map(item => item.id);
+            // const productsFound = await Product.find().where('_id').in(idsProduct);
+          // res.json(idsProduct);
 
             res.render('client/search', {
                 query: req.query.q,
-                products: multipleMongooseToObject(productsFound),
+                products: multipleMongooseToObject(products),
                 user: singleMongooseToObject(req.user),
             });
         }

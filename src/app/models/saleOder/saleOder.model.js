@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const saleOderSchema = new mongoose.Schema(
     {
         firstName: {
-            type:  String,
+            type: String,
             required: true,
         },
         lastName: {
@@ -17,11 +17,11 @@ const saleOderSchema = new mongoose.Schema(
             reqired: true,
         },
         address: {
-            type:  String,
+            type: String,
             required: true,
         },
         address2: {
-            type:  String,
+            type: String,
         },
         productList: {
             type: [{
@@ -35,8 +35,12 @@ const saleOderSchema = new mongoose.Schema(
             }],
             required: true,
         },
+        status:
+        {
+            type: String,
+        },
         user: {
-            type: mongoose.Schema.Types.ObjectId,   
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
         totalPrice: {
