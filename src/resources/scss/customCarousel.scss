@@ -1,66 +1,66 @@
-.carousel {
-    background: #fff;
-    margin-bottom: 40px;
-}
+// .carousel {
+//     background: #fff;
+//     margin-bottom: 40px;
+// }
 
 
-.carousel-cell {
-    width: 100%;
-    margin-right: 10px;
-    background: transparent;
-}
+// .carousel-cell {
+//     width: 100%;
+//     margin-right: 10px;
+//     background: transparent;
+// }
 
-.carousel-cell-image {
-    display: block;
-    width: fit-content;
-    max-height: 500px;
-    height: 100%;
-    margin: 0 auto;
-    max-width: 100%;
-    opacity: 0;
-    -webkit-transition: opacity 0.4s;
-    transition: opacity 0.4s;
-}
+// .carousel-cell-image {
+//     display: block;
+//     width: fit-content;
+//     max-height: 500px;
+//     height: 100%;
+//     margin: 0 auto;
+//     max-width: 100%;
+//     opacity: 0;
+//     -webkit-transition: opacity 0.4s;
+//     transition: opacity 0.4s;
+// }
 
-/* fade in lazy loaded image */
-.carousel-cell-image.flickity-lazyloaded,
-.carousel-cell-image.flickity-lazyerror {
-    opacity: 1;
-}
+// /* fade in lazy loaded image */
+// .carousel-cell-image.flickity-lazyloaded,
+// .carousel-cell-image.flickity-lazyerror {
+//     opacity: 1;
+// }
 
-@media only screen and (max-width: 992px) {
-    .carousel-nav {
-        display: flex !important;
-        justify-content: center;
-        .img-mini {
+// @media only screen and (max-width: 992px) {
+//     .carousel-nav {
+//         display: flex !important;
+//         justify-content: center;
+//         .img-mini {
           
-           margin-left: 24px;
-           margin-right: 24px;
-        }
-    }
-}
+//            margin-left: 24px;
+//            margin-right: 24px;
+//         }
+//     }
+// }
 
-.carousel-nav .img-mini {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    margin-bottom: 16px;
-    cursor: pointer;
-    opacity: .5;
-    position: relative;
+// .carousel-nav .img-mini {
+//     width: 100px;
+//     height: 100px;
+//     overflow: hidden;
+//     margin-bottom: 16px;
+//     cursor: pointer;
+//     opacity: .5;
+//     position: relative;
 
-    img {
-        position: absolute;
-        vertical-align: middle;
-        width: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+//     img {
+//         position: absolute;
+//         vertical-align: middle;
+//         width: 100%;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
 
-    }
-}
+//     }
+// }
 
-.carousel-nav .img-mini.is-nav-selected {
-    opacity: 1;
-}
+// .carousel-nav .img-mini.is-nav-selected {
+//     opacity: 1;
+// }
 

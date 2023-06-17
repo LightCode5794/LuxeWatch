@@ -222,6 +222,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        //funtion for preview images
+
+
         //funtion for select tags
         $(".tags").select2({
             tags: true,
@@ -233,8 +236,13 @@
         $(document).ready(function () {
             $("#brand").select2({
                 width: '100%',
+
+                //formatResult: formatBrand,
+                // formatSelection: formatBrand,
                 templateResult: formatBrand,
                 templateSelection: formatBrand,
+
+                //  escapeMarkup: function(m) { return m; }
             })
         });
 

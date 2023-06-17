@@ -1,7 +1,6 @@
 jQuery(document).ready(function () {
 
 
-
     function createImgComponent(index) {
 
         wrapper = document.createElement('div');
@@ -12,11 +11,27 @@ jQuery(document).ready(function () {
         removeBtn.classList.add('remove-btn');
         removeBtn.appendChild(nodeRemove);
         img = document.createElement('img');
-        img.src = URL.createObjectURL(event.target.files[index] || event.target.file);
+        img.src = URL.createObjectURL(event.target.files[index] || event.target.file)
         img.classList.add('img-preview-thumb');
         wrapper.appendChild(img);
         wrapper.appendChild(removeBtn);
-       
+        return wrapper;
+    }
+
+    function createImgUrlComponent(obj) {
+
+        wrapper = document.createElement('div');
+        wrapper.classList.add('wrapper-thumb');
+        removeBtn = document.createElement("span");
+        removeBtn.setAttribute('data-id', obj.filename);
+        nodeRemove = document.createTextNode('x');
+        removeBtn.classList.add('remove-btn');
+        removeBtn.appendChild(nodeRemove);
+        img = document.createElement('img');
+        img.src = obj.path;
+        img.classList.add('img-preview-thumb');
+        wrapper.appendChild(img);
+        wrapper.appendChild(removeBtn);
         return wrapper;
     }
     // ImgUpload();
@@ -27,14 +42,45 @@ jQuery(document).ready(function () {
         , previewTitle
         , previewTitleText
         , img;
-    
-    if(!imgUpload) return;
+
+
+    if (!imgUpload) return;
 
     let fileListArr = [];
+
+    //handle images when edit product
+    const dataImagesSelected = imgPreview.getAttribute('data-images-seleced');
+    let numImageUrl = 0;
+    if (dataImagesSelected) {
+        const urlSelectedImages = JSON.parse(dataImagesSelected);
+        if (urlSelectedImages) {
+            numImageUrl = urlSelectedImages.length;
+            let oldImageArr = [];
+            const oldImageInput = document.getElementById('oldImages');
+            imgPreview.classList.remove('img-thumbs-hidden');
+            for (let i = 0; i < urlSelectedImages.length; i++) {
+                imgPreview.appendChild(createImgUrlComponent(urlSelectedImages[i]));
+            }
+            $('.remove-btn').click(function () {
+                $(this).parent('.wrapper-thumb').remove();
+                oldImageArr.push($(this).data('id'))
+                oldImageInput.value = JSON.stringify(oldImageArr);
+            });
+        }
+    }
 
     imgUpload.addEventListener('change', previewImgs, true);
 
     function previewImgs(_event) {
+        if (dataImagesSelected) {
+            console.log(imgPreview.childNodes.length);
+            while (imgPreview.childNodes.length > numImageUrl) {
+                imgPreview.removeChild(imgPreview.lastChild);
+            }
+        }
+        else {
+            imgPreview.replaceChildren();
+        }
         totalFiles = imgUpload.files.length;
         fileListArr = Array.from(imgUpload.files);
         if (!!totalFiles) {
@@ -46,39 +92,49 @@ jQuery(document).ready(function () {
 
         $('.remove-btn').click(function () {
             $(this).parent('.wrapper-thumb').remove();
+            // console.log($(this).data('index'));
             fileListArr.splice($(this).data('index'), 1);
-            if (!fileListArr.length) {
-                imgUpload.value = '';
-                imgPreview.classList.add('img-thumbs-hidden')
-            }
-
+            //console.log(fileListArr.length);
+            // if (!fileListArr.length) {
+            //     imgUpload.value = '';
+            //     //imgPreview.classList.add('img-thumbs-hidden')
+            // }
         });
-
     }
 
     const thumbUpload = document.getElementById('upload-thumnail')
         , thumbPreview = document.getElementById('thumbnail-preview')
-       
+
+
+    //handle thumbnail when edit product
+    const dataThumbnailSelected = thumbPreview.getAttribute('data-thumbnail-seleced');
+    if (dataThumbnailSelected) {
+        const urlThumbnail = JSON.parse(dataThumbnailSelected);
+        const oldThumbInput = document.getElementById('oldThumbnail');
+        thumbPreview.classList.remove('img-thumbs-hidden');
+        thumbPreview.appendChild(createImgUrlComponent(urlThumbnail));
+        $('.remove-btn').click(function () {
+            $(this).parent('.wrapper-thumb').remove();
+            oldThumbInput.value = $(this).data('id');
+            //console.log(oldThumbInput.value);
+        });
+    }
 
     thumbUpload.addEventListener('change', previewThumb, true);
     function previewThumb(_event) {
-
-        if (thumbUpload.files) {
-           
-            thumbPreview.classList.remove('img-thumbs-hidden');
+        if (dataThumbnailSelected) {
+            const thumbnailObj = JSON.parse(dataThumbnailSelected);
+            const oldThumbInput = document.getElementById('oldThumbnail');
+            oldThumbInput.value = thumbnailObj.filename;
+            // console.log(oldThumbInput.value);
         }
+        thumbPreview.classList.remove('img-thumbs-hidden');
         thumbPreview.replaceChildren();
         thumbPreview.appendChild(createImgComponent(0));
-        console.log(thumbPreview);
-
         $('.remove-btn').click(function () {
             $(this).parent('.wrapper-thumb').remove();
 
-            thumbUpload.value = '';
-            thumbPreview.classList.add('img-thumbs-hidden')
-
         });
-
     }
 })
 

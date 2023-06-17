@@ -19,6 +19,7 @@ const cpUpload = upload.fields([
 ]);
 // upload.array('imagesProduct[]', 8)
 router.get('/:id/edit', productsController.edit)
+router.put('/:id', cpUpload, productsController.update)
 router.post('/store', cpUpload, productsController.store)
 router.get('/create', productsController.create);
 router.get('/', productsController.show)

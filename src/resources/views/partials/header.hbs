@@ -33,7 +33,7 @@
                             <p>{{user.firstName}}</p>
                             <i class="arrow-down-icon fa-solid fa-caret-down"></i>
                         </a>
-                        <ul class="sub-menu-top-bar" style="left: 50%;">
+                        <ul class="sub-menu-top-bar" style="left: 25%;">
                             <li><a href="/user"> My account </a> </li>
                             <li><a href="#">Checkout</a></li>
                             <li><a href="#">Sign out</a></li>
@@ -49,24 +49,24 @@
 
                     </div>
                     <!-- languages -->
-                    <div class="menu-top-bar languages">
+                    {{!-- <div class="menu-top-bar languages">
 
                         <a href="#">English <i class="arrow-down-icon fa-solid fa-caret-down"></i></i></a>
                         <ul class="sub-menu-top-bar">
                             <li><a href="#">Tiếng Việt</a> </li>
                             <li><a href="#">English</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                     <!-- currentcy -->
-                    <div class="menu-top-bar currentcy">
+                    {{!-- <div class="menu-top-bar currentcy">
 
                         <a href="#">USD <i class="arrow-down-icon fa-solid fa-caret-down"></i></i></a>
                         <ul class="sub-menu-top-bar">
                             <li><a href="#">VND</a> </li>
                             <li><a href="#">EUR</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -86,8 +86,8 @@
                     <li><a class="hover-underline-animation" href="brands.html">Brands</a></li>
                     <li><a class="hover-underline-animation" href="watches.html">Watches</a></li>
                     <li><a class="hover-underline-animation" href="about.html">About</a></li>
-                    <li><a class="hover-underline-animation" href="blog.html">Blog</a></li>
-                    <li><a class="hover-underline-animation" href="contact.html">Contact</a></li>
+                    {{!-- <li><a class="hover-underline-animation" href="blog.html">Blog</a></li>
+                    <li><a class="hover-underline-animation" href="contact.html">Contact</a></li> --}}
                 </ul>
             </div>
             <div class="nav-icon-menu">
@@ -104,8 +104,10 @@
                         <i class="fa-solid fa-magnifying-glass" id="icon_search"></i>
                     </li>
                     <li data-bs-toggle="modal" data-bs-target="#cartModal">
-
-                        <i class="fa-solid fa-cart-shopping icon-cart"></i>
+                        <div class="cart">
+                            <span class="count">1</span>
+                            <i class="fa-solid fa-cart-shopping icon-cart"></i>
+                        </div>
 
                     </li>
 
@@ -170,3 +172,5 @@
         </div>
     </form>
 </div>
+
+

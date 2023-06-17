@@ -33,7 +33,7 @@
                     <td>{{sum @index 1}}</td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <img class="product-img" src="{{this.thumbnail}}" alt="" style="width: 50px">
+                            <img class="product-img" src="{{this.thumbnail.path}}" alt="" style="width: 50px">
                             <p class="m-0">{{this.name}}</p>
                         </div>
 
@@ -105,7 +105,8 @@
 
                     <label class="fw-bold" for="form-quantity" class="form-label">Unit Price</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" name="unitPrice" aria-label="Amount (to the nearest dollar)">
+                        <input type="number" class="form-control" name="unitPrice"
+                            aria-label="Amount (to the nearest dollar)">
                         <span class="input-group-text">.00</span>
                         <span class="input-group-text">VNĐ</span>
                     </div>
@@ -125,6 +126,7 @@
         //table
         $(document).ready(function () {
             $('#products-table').DataTable({
+                responsive: true
                 pageLength: 8,
                 lengthMenu: [5, 10, 20, 50, 100],
                 columnDefs: [{
@@ -140,7 +142,7 @@
         let productId;
         const exampleModal = document.getElementById('staticBackdrop')
         const importOderForm = document.getElementById('importOder-form')
-       
+
         if (exampleModal) {
             exampleModal.addEventListener('show.bs.modal', event => {
                 // Button that triggered the modal

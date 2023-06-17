@@ -1,3 +1,74 @@
+.custom-carousel {
+    .carousel {
+        background: #fff;
+        margin-bottom: 40px;
+    }
+
+
+    .carousel-cell {
+        width: 100%;
+        margin-right: 10px;
+        background: transparent;
+    }
+
+    .carousel-cell-image {
+        display: block;
+        width: fit-content;
+        max-height: 500px;
+        height: 100%;
+        margin: 0 auto;
+        max-width: 100%;
+        opacity: 0;
+        -webkit-transition: opacity 0.4s;
+        transition: opacity 0.4s;
+    }
+
+    /* fade in lazy loaded image */
+    .carousel-cell-image.flickity-lazyloaded,
+    .carousel-cell-image.flickity-lazyerror {
+        opacity: 1;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .carousel-nav {
+            display: flex !important;
+            justify-content: center;
+
+            .img-mini {
+
+                margin-left: 24px;
+                margin-right: 24px;
+            }
+        }
+    }
+
+    .carousel-nav .img-mini {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        cursor: pointer;
+        opacity: .5;
+        position: relative;
+
+        img {
+            position: absolute;
+            vertical-align: middle;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+    }
+
+    .carousel-nav .img-mini.is-nav-selected {
+        opacity: 1;
+    }
+
+
+}
+
 .cart-container {
     display: flex;
     flex-wrap: wrap;
@@ -78,20 +149,24 @@
     display: inline;
     font-size: 28px;
 }
+
 // read more
-.read-more-content{
-	display: none;
-	padding-top: 22px;
+.read-more-content {
+    display: none;
+    padding-top: 22px;
 }
-.read-more{
-	display: inline-block;
-	margin-top: 8px;
-}.timeline-info {
-	position: relative;
-	background: #f3f1f1;
-	padding: 24px 20px 18px;
-	margin-bottom: 12px;
-	border: 1px solid #f3f1f1;
-	border-radius: 8px;
-	margin-left: 54px;
+
+.read-more {
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.timeline-info {
+    position: relative;
+    background: #f3f1f1;
+    padding: 24px 20px 18px;
+    margin-bottom: 12px;
+    border: 1px solid #f3f1f1;
+    border-radius: 8px;
+    margin-left: 54px;
 }

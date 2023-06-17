@@ -4,7 +4,7 @@ const Product = require('../models/product/product.model');
 const Category = require('../models/category/category.model');
 const Brand = require('../models/brand/brand.model');
 const Tag = require('../models/tag/tag.model');
-const { array } = require('../../middlewares/uploadFiles');
+
 const ContentBasedRecommender = require('content-based-recommender')
 const recommender = new ContentBasedRecommender({
     minScore: 0,

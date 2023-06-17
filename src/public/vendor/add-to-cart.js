@@ -167,7 +167,18 @@ $('.clear-cart').click(function () {
 
 
 function displayCart() {
+
+  
+  const numCartItems = $('.cart .count');
+console.log(numCartItems);
+
   var cartArray = shoppingCart.listCart();
+  if (cartArray.length == 0) {
+    numCartItems.hide();
+  } else {
+    numCartItems.text(cartArray.length);
+    numCartItems.show();
+  }
   var output = "";
   for (var i in cartArray) {
     // output += "<tr>"
@@ -189,7 +200,7 @@ function displayCart() {
     </div>
     <div class="d-flex flex-column  flex-grow-1 gap-3 ">
       <div>${cartArray[i].name}</div>
-      <div>${cartArray[i].price.toLocaleString(undefined, {minimumFractionDigits: 2})} VNĐ</div>
+      <div>${cartArray[i].price.toLocaleString(undefined, { minimumFractionDigits: 2 })} VNĐ</div>
       <div class="qty">
         <div class="input-group">
           <button class='minus-item input-group-addon btn btn-dark' data-code="${cartArray[i].code}">-</button>
@@ -197,7 +208,7 @@ function displayCart() {
             <button class='plus-item btn btn-dark input-group-addon' data-code="${cartArray[i].code}">+</button>
         </div>
       </div>
-      <div style="min-width: 150px">${cartArray[i].total.toLocaleString(undefined, {minimumFractionDigits: 2})} VNĐ</div>
+      <div style="min-width: 150px">${cartArray[i].total.toLocaleString(undefined, { minimumFractionDigits: 2 })} VNĐ</div>
     </div>
     <button class='delete-item btn btn-danger btn-sm' data-code="${cartArray[i].code}">X</button>
   </div>
@@ -207,7 +218,7 @@ function displayCart() {
     `
   }
   $('.show-cart').html(output);
-  $('.total-cart').html(shoppingCart.totalCart().toLocaleString(undefined, {minimumFractionDigits: 2}) + ' VNĐ');
+  $('.total-cart').html(shoppingCart.totalCart().toLocaleString(undefined, { minimumFractionDigits: 2 }) + ' VNĐ');
   $('.total-count').html(shoppingCart.totalCount());
 }
 
@@ -232,18 +243,18 @@ $('.show-cart').on("click", ".minus-item", function (event) {
 // +1
 $('.show-cart').on("click", ".plus-item", function (event) {
   var code = $(this).data('code')
-  shoppingCart.addItemToCart('','', code, '', 0, 0);
+  shoppingCart.addItemToCart('', '', code, '', 0, 0);
   displayCart();
 })
 
 // Item count input
 $('.show-cart').on("change", ".item-count", function (event) {
- 
+
   var code = $(this).data('code')
   var count = Number($(this).val());
   shoppingCart.setCountForItem(code, count);
   displayCart();
- 
+
 });
 
 displayCart();
@@ -251,8 +262,8 @@ displayCart();
 //check nums element of cart
 function checkElementCart() {
   const btnCheckout = $('.btn-checkout');
- 
-  if(shoppingCart.listCart().length == 0) {
+
+  if (shoppingCart.listCart().length == 0) {
     btnCheckout.prop('disabled', true);
   }
   else {
@@ -260,26 +271,26 @@ function checkElementCart() {
   }
 }
 
-  function addDataProduct() {
-  
-    const productArr = shoppingCart.listCart().map(item => ({
-        product: item.id,
-        count: item.count,
-    }))
-    //console.log(productArr)
-    const productListInput = $('#productList');
-    const totalPrice = $('#totalPrice');
-    if(productListInput) {
-       productListInput.val(JSON.stringify( productArr ));
-      // $('input:hidden[name="productList[]"]').val(JSON.stringify( productArr ).replace(/\\/g, ''));
-      
-      // console.log(productListInput.val());
-    }
-    if(totalPrice) {
-      totalPrice.val(shoppingCart.totalCart());
-     // console.log(totalPrice);
-    }
+function addDataProduct() {
+
+  const productArr = shoppingCart.listCart().map(item => ({
+    product: item.id,
+    count: item.count,
+  }))
+  //console.log(productArr)
+  const productListInput = $('#productList');
+  const totalPrice = $('#totalPrice');
+  if (productListInput) {
+    productListInput.val(JSON.stringify(productArr));
+    // $('input:hidden[name="productList[]"]').val(JSON.stringify( productArr ).replace(/\\/g, ''));
+
+    // console.log(productListInput.val());
   }
+  if (totalPrice) {
+    totalPrice.val(shoppingCart.totalCart());
+    // console.log(totalPrice);
+  }
+}
 export {
   addDataProduct
 }

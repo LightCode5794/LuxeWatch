@@ -7,14 +7,14 @@
                 <div class="py-5">
                     <div class="row g-4 align-items-center">
                         <div class="col">
-                            <h1 class="h3 m-0">Add Products</h1>
+                            <h1 class="h3 m-0">Edit Products</h1>
                         </div>
-                        <div class="col-auto d-flex">
+                        {{!-- <div class="col-auto d-flex">
                             <div class="form-group p-2 float-end me-2">
-                                <button type="reset" class="btn btn-danger me-3">Reset</button>
+                                <button type="reset" class="btn btn-danger me-3" id="btn-reset">Reset</button>
                                 <button type="submit" class="btn btn-primary btn-add--product">Add</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                     placeholder="Ex: Rolex"> --}}
 
                                 <select id="brand" name="brand" class="form-select" data-placeholder="Select an brand"
-                                    data-allow-clear="true" required>
+                                    data-allow-clear="true" required data-selected-brand="{{brand}}">
                                     <option></option>
                                     {{#each @root.brands}}
                                     <option value='{{this._id}}' data-thumbnail="{{this.imgUrl}}">{{this.name}}
@@ -54,26 +54,8 @@
                                     value="{{code}}" required>
 
                             </div>
-
-                            {{!-- <div class="mb-4">
-                                <label for="form-product/slug" class="form-label">Slug</label>
-                                <div class="input-group--sa-slug input-group">
-                                    <span class="input-group-text"
-                                        id="form-product/slug-addon">https://example.com/products/
-                                    </span>
-                                    <input type="text" class="form-control" id="form-product/slug" name="slug"
-                                        aria-describedby="form-product/slug-addon form-product/slug-help"
-                                        placeholder="Ex: brandix-screwdriver-screw150" required>
-                                </div>
-                                <div id="form-product/slug-help" class="form-text">Unique human-readable product
-                                    identifier.
-                                    No longer than 255 characters.</div>
-                            </div> --}}
                             <div class="mb-4">
                                 <label for="form-product/dial" class="form-label">Dial</label>
-
-                                {{!-- <input type="text" class="form-control" id="form-product/dial" name="dial"
-                                    placeholder="Ex: Ivory lacquered, gold applied Breguet numerals" required> --}}
                                 <textarea class="form-control" id="form-product/dial" name="dial"
                                     required>{{dial}}</textarea>
 
@@ -83,7 +65,7 @@
 
                                 <textarea class="form-control" id="form-product/case" name="case"
                                     placeholder="Ex: Rose gold. Interchangeable solid and sapphire crystal case backs. Water-resistant to 30 m. Case diameter: 39 mm. Height: 9.71 mm."
-                                    required> {{case}}</textarea>
+                                    required>{{case}}</textarea>
 
                             </div>
                             <div class="mb-4">
@@ -127,39 +109,15 @@
                             </div>
                             {{!-- <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div> --}}
                         </div>
-                        {{!-- <div class="card p-5  mb-3">
-                            <div class="mb-2">
-                                <h4>Inventory</h4>
-                            </div>
-                            <div class="row g-4">
-                                <div class="mb-4">
-                                    <label for="form-product/code" class="form-label">Code</label>
-                                    <input type="text" class="form-control" id="form-product/code" name="code" required>
-                                </div>
-
-                                <div>
-                                    <label for="form-product/quantity" class="form-label">Stock quantity</label>
-                                    <input type="number" class="form-control" id="form-product/quantity" name="stock">
-                                </div>
-                            </div>
-                            <div class="mt-4 mb-n2"><a href="#">Schedule discount</a></div>
-                        </div> --}}
 
                         <div class="card p-5  mb-3">
                             <div class="mb-2">
                                 <h4>Media</h4>
                             </div>
-                            {{!-- <div class="upload__box">
-                                <div class="upload__btn-box">
-
-                                    <input type="file" multiple="" data-max_length="20" name="imagesProduct[]"
-                                        class="upload__inputfile form-control" accept="image/*" required>
-
-                                </div>
-                                <div class="upload__img-wrap mt-2"></div>
-                            </div> --}}
                             <input type="file" class="form-control" name="imagesProduct[]" multiple id="upload-img" />
-                            <div class="img-thumbs img-thumbs-hidden" id="img-preview"></div>
+                            <div class="img-thumbs img-thumbs-hidden" id="img-preview"
+                                data-images-seleced="{{json images}}"></div>
+                            <input type="hidden" name="oldImages[]" multiple id="oldImages" />
                         </div>
                     </div>
 
@@ -170,7 +128,9 @@
                             <h4>Thumbnail</h4>
                         </div>
                         <input type="file" class="form-control" name="thumbnail" id="upload-thumnail" />
-                        <div class="img-thumbs img-thumbs-hidden" id="thumbnail-preview"></div>
+                        <div class="img-thumbs img-thumbs-hidden" id="thumbnail-preview"
+                            data-thumbnail-seleced="{{json thumbnail}}"></div>
+                        <input type="hidden" name="oldThumb" multiple id="oldThumbnail" />
 
                     </div>
                     <div class="card p-2 mt-4">
@@ -195,7 +155,7 @@
                     <div class="card p-2 mt-4">
                         <label for="form-product/category" class="form-label">Category</label>
                         <select id='category' name="category" class="form-select" data-placeholder="Select an category"
-                            data-allow-clear="true" required>
+                            data-allow-clear="true" data-selected-category="{{category}}" required>
                             <option></option>
                             {{#each @root.categories}}
                             <option value="{{this._id}}">{{this.name}}</option>
@@ -206,14 +166,17 @@
                         <div class="mb-2">
                             <h4>Tags</h4>
                         </div>
-                        <select class="form-control tags" multiple="multiple" name="tags[]" required>
+                        <select class="form-control tags" multiple="multiple" name="tags[]"
+                            data-selected-tags="{{json tags}}" required>
                             {{#each @root.tags}}
                             <option value="{{this._id}}">{{this.name}}</option>
                             {{/each}}
                         </select>
+                        {{!-- <input type="hidden" name="oldTags[]" id="oldTags"> --}}
                     </div>
-
-
+                    <div class="p-2 mt-4 d-flex">
+                        <button type="submit" class="btn btn-primary w-100">Save</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -229,20 +192,25 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         //funtion for select tags
-        $(".tags").select2({
+        const oldTagsInput = document.getElementById('oldTags')
+        const selectTags = $(".tags")
+        selectTags.select2({
             tags: true,
             tokenSeparators: [','],
 
         })
+        selectTags.val(selectTags.data('selected-tags'));
+        selectTags.trigger('change');
 
         //select brand 
-        $(document).ready(function () {
-            $("#brand").select2({
-                width: '100%',
-                templateResult: formatBrand,
-                templateSelection: formatBrand,
-            })
+        const selectedBrand = $("#brand");
+        selectedBrand.select2({
+            width: '100%',
+            templateResult: formatBrand,
+            templateSelection: formatBrand,
         });
+        selectedBrand.val(selectedBrand.data('selected-brand'));
+        selectedBrand.trigger('change')
 
         function formatBrand(brand) {
             if (!brand.id) { return brand.text; }
@@ -254,18 +222,35 @@
         }
 
         //select category
-        $(document).ready(function () {
-            $("#category").select2({
-                width: '100%',
-            });
+        const selectedCategory = $("#category");
+        selectedCategory.select2({
+            width: '100%',
         });
+        selectedCategory.val(selectedCategory.data('selected-category'));
+        selectedCategory.trigger('change')
+
+        const btnReset = $("#btn-reset");
+
+        // btnReset.on('click', function () {
+
+        //    selectTags.val(selectTags.data('selected-tags'));
+        //   selectTags.trigger('change');
+
+        //  selectedBrand.val(selectedBrand.data('selected-brand'));
+        //  selectedBrand.trigger('change')
+
+        //  selectedCategory.val(selectedCategory.data('selected-category'));
+        //  selectedCategory.trigger('change')
+
+
+        //  })
+        //splash
         $('#loaderDiv').hide();
         $("#form-product").submit(function (e) {
             e.preventDefault();
             $('#main-view').hide();
             $('#loaderDiv').show();
             this.submit();
-
         })
     })
 
