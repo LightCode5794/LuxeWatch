@@ -10,16 +10,16 @@ class SaleOdersController {
         SaleOder.find({})
             .populate('productList.product', 'price')
             .then((saleOders) => {
-                const saleOdersObj = saleOders.map((saleOder) => ({
-                    ...saleOder.toObject(),
-                    total: saleOder.productList.reduce((sum, item) => sum + item.product.price * item.count, 0)
-                }));
+                // const saleOdersObj = saleOders.map((saleOder) => ({
+                //     ...saleOder.toObject(),
+                //     total: saleOder.productList.reduce((sum, item) => sum + item.product.price * item.count, 0)
+                // }));
                 res.render('admin/saleOders/show', {
                     layout: 'admin',
-                    saleOders: saleOdersObj,
+                    saleOders: multipleMongooseToObject(saleOders), 
 
                 });
-                // res.json(saleOdersObj)
+                 //res.json(saleOdersObj)
             })
             .catch(next);
     }
