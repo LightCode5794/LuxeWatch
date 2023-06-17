@@ -244,6 +244,7 @@ a.actived-page.hover-underline-animation::after {
     font-size: 24px;
     color: white; }
   .cart .count {
+    display: none;
     position: absolute;
     top: -6px;
     right: -4px;

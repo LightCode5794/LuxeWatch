@@ -168,9 +168,9 @@ $('.clear-cart').click(function () {
 
 function displayCart() {
 
-  
+
   const numCartItems = $('.cart .count');
-console.log(numCartItems);
+  console.log(numCartItems);
 
   var cartArray = shoppingCart.listCart();
   if (cartArray.length == 0) {
@@ -291,7 +291,11 @@ function addDataProduct() {
     // console.log(totalPrice);
   }
 }
+function clearCart() {
+  shoppingCart.clearCart();
+}
 export {
-  addDataProduct
+  addDataProduct,
+  clearCart,
 }
 checkElementCart();
