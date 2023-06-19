@@ -29,11 +29,12 @@
                     </a>
                     <div class="nav-item__sub-menu collapse" id="catalog-collapse">
                         <ul class="sub-btn-nav list-unstyled fw-normal">
-                            <li><a href="/admin/products" class="sub-btn-nav__item nav-link link-dark rounded">Products
-                                    List</a>
+                            <li><a href="/admin/brands" class="sub-btn-nav__item nav-link link-dark rounded">Brands</a>
                             </li>
                             <li><a href="/admin/categories"
-                                    class="sub-btn-nav__item nav-link link-dark rounded">Categories List</a>
+                                    class="sub-btn-nav__item nav-link link-dark rounded">Categories</a>
+                            </li>
+                            <li><a href="/admin/products" class="sub-btn-nav__item nav-link link-dark rounded">Products</a>
                             </li>
                         </ul>
                     </div>
@@ -49,20 +50,13 @@
                     </a>
                     <div class="collapse nav-item__sub-menu" id="oder-collapse">
                         <ul class="sub-btn-nav list-unstyled fw-normal">
-                            <li><a href="/admin/importOders" class="sub-btn-nav__item nav-link link-dark rounded">Import Oders</a>
+                            <li><a href="/admin/importOders" class="sub-btn-nav__item nav-link link-dark rounded">Import
+                                    Oders</a>
                             </li>
-                            <li><a href="/admin/saleOders" class="sub-btn-nav__item nav-link link-dark rounded">Sale Oders</a></li>
+                            <li><a href="/admin/saleOders" class="sub-btn-nav__item nav-link link-dark rounded">Sale
+                                    Oders</a></li>
                         </ul>
                     </div>
-                </li>
-
-                <li class="nav-item">
-                    <a href="customersList.html" class="nav-link link-dark  d-flex align-items-center"
-                        aria-current="page">
-
-                        <i class="nav-link__icon ti-user"></i>
-                        <span class="nav-link__title">Customers List</span>
-                    </a>
                 </li>
 
                 {{!-- <li class="nav-item">
@@ -91,13 +85,27 @@
                         <span class="nav-link__title">Import Oders</span>
                     </a>
                 </li> --}}
-                <li class="nav-item">
+                {{!-- <li class="nav-item">
                     <a href="/admin/brands" class="nav-link link-dark  d-flex align-items-center" aria-current="page">
                         <i class="nav-link__icon ti-shopping-cart-full"></i>
                         <span class="nav-link__title">Brands</span>
                     </a>
+                </li> --}}
+                <li class="nav-item">
+                    <a href="/admin/tags" class="nav-link link-dark  d-flex align-items-center" aria-current="page">
+
+                        <i class="nav-link__icon ti-user"></i>
+                        <span class="nav-link__title">Tags</span>
+                    </a>
                 </li>
-                
+                <li class="nav-item">
+                    <a href="customersList.html" class="nav-link link-dark  d-flex align-items-center"
+                        aria-current="page">
+
+                        <i class="nav-link__icon ti-user"></i>
+                        <span class="nav-link__title">Customers List</span>
+                    </a>
+                </li>
                 {{!-- <li class="nav-item">
                     <a class="btn sub-btn nav-link link-dark align-items-center rounded collapsed text-start d-flex justify-content-between"
                         data-bs-toggle="collapse" data-bs-target="#staff-collapse" aria-expanded="false">

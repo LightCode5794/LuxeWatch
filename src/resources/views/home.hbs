@@ -56,23 +56,24 @@
                 <h2>
                     <span>Brands</span>
                 </h2>
-                <a class="view-all-link"
-                    href="#">View All</a>
+                <a class="view-all-link" href="#">View All</a>
             </div>
+            <div class="content-containter">
 
-            <!-- Flickity HTML init -->
-            <div class="carousel js-flickity"
-                data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 2, "pageDots": false}'>
-                {{#each brands}}
-                <div class="carousel-cell">
-                    <div class="box-image">
-                        <a href="/brands/{{this.name}}">
-                            <img class="carousel-cell-image brand-image" data-flickity-lazyload="{{this.imgUrl}}"
-                                alt="tulip">
-                        </a>
+                <!-- Flickity HTML init -->
+                <div class="carousel js-flickity"
+                    data-flickity='{"wrapAround": false,"freeScroll": false, "contain": true,  "lazyLoad": 2, "initialIndex": 2, "pageDots": false}'>
+                    {{#each brands}}
+                    <div class="carousel-cell">
+                        <div class="box-image">
+                            <a href="/brands/{{this.name}}">
+                                <img class="carousel-cell-image brand-image" data-flickity-lazyload="{{this.imgUrl}}"
+                                    alt="tulip">
+                            </a>
+                        </div>
                     </div>
+                    {{/each}}
                 </div>
-                {{/each}}
             </div>
 
         </div>
@@ -102,7 +103,7 @@
                             </a>
                             {{!-- <div class="quick-view">
                                 <a href="/products/{{this.slug}}" class="text">
-                                     View
+                                    View
                                 </a>
                             </div> --}}
                         </div>
@@ -164,6 +165,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 </section>
 

@@ -69,6 +69,7 @@ const productSchema = new mongoose.Schema(
 // add plugins
 mongoose.plugin(slug);
 productSchema.plugin(MongooseDelete, { overrideMethods: 'all', deletedAt: true });
+//create index to query
 productSchema.indexes({ '$**': 'text' });
 
 const Product = mongoose.model('Product', productSchema);

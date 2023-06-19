@@ -2,37 +2,31 @@
     <div class="py-4">
         <div class="row align-items-center">
             <div class="col">
-                <h1 class="h3 m-0">Import Oders</h1>
+                <h1 class="h3 m-0">Categories</h1>
+            </div>
+            <div class="col-auto fw-bold">
+                <a href="/admin/categories/create" class="btn btn-primary">New category</a>
             </div>
         </div>
     </div>
 </div>
 
 <div class="card p-2">
-    <div class="widget-table  table-responsive">
-
-        <table id="ImportOders-table" class="table order-list-tb table-bordered">
+    <div class="widget-table table-responsive">
+        <table id="tags-table" class="table table-bordered">
             <thead class="text-primary">
                 <tr>
-                    <th> No</th>
-                    {{!-- <th> Oder Id</th> --}}
-                    <th> Order Creation Date </th>
-                    <th> Quantity</th>
-                    <th> Unit Price</th>
-                    <th> Value</th>
+                    <th>No</th>
+                    <th> Name</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <!-- oder 1 -->
-                {{#each importOders}}
+                {{#each tags}}
                 <tr>
                     <td>{{sum @index 1}}</td>
-                    {{!-- <th>00000</th> --}}
-                    <td>{{moment this.createdAt format="DD/MM/YYYY"}}</td>
-                    <td>{{this.quantity}}</td>
-                    <td>{{number  this.unitPrice "0,0.00" }} VNĐ</td>
-                    <td>{{number (multiply this.quantity this.unitPrice) "0,0.00" }} VNĐ</td>
+                    <td>{{this.name}}</td>
 
                     <td>
                         <div class="dropdown">
@@ -45,11 +39,8 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                                <li><a class="dropdown-item" href="/admin/ImportOders/{{this._id}}/edit">Edit</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+
+                                <li><a class="dropdown-item text-danger" href="/admin/tags/{{this._id}}/delete">Delete</a></li>
                             </ul>
                         </div>
                     </td>
@@ -60,15 +51,14 @@
     </div>
 </div>
 
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         $(document).ready(function () {
-            $('#ImportOders-table').DataTable({
-                pageLength: 7,
+            $('#tags-table').DataTable({
+                pageLength: 8,
                 lengthMenu: [8, 15, 20, 50, 100],
                 columnDefs: [{
-                    "targets": [5],
+                    "targets": [2],
                     "searchable": false,
                     "orderable": false,
                     "visible": true

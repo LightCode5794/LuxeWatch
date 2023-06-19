@@ -17,7 +17,14 @@ class SearchController {
     async text(req, res, next) {
         try {
 
-            const query = { $text: { $search: req.query.q } };
+            const query = {
+                $text: {
+                    $search: req.query.q,
+                    fuzzy: {
+
+                    }
+                }
+            };
             const products = await Product.find(query);
 
             // const products = await Product.aggregate([
@@ -89,10 +96,10 @@ class SearchController {
             // recommender.train(documents);
             // const similarDocuments = recommender.getSimilarDocuments('0', 0, 100);
 
-           
+
             // const idsProduct = similarDocuments.map(item => item.id);
             // const productsFound = await Product.find().where('_id').in(idsProduct);
-          // res.json(idsProduct);
+            // res.json(idsProduct);
 
             res.render('client/search', {
                 query: req.query.q,

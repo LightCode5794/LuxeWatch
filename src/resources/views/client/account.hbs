@@ -1,0 +1,91 @@
+<div class="container-sm account-container">
+    <div id="page-tab-container" class="d-flex justify-content-center">
+        <div class="tabs mt-4">
+            <div class="tab-links">
+                <button data-id="prepare" data-default>Prepare</button>
+                <button data-id="produce">Produce</button>
+                <button data-id="delivery">Delivery</button>
+            </div>
+
+            <div class="tab-content">
+                <section id="prepare">
+                    <h2>How to prepare content?</h2>
+                    <p>Need a lot of research and organizing ideas</p>
+                </section>
+                <section id="produce">
+                    <h2>How to produce</h2>
+                    <p>Develop your idea and record it</p>
+                    <p>To record you will need: Sound, Camera, Light and a Computer</p>
+                </section>
+                <section id="delivery">
+                    <h2>How to delivery</h2>
+                    <p>You can choose any digital media like: YouTube, Twich or Instagram.</p>
+                </section>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        //  const $ = document.querySelector.bind(document);
+
+        function TabNavigation() {
+            const html = {
+                links: [...document.querySelector('.tab-links').children],
+                contents: [...document.querySelector('.tab-content').children],
+                openTab: document.querySelector('[data-default]'),
+            }
+
+            function hideAllTabContent() {
+                html.contents.forEach(section => {
+                    section.style.display = "none";
+
+                });
+            }
+
+            function removeAllActiveClas() {
+                html.links.forEach(tab => {
+                    tab.className = tab.className.replace(' active', '');
+                })
+            }
+
+            function showCurrentTab(id) {
+                const tabcontent = document.querySelector('#' + id);
+                tabcontent.style.display = 'block';
+            }
+
+            function selecttab(event) {
+                hideAllTabContent();
+                removeAllActiveClas();
+
+                const target = event.currentTarget;
+                showCurrentTab(target.dataset.id);
+
+                target.className += ' active';
+            }
+
+            function listenForChange() {
+                html.links.forEach(tab => {
+                    tab.addEventListener('click', selecttab);
+                });
+            }
+
+            function init() {
+                hideAllTabContent();
+                listenForChange();
+
+                html.openTab.click();
+            }
+
+            return {
+                init
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const tabNavigation = TabNavigation();
+            tabNavigation.init();
+        })
+    });
+</script>
