@@ -1,0 +1,57 @@
+<div class="search-content">
+    <form method="GET" action="/brands/{{query}}/filter">
+        <div class="container pt-3 pb-3 w-100 bg-black d-flex justify-content-between align-items-center">
+            <p><strong> {{query}}</strong> </p>
+            <div class="filter-container d-flex justify-content-between gap-3">
+                <select class="form-select form-select-sm bg-black border-0 filter-select"
+                    aria-label=".form-select-sm example" name="category">
+                    <option value="0">Category</option>
+                    <option value="1">Woman</option>
+                    <option value="2">Man</option>
+                    <option value="3">Unisex</option>
+                </select>
+                {{!-- <select class="form-select form-select-sm bg-black border-0 filter-select"
+                    aria-label=".form-select-sm example" name="strap">
+                    <option selected>Strap</option>
+                    <option value="1">Steel</option>
+                    <option value="2">Leather</option>
+                    <option value="3">Sapphire</option>
+                    <option value="3">Gold</option>
+                    <option value="4">Platinum</option>
+                </select> --}}
+                <select class="form-select form-select-sm bg-black border-0 filter-select"
+                    aria-label=".form-select-sm example" name="price">
+                    <option value="0">Price</option>
+                    <option value="1">
+                        < 20 triệu </option>
+                    <option value="2"> 20 - 100 triệu</option>
+                    <option value="3"> 100 - 500 triệu</option>
+                    <option value="4">> 500 triệu</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-light fiter-btn">Filter</button>
+            </div>
+        </div>
+        <input type="hidden" name="nameBrand" value="{{query}}">
+    </form>
+</div>
+
+
+<div class="container mb-3 mt-3">
+    <div class="grid-products  row">
+        {{#each products}}
+        <div class="product-item col-12 col-md-6 col-lg-4 pt-5 pb-5">
+            <div class="image-container">
+                <a href="/products/{{this.slug}}">
+                    <img src="{{this.thumbnail.path}}" alt="tulip">
+                </a>
+            </div>
+            <div class="box-caption pt-3">
+                <a class="product-name" href="/products/{{this.slug}}">{{this.name}}</a>
+                <p class="product-price">
+                    {{number this.price "0,0.00" }} VND
+                </p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
