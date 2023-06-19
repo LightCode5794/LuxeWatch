@@ -22,6 +22,9 @@ router.get('/:id/edit', productsController.edit)
 router.put('/:id', cpUpload, productsController.update)
 router.post('/store', cpUpload, productsController.store)
 router.get('/create', productsController.create);
+router.get('/:id/delete', productsController.delete);
+router.get('/:id/view', productsController.view);
 router.get('/', productsController.show)
+
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-updater');
+const MongooseDelete = require("mongoose-delete");
 
 const productSchema = new mongoose.Schema(
     {
@@ -67,6 +68,7 @@ const productSchema = new mongoose.Schema(
 
 // add plugins
 mongoose.plugin(slug);
+productSchema.plugin(MongooseDelete, { overrideMethods: 'all', deletedAt: true });
 productSchema.indexes({ '$**': 'text' });
 
 const Product = mongoose.model('Product', productSchema);

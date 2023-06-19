@@ -102,21 +102,30 @@ class ProductsController {
         } catch (error) {
             res.send(error.message);
         }
+    }
 
-        // Product.findById(req.params.id)
-        //     .populate('brand')
-        //     .populate('category')
-        //     .populate('tags')
-        //     .then((product) =>
-        //         res.render('admin/products/edit', {
-        //             layout: 'admin',
-        //             product: singleMongooseToObject(product),
-        //             categories: multipleMongooseToObject(categories),
-        //             brands: multipleMongooseToObject(brands),
-        //             tags: multipleMongooseToObject(tags),
-        //         }),
-        //     )
-        //     .catch(next);
+     //[GET] /admin/products/:id/view
+
+     async view(req, res, next) {
+
+        try {
+
+            const categories = await Category.find({});
+            const brands = await Brand.find({});
+            const tags = await Tag.find({});
+            const product = await Product.findById(req.params.id)
+
+            res.render('admin/products/view', {
+                layout: 'admin',
+                categories: multipleMongooseToObject(categories),
+                brands: multipleMongooseToObject(brands),
+                tags: multipleMongooseToObject(tags),
+                product: singleMongooseToObject(product),
+            })
+
+        } catch (error) {
+            res.send(error.message);
+        }
     }
 
     //[PUT] /admin/products/:id
@@ -174,7 +183,7 @@ class ProductsController {
                 new: true
             });
 
-            res.redirect('back')
+            res.redirect('/admin/products')
         } catch (error) {
             res.json({ error: error.message });
         }
@@ -183,6 +192,15 @@ class ProductsController {
         // Product.updateOne({ _id: req.params.id }, req.body)
         //     .then(() => res.redirect('/admin/products'))
         //     .catch(next);
+    }
+    //[DELETE] /admin/products/:id
+    async delete(req, res, next) {
+        try {
+            await Product.delete({ _id: req.params.id });
+            res.redirect('/admin/products');
+        } catch (error) {
+            res.json({ error: error.message });
+        }
     }
 }
 

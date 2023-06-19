@@ -1,0 +1,213 @@
+<section id="main-view">
+    <div class="container">
+        <div class="row dashboard-title">
+            <div class="py-5">
+                <div class="row g-4 align-items-center">
+                    <div class="col">
+                        <h1 class="h3 m-0">View Products</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row content-dashboard g-4 g-xl-4" id="viewProduct-container">
+            {{#product}}
+            <div class="col col-md-8 ">
+                {{!-- basic information --}}
+                <div class="mb-2">
+                    <div class="card p-4 mb-3">
+                        <div class="mb-2">
+                            <h4>Basic information</h4>
+                        </div>
+                        <div class="mb-4">
+                            <label for="form-product/name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="form-product/name" name="name"
+                                placeholder="Brandix Screwdriver SCREW150" value="{{name}}" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="form-product/brand" class="form-label">Brand</label>
+                            {{!-- <input type="text" class="form-control" id="form-product/brand" name="brand"
+                                placeholder="Ex: Rolex"> --}}
+
+                            <select id="brand" name="brand" class="form-select" data-placeholder="Select an brand"
+                                data-allow-clear="true" required data-selected-brand="{{brand}}">
+                                <option></option>
+                                {{#each @root.brands}}
+                                <option value='{{this._id}}' data-thumbnail="{{this.imgUrl}}">{{this.name}}
+                                </option>
+                                {{/each}}
+                            </select>
+
+                        </div>
+                        <div class="mb-4">
+
+                            <label for="form-product/code" class="form-label">Code</label>
+                            <input type="text" class="form-control" id="form-product/code" name="code" value="{{code}}"
+                                required>
+
+                        </div>
+                        <div class="mb-4">
+                            <label for="form-product/dial" class="form-label">Dial</label>
+                            <textarea class="form-control" id="form-product/dial" name="dial"
+                                required>{{dial}}</textarea>
+
+                        </div>
+                        <div class="mb-4">
+                            <label for="form-product/case" class="form-label">Case</label>
+
+                            <textarea class="form-control" id="form-product/case" name="case"
+                                placeholder="Ex: Rose gold. Interchangeable solid and sapphire crystal case backs. Water-resistant to 30 m. Case diameter: 39 mm. Height: 9.71 mm."
+                                required>{{case}}</textarea>
+
+                        </div>
+                        <div class="mb-4">
+                            <label for="form-product/strap" class="form-label">Strap</label>
+
+                            <textarea class="form-control" id="form-product/strap" name="strap"
+                                placeholder="Ex: Alligator strap with square scales, hand-stitched, shiny dark chestnut. Fold-over clasp."
+                                required>{{strap}}</textarea>
+
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="form-product/description" class="form-label">Description</label>
+                            <textarea id="form-product/description" name="description"
+                                class="sa-quill-control form-control sa-quill-control--ready" rows="4"
+                                required>{{description}}</textarea>
+
+                        </div>
+                    </div>
+                    <div class="card p-5 mb-3">
+                        <div class="mb-2">
+                            <h4>Pricing</h4>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col">
+                                <label for="form-product/price" class="form-label">Price</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control flex-1" id="form-product/price"
+                                        name="price" value="{{price}}">
+                                    <select class="form-select" name="currency" id="currency">
+                                        <option value="VND">VND</option>
+                                        <option value="USD">USD</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-5  mb-3">
+                        <div class="mb-2">
+                            <h4>Media</h4>
+                        </div>
+                        <input type="file" class="form-control" name="imagesProduct[]" multiple id="upload-img" />
+                        <div class="img-thumbs img-thumbs-hidden" id="img-preview" 
+                            data-images-seleced="{{json images}}"></div>
+                        <input type="hidden" name="oldImages[]" multiple id="oldImages" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="col col-md-4">
+                <div class="card p-2">
+                    <div class="mb-2">
+                        <h4>Thumbnail</h4>
+                    </div>
+                    <input type="file" class="form-control" name="thumbnail" id="upload-thumnail" />
+                    <div class="img-thumbs img-thumbs-hidden" id="thumbnail-preview"
+                        data-thumbnail-seleced="{{json thumbnail}}"></div>
+                    <input type="hidden" name="oldThumb" multiple id="oldThumbnail" />
+
+                </div>
+                <div class="card p-2 mt-4">
+                    <div class="mb-2">
+                        <h4>Status</h4>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" value="true" id="vPublished" checked>
+                        <label class="form-check-label" for="vPublished">
+                            Published
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="false" name="status" id="vHidden">
+                        <label class="form-check-label" for="vHidden">
+                            Hidden
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card p-2 mt-4">
+                    <label for="form-product/category" class="form-label">Category</label>
+                    <select id='category' name="category" class="form-select" data-placeholder="Select an category"
+                        data-allow-clear="true" data-selected-category="{{category}}" required>
+                        <option></option>
+                        {{#each @root.categories}}
+                        <option value="{{this._id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="card p-2 mt-4">
+                    <div class="mb-2">
+                        <h4>Tags</h4>
+                    </div>
+                    <select class="form-control tags" multiple="multiple" name="tags[]"
+                        data-selected-tags="{{json tags}}" required>
+                        {{#each @root.tags}}
+                        <option value="{{this._id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                    {{!-- <input type="hidden" name="oldTags[]" id="oldTags"> --}}
+                </div>
+            </div>
+            {{/product}}
+        </div>
+
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        //funtion for select tags
+        const oldTagsInput = document.getElementById('oldTags')
+        const selectTags = $(".tags")
+        selectTags.select2({
+            tags: true,
+            tokenSeparators: [','],
+
+        })
+        selectTags.val(selectTags.data('selected-tags'));
+        selectTags.trigger('change');
+
+        //select brand 
+        const selectedBrand = $("#brand");
+        selectedBrand.select2({
+            width: '100%',
+            templateResult: formatBrand,
+            templateSelection: formatBrand,
+        });
+        selectedBrand.val(selectedBrand.data('selected-brand'));
+        selectedBrand.trigger('change')
+
+        function formatBrand(brand) {
+            if (!brand.id) { return brand.text; }
+            var originalOption = brand.element;
+            const $brand = $(
+                `<span class= "d-flex align-items-center"><img style="width: 48px; margin-right: 16px" src="${$(originalOption).data('thumbnail')}" /> ${brand.text}</span>`
+            );
+            return $brand;
+        }
+
+        //select category
+        const selectedCategory = $("#category");
+        selectedCategory.select2({
+            width: '100%',
+        });
+        selectedCategory.val(selectedCategory.data('selected-category'));
+        selectedCategory.trigger('change')
+
+        //  disable ALL descendants of the DIV
+        $("#viewProduct-container *").prop('disabled', true);
+    })
+
+</script>

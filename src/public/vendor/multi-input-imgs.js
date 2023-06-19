@@ -18,20 +18,22 @@ jQuery(document).ready(function () {
         return wrapper;
     }
 
-    function createImgUrlComponent(obj) {
+    function createImgUrlComponent(obj, isViewProduct) {
 
         wrapper = document.createElement('div');
         wrapper.classList.add('wrapper-thumb');
-        removeBtn = document.createElement("span");
-        removeBtn.setAttribute('data-id', obj.filename);
-        nodeRemove = document.createTextNode('x');
-        removeBtn.classList.add('remove-btn');
-        removeBtn.appendChild(nodeRemove);
         img = document.createElement('img');
         img.src = obj.path;
         img.classList.add('img-preview-thumb');
         wrapper.appendChild(img);
-        wrapper.appendChild(removeBtn);
+        if (!isViewProduct) {
+            removeBtn = document.createElement("span");
+            removeBtn.setAttribute('data-id', obj.filename);
+            nodeRemove = document.createTextNode('x');
+            removeBtn.classList.add('remove-btn');
+            removeBtn.appendChild(nodeRemove);
+            wrapper.appendChild(removeBtn);
+        }
         return wrapper;
     }
     // ImgUpload();
@@ -43,12 +45,14 @@ jQuery(document).ready(function () {
         , previewTitleText
         , img;
 
+    const isViewProuct = document.getElementById('viewProduct-container');
+
 
     if (!imgUpload) return;
 
     let fileListArr = [];
 
-    //handle images when edit product
+    //handle url images when edit product
     const dataImagesSelected = imgPreview.getAttribute('data-images-seleced');
     let numImageUrl = 0;
     if (dataImagesSelected) {
@@ -59,7 +63,7 @@ jQuery(document).ready(function () {
             const oldImageInput = document.getElementById('oldImages');
             imgPreview.classList.remove('img-thumbs-hidden');
             for (let i = 0; i < urlSelectedImages.length; i++) {
-                imgPreview.appendChild(createImgUrlComponent(urlSelectedImages[i]));
+                imgPreview.appendChild(createImgUrlComponent(urlSelectedImages[i], isViewProuct));
             }
             $('.remove-btn').click(function () {
                 $(this).parent('.wrapper-thumb').remove();
@@ -112,7 +116,7 @@ jQuery(document).ready(function () {
         const urlThumbnail = JSON.parse(dataThumbnailSelected);
         const oldThumbInput = document.getElementById('oldThumbnail');
         thumbPreview.classList.remove('img-thumbs-hidden');
-        thumbPreview.appendChild(createImgUrlComponent(urlThumbnail));
+        thumbPreview.appendChild(createImgUrlComponent(urlThumbnail, isViewProuct));
         $('.remove-btn').click(function () {
             $(this).parent('.wrapper-thumb').remove();
             oldThumbInput.value = $(this).data('id');
