@@ -17,6 +17,7 @@
                     <th> No</th>
                     {{!-- <th> Oder Id</th> --}}
                     <th> Order Creation Date </th>
+                    <th>Product</th>
                     <th> Quantity</th>
                     <th> Unit Price</th>
                     <th> Value</th>
@@ -30,8 +31,14 @@
                     <td>{{sum @index 1}}</td>
                     {{!-- <th>00000</th> --}}
                     <td>{{moment this.createdAt format="DD/MM/YYYY"}}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img class="product-img" src="{{this.product.thumbnail.path}}" alt="" style="width: 36px">
+                            <p class="m-0">{{this.product.name}}</p>
+                        </div>
+                    </td>
                     <td>{{this.quantity}}</td>
-                    <td>{{number  this.unitPrice "0,0.00" }} VNĐ</td>
+                    <td>{{number this.unitPrice "0,0.00" }} VNĐ</td>
                     <td>{{number (multiply this.quantity this.unitPrice) "0,0.00" }} VNĐ</td>
 
                     <td>

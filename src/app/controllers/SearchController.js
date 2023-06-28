@@ -5,13 +5,6 @@ const Category = require('../models/category/category.model');
 const Brand = require('../models/brand/brand.model');
 const Tag = require('../models/tag/tag.model');
 
-const ContentBasedRecommender = require('content-based-recommender')
-const recommender = new ContentBasedRecommender({
-    minScore: 0,
-    maxSimilarDocuments: 100,
-    maxVectorSize: 1000,
-});
-
 class SearchController {
     //[GET] /admin/dashboard
     async text(req, res, next) {
@@ -20,9 +13,6 @@ class SearchController {
             const query = {
                 $text: {
                     $search: req.query.q,
-                    fuzzy: {
-
-                    }
                 }
             };
             const products = await Product.find(query);
@@ -105,6 +95,7 @@ class SearchController {
                 query: req.query.q,
                 products: multipleMongooseToObject(products),
                 user: singleMongooseToObject(req.user),
+
             });
         }
         catch (err) {

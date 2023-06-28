@@ -7,7 +7,9 @@ class ImportOdersController {
     show(req, res, next) {
         // res.json(req.params)
         ImportOder.find()
+            .populate('product', 'name thumbnail')
             .then((importOders) => {
+                // res.json(importOders);
                 res.render('admin/importOders/show', {
                     layout: 'admin',
                     importOders: multipleMongooseToObject(importOders),
@@ -18,12 +20,12 @@ class ImportOdersController {
 
     // [POST] /admin/importOders/store
     store(req, res, next) {
-       // res.send({...req.body, ...req.params});
-         const newImportOder = new ImportOder({
+        // res.send({...req.body, ...req.params});
+        const newImportOder = new ImportOder({
             product: req.params.idProduct,
             ...req.body,
-         });
-         newImportOder.save() 
+        });
+        newImportOder.save()
             .then(() => res.redirect('/admin/importOders'))
             .catch(next);
     }

@@ -16,10 +16,10 @@ class SaleOdersController {
                 // }));
                 res.render('admin/saleOders/show', {
                     layout: 'admin',
-                    saleOders: multipleMongooseToObject(saleOders), 
+                    saleOders: multipleMongooseToObject(saleOders),
 
                 });
-                 //res.json(saleOdersObj)
+                //res.json(saleOdersObj)
             })
             .catch(next);
     }
@@ -37,7 +37,6 @@ class SaleOdersController {
     }
 
     //[GET] /admin/saleOder/:id/edit
-
     edit(req, res, next) {
         SaleOder.findById(req.params.id)
             .then((saleOder) =>
@@ -49,6 +48,13 @@ class SaleOdersController {
             .catch(next);
     }
 
+    //[PUT] /admin/saleOder/:id/status
+    updateStatus(req, res, next) {
+        // res.json(req.body);
+        SaleOder.updateOne({ _id: req.params.id }, { status: req.body.newStatus })
+            .then(() => res.redirect('/admin/saleOders'))
+            .catch(next);
+    }
     //[PUT] /admin/saleOder/:id
     update(req, res, next) {
         // res.send(req.params.id);

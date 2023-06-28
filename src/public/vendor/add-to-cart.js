@@ -170,7 +170,6 @@ function displayCart() {
 
 
   const numCartItems = $('.cart .count');
-  console.log(numCartItems);
 
   var cartArray = shoppingCart.listCart();
   if (cartArray.length == 0) {

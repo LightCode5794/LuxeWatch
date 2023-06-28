@@ -69,40 +69,63 @@ class ClientSiteController {
                 default: return null
             }
         }
-        async function getProductsByPrice(brand, value) {
-            switch (value) {
-                case 0:
-                    return products;
-                case 1:
-                    return await products.where('price').lte(20000000);
-                case 2:
-                    return await products.where('price').within(20000001, 100000000);
-                case 3:
-                    return await products.where('price').within(100000001, 500000000);
-                case 4:
-                    return await products.where('price').gt(500000000);
-                default:
-                    return products;
+        async function getProductsByPrice(brand, category, value) {
+            if (category) {
+                switch (value) {
+                    case 0:
+                        // console.log(brand._id + 'ahihihi');
+                        return await Product.find({ brand: brand, category: category });
+                    case 1:
+                        console.log('case 1');
+                        return await Product.find({ brand: brand, category: category, price: { $lte: 20000000 } })
+                    case 2:
+                        console.log('case 2');
+                        return await Product.find({ brand: brand, category: category, price: { $gt: 20000001, $lte: 100000000 } });
+                    case 3:
+                        console.log('case 3');
+                        return await Product.find({ brand: brand, category: category, price: { $gt: 100000001, $lte: 500000000 } });
+                    case 4:
+                        console.log('case 4');
+                        return await Product.find({ brand: brand, category: category, price: { $gt: 500000000 } })
+                    default:
+                        return await Product.find({ brand: brand, category: category });
+                }
+            } else {
+                switch (value) {
+                    case 0:
+                        // console.log(brand._id + 'ahihihi');
+                        return await Product.find({ brand: brand });
+                    case 1:
+                        console.log('case 1');
+                        return await Product.find({ brand: brand, price: { $lte: 20000000 } })
+                    case 2:
+                        console.log('case 2');
+                        return await Product.find({ brand: brand, price: { $gt: 20000001, $lte: 100000000 } });
+                    case 3:
+                        console.log('case 3');
+                        return await Product.find({ brand: brand, price: { $gt: 100000001, $lte: 500000000 } });
+                    case 4:
+                        console.log('case 4');
+                        return await Product.find({ brand: brand, price: { $gt: 500000000 } })
+                    default:
+                        return await Product.find({ brand: brand, });
+                }
+
             }
         }
 
         try {
-            let x = undefined;
+
             const brand = await Brand.findOne({ name: req.params.name });
             const category = await Category.findOne({ name: getCategory(Number(req.query.category)) });
-            let products;
-            if (category) {
-                products = await Product.find({ brand: brand, category: category });
-            } else {
-              
-            }
-            // res.json(products);
+            const products = await getProductsByPrice(brand, category, Number(req.query.price));
             res.render('client/productByBrand', {
                 query: req.params.name,
                 products: multipleMongooseToObject(products),
                 user: singleMongooseToObject(req.user),
+                selectedCategory: req.query.category,
+                selectedPrice: req.query.price
             });
-
 
         } catch (err) {
             res.status(401).send(err.message);

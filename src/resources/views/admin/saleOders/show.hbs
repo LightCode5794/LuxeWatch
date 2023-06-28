@@ -2,7 +2,7 @@
     <div class="py-4">
         <div class="row align-items-center">
             <div class="col">
-                <h1 class="h3 m-0">Import Oders</h1>
+                <h1 class="h3 m-0">Sale Oders</h1>
             </div>
         </div>
     </div>
@@ -29,8 +29,14 @@
                     <td>{{sum @index 1}}</td>
                     <td>{{this.lastName}} {{this.firstName}}</td>
                     <td>{{moment this.createdAt format="DD/MM/YYYY"}}</td>
-                    <td>{{this.status}}</td>
-                    {{!-- <td>{{number this.unitPrice "0,0.00" }} VNĐ</td> --}}
+                    <td>
+                        <select class="status" name="status" class="form-select" required
+                            data-selected-status="{{status}}" data-oder-id="{{_id}}">
+                            <option value='0'>Pending</option>
+                            <option value='1'>Completed </option>
+                            <option value='2'>Cancel</option>
+                        </select>
+                    </td>
                     <td>{{number this.totalPrice "0,0.00" }} VNĐ</td>
 
                     <td>
@@ -44,11 +50,11 @@
                                 </svg>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="widget-context-menu-1">
-                                <li><a class="dropdown-item" href="/admin/ImportOders/{{this._id}}/edit">Edit</a></li>
-                                <li>
+                                <li><a class="dropdown-item" href="/admin/ImportOders/{{this._id}}/edit">View</a></li>
+                                {{!-- <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li> --}}
                             </ul>
                         </div>
                     </td>
@@ -58,6 +64,11 @@
         </table>
     </div>
 </div>
+
+{{!--form to update status --}}
+<form id="form-setStatus" method="POST">
+    <input type="hidden" name="newStatus" id="newStatus">
+</form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -73,6 +84,69 @@
                 }]
             });
         });
+
+
+        const selectedStatus = $(".status");
+        selectedStatus.select2({
+            width: '100%',
+            // templateResult: formatBrand,
+            templateSelection: formatBrand,
+        });
+        function formatBrand(status) {
+            if (!status.id) { return status.text; }
+            var originalOption = status.element;
+
+            let $status;
+
+            switch (Number(status.id)) {
+                case 0: {
+                    $status = $(
+                        `<div class="badge badge-sa-primary"> ${status.text}</div>`
+                    );
+                    break;
+                }
+
+                case 1: {
+
+                    $status = $(
+                        `<div class="badge badge-sa-success"> ${status.text}</div>`
+                    );
+                    break;
+                }
+
+                case 2: {
+                    $status = $(
+                        `<div class="badge badge-sa-danger"> ${status.text}</div>`
+                    );
+                    break;
+                }
+
+                default: {
+                    console.log(status.id)
+                    $status = $(
+                        `<div class="badge badge-sa-primary"> ${status.text}</div>`
+                    );
+                }
+
+            }
+            return $status;
+        }
+
+        selectedStatus.each(function () {
+            $(this).val($(this).data('selected-status'));
+            $(this).trigger('change')
+            $(this).on('change', function (e) {
+                const setStatusForm = document.getElementById('form-setStatus');
+                const newStatusInput = document.getElementById('newStatus');
+                const idOder = e.target.getAttribute('data-oder-id');
+
+                //newStatusInput.value = e.target.getAttribute('data-selected-status');
+                newStatusInput.value = e.target.value;
+                setStatusForm.action = `/admin/saleOders/${idOder}/status?_method=PUT`
+                setStatusForm.submit();
+            });
+        })
+
     })
 
 </script>

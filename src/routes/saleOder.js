@@ -7,7 +7,8 @@ const saleOdersController = require('../app/controllers/SaleOdersController');
 //router.get('/:id/edit', saleOdersController.edit);
 // router.put('/:id', saleOdersController.update);
 // router.get('/create', saleOdersController.create);
-router.post('/store/:idProduct', saleOdersController.store);
+//router.post('/store/:idProduct', saleOdersController.store);
+router.put('/:id/status', saleOdersController.updateStatus);
 router.get('/', saleOdersController.show);
 
 module.exports = router;

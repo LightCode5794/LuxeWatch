@@ -37,7 +37,7 @@ const saleOderSchema = new mongoose.Schema(
         },
         status:
         {
-            type: String,
+            type: Number,
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,

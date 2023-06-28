@@ -4,8 +4,9 @@
             <p><strong> {{query}}</strong> </p>
             <div class="filter-container d-flex justify-content-between gap-3">
                 <select class="form-select form-select-sm bg-black border-0 filter-select"
-                    aria-label=".form-select-sm example" name="category">
-                    <option value="0">Category</option>
+                    aria-label=".form-select-sm example" name="category" id="category"
+                    data-selected={{selectedCategory}}>
+                    <option value="0" disabled selected hidden>Category</option>
                     <option value="1">Woman</option>
                     <option value="2">Man</option>
                     <option value="3">Unisex</option>
@@ -20,7 +21,7 @@
                     <option value="4">Platinum</option>
                 </select> --}}
                 <select class="form-select form-select-sm bg-black border-0 filter-select"
-                    aria-label=".form-select-sm example" name="price">
+                    aria-label=".form-select-sm example" name="price" id="price" data-selected={{selectedPrice}}>
                     <option value="0">Price</option>
                     <option value="1">
                         < 20 triệu </option>
@@ -55,3 +56,29 @@
         {{/each}}
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+         // handle select category
+        const selectCategory = $("#category")
+        const categoryVal = Number(selectCategory.data('selected'));
+        if (categoryVal != 0) {
+            var o = new Option("All", "0");
+            selectCategory.append(o);
+        }
+        selectCategory.val(categoryVal);
+        selectCategory.trigger('change');
+     
+        // handle select price
+        const selectPrice = $("#price")
+        const priceVal = Number(selectPrice.data('selected'));
+        if (priceVal != 0) {
+            var o = new Option("All", "0");
+            selectPrice.append(o);
+        }
+        selectPrice.val(priceVal);
+        selectPrice.trigger('change');
+        console.log(priceVal);
+    })
+</script>
