@@ -8,7 +8,7 @@ class SaleOdersController {
         // res.json(req.params)
 
         SaleOder.find({})
-            .populate('productList.product', 'price')
+            .populate('productList.product', 'name price thumbnails')
             .then((saleOders) => {
                 // const saleOdersObj = saleOders.map((saleOder) => ({
                 //     ...saleOder.toObject(),
@@ -52,7 +52,7 @@ class SaleOdersController {
     updateStatus(req, res, next) {
         // res.json(req.body);
         SaleOder.updateOne({ _id: req.params.id }, { status: req.body.newStatus })
-            .then(() => res.redirect('/admin/saleOders'))
+            .then(() => res.redirect('back'))
             .catch(next);
     }
     //[PUT] /admin/saleOder/:id
@@ -61,6 +61,26 @@ class SaleOdersController {
         SaleOder.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/admin/saleOder'))
             .catch(next);
+    }
+
+    //[GET] /admin/saleOders/:id/view
+
+    async viewDetail(req, res, next) {
+        try {
+            const oder = await SaleOder.findOne({ _id: req.params.id })
+                .populate('productList.product', 'name price thumbnail')
+                .populate('user')
+
+           //  res.json(oder);
+
+            res.render('admin/saleOders/view', {
+                layout: 'admin',
+                oder: singleMongooseToObject(oder),
+            });
+
+        } catch (error) {
+
+        }
     }
 }
 

@@ -35,7 +35,7 @@ class ClientController {
         const newOderData = {
             ...req.body,
             productList: JSON.parse(req.body.productList),
-            user: req.user ? req.user._id : null ,
+            user: req.user._id,
             status: 0,
         }
 
