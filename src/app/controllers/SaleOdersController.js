@@ -71,11 +71,27 @@ class SaleOdersController {
                 .populate('productList.product', 'name price thumbnail')
                 .populate('user')
 
-           //  res.json(oder);
+            //  res.json(oder);
+
+            let statusOder;
+            switch (oder.status) {
+                case 0:
+                    statusOder = 'Pending';
+                    break;
+                case 1:
+                    statusOder = 'Completed';
+                    break;
+                case 0:
+                    statusOder = 'Cancelled';
+                    break;
+                default: statusOder = 'Pending';
+
+            }
 
             res.render('admin/saleOders/view', {
                 layout: 'admin',
                 oder: singleMongooseToObject(oder),
+                statusOder
             });
 
         } catch (error) {
