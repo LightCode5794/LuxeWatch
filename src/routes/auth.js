@@ -21,5 +21,6 @@ router.get(
         scope: ['profile', 'email'],
     }),
 );
+router.get('/logout', authController.logout);
 
 module.exports = router;

@@ -14,6 +14,7 @@ const methodOverride = require('method-override');
 const Handlebars = require("handlebars");
 const MomentHandler = require("handlebars.moment");
 const NumeralHelper = require("handlebars.numeral");
+const { equal } = require('assert');
 
 
 require("./config/passport");
@@ -50,7 +51,8 @@ app.engine(
             multiply: (a, b) => a * b,
             json: function (obj) {
                 return JSON.stringify(obj);
-            }
+            },
+            equal: (a, b) => a == b,
         },
     }),
 );

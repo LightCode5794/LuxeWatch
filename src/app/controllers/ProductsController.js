@@ -5,23 +5,73 @@ const Product = require('../models/product/product.model');
 const Category = require('../models/category/category.model');
 const Brand = require('../models/brand/brand.model');
 const Tag = require('../models/tag/tag.model');
-const { response } = require('express');
 const cloudinary = require('../../config/cloudinary');
+const SaleOder = require('../models/saleOder/saleOder.model');
+const ImportOder = require('../models/importOder/importOder.model');
 class ProductsController {
 
     //[GET] /admin/products
-    show(req, res, next) {
-        Product.find()
-            .populate('brand')
-            .populate('category')
-            .populate('tags')
-            .then((products) => {
-                res.render('admin/products/show', {
-                    layout: 'admin',
-                    products: multipleMongooseToObject(products),
-                });
-            })
-            .catch(next);
+    async show(req, res, next) {
+        async function getStock(productId) {
+            try {
+                let numSale, numImport, isStock;
+                const saleOder = await SaleOder.find({ "productList.product": productId }).select('productList');
+                const importOder = await ImportOder.find({ product: productId }).select('product quantity')
+                // caculate numSale and numImport
+                if (saleOder.length > 0) {
+                    saleOder.forEach(item => {
+                        numSale = item.productList.reduce((sum, acc) => {
+                            if (String(acc.product) == String(productId)) {
+
+                                sum += acc.count;
+                            }
+                            return sum;
+                        }, 0)
+                    })
+                } else {
+                    numSale = 0;
+                }
+
+                numImport = importOder.reduce((sum, acc) => {
+                    if (String(acc.product) == String(productId)) {
+                        sum += acc.quantity;
+                    }
+                    return sum;
+                }, 0)
+
+
+                console.log('numSale: ' + numSale)
+                console.log('numImport: ' + numImport)
+                console.log((numImport - numSale))
+                const stock = numImport - numSale;
+                return stock > 0 ? stock : 0;
+
+            } catch (error) {
+                res.send(error.message);
+            }
+        }
+
+        try {
+            const products = await Product.find()
+                .populate('brand')
+                .populate('category')
+                .populate('tags')
+
+
+            const productsObj = await Promise.all(products.map(async (product) => ({
+                ...product.toObject(),
+                stock: await getStock(product._id)
+                //total: saleOder.productList.reduce((sum, item) => sum + item.product.price * item.count, 0)
+            })));
+
+            // res.json(productsObj);
+            res.render('admin/products/show', {
+                layout: 'admin',
+                products: productsObj,
+            });
+        } catch (error) {
+            res.send(error.message);
+        }
     }
     // [GET] /admin/products/create
     async create(req, res, next) {
@@ -74,7 +124,7 @@ class ProductsController {
 
         }
         catch (err) {
-            res.status(401).send(err);
+            res.status(401).send(err.message);
         }
     }
 
@@ -104,23 +154,25 @@ class ProductsController {
         }
     }
 
-     //[GET] /admin/products/:id/view
+    //[GET] /admin/products/:id/view
 
-     async view(req, res, next) {
+    async view(req, res, next) {
 
         try {
 
             const categories = await Category.find({});
             const brands = await Brand.find({});
             const tags = await Tag.find({});
-            const product = await Product.findById(req.params.id)
+            const productView = await Product.findById(req.params.id)
+            const saleOders = await SaleOder.find({ "productList.product": productView._id });
+            const imporOders = await ImporOder.find({ product: productView._id });
 
             res.render('admin/products/view', {
                 layout: 'admin',
                 categories: multipleMongooseToObject(categories),
                 brands: multipleMongooseToObject(brands),
                 tags: multipleMongooseToObject(tags),
-                product: singleMongooseToObject(product),
+                product: singleMongooseToObject(productView),
             })
 
         } catch (error) {

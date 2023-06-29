@@ -67,7 +67,7 @@
                 <a class="read-more" title="Read More">Read More</a>
             </div>
             <div class="summary-content mt-3">
-                <form  action="#" method="post" enctype="multipart/form-data">
+                <form action="#" method="post" enctype="multipart/form-data">
                     <div class="cart-container">
                         {{!-- <div class="quantity">
                             <span class="minus">
@@ -89,10 +89,14 @@
                                 </svg>
                             </span>
                         </div> --}}
+                        {{#if @root.isStock}}
                         <button type="button" name="add-to-cart" data-name="{{name}}" data-price="{{price}}"
-                            data-code="{{code}}" data-img="{{thumbnail.path}}" data-id="{{_id}}"
-                            class="btn-dark btn btn-add-to-cart add-to-cart p-2 w-100">Add
-                            to cart</button>
+                            data-code="{{code}}" data-img="{{thumbnail.path}}" data-id="{{_id}}" data-stock="{{@root.stock}}"
+                            class="btn-dark btn btn-add-to-cart add-to-cart p-2 w-100">Add to cart</button>
+                        {{else}}
+                        <button type="button" name="add-to-cart"
+                            class="btn-dark btn btn-add-to-cart add-to-cart p-2 w-100" disabled> Sold out</button>
+                        {{/if}}
                     </div>
                 </form>
             </div>
@@ -132,7 +136,7 @@
         {{/with}}
     </div>
     <div class="content-containter mt-5">
-        <div class="text-center bg-black p-2 mb-5">
+        <div class="text-center bg-black p-1 mb-5">
             <h2 class="text-white">
                 <span>Recommend for you</span>
             </h2>

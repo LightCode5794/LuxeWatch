@@ -10,13 +10,14 @@ var shoppingCart = (function () {
 
   // Constructor
   class Item {
-    constructor(id, name, code, img, price, count) {
+    constructor(id, name, code, img, price, count, stock) {
       this.id = id;
       this.name = name;
       this.code = code;
       this.price = price;
       this.img = img;
       this.count = count;
+      this.stock = stock;
     }
   }
 
@@ -40,16 +41,18 @@ var shoppingCart = (function () {
   var obj = {};
 
   // Add to cart
-  obj.addItemToCart = function (id, name, code, img, price, count) {
+  obj.addItemToCart = function (id, name, code, img, price, count, stock) {
 
     for (var item in cart) {
       if (cart[item].code === code) {
-        cart[item].count++;
-        saveCart();
+        if (cart[item].stock > cart[item].count) {
+          cart[item].count++;
+          saveCart();
+        }
         return;
       }
     }
-    var item = new Item(id, name, code, img, price, count);
+    var item = new Item(id, name, code, img, price, count, stock);
     cart.push(item);
     saveCart();
   }
@@ -153,7 +156,8 @@ $('.add-to-cart').click(function (event) {
   var code = $(this).data('code');
   var img = $(this).data('img');
   var id = $(this).data('id');
-  shoppingCart.addItemToCart(id, name, code, img, price, 1);
+  var stock = $(this).data('stock');
+  shoppingCart.addItemToCart(id, name, code, img, price, 1, stock);
   displayCart();
   checkElementCart();
 });
@@ -243,6 +247,7 @@ $('.show-cart').on("click", ".minus-item", function (event) {
 $('.show-cart').on("click", ".plus-item", function (event) {
   var code = $(this).data('code')
   shoppingCart.addItemToCart('', '', code, '', 0, 0);
+
   displayCart();
 })
 

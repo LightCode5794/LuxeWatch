@@ -6,7 +6,7 @@ const clientRoutes = require('./client');
 const { isLoggedIn } = require('../middlewares/auth');
 
 function routes(app) {
-    app.use('/admin', adminRoutes);
+    app.use('/admin',  adminRoutes);
     app.use('/auth', authRouter);
     app.use('/', clientRoutes);
 }

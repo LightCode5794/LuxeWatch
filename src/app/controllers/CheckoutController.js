@@ -12,36 +12,28 @@ class ClientController {
         res.render('client/checkout', {
             user: singleMongooseToObject(req.user)
         })
-        // try {
-        //     const products = await Product.find()
-        //         .populate('brand')
-        //         .populate('category')
-        //         .populate('tags');
-        //     const brands = await Brand.find();
-
-        //     res.render('home', {
-        //         brands: multipleMongooseToObject(brands),
-        //         products: multipleMongooseToObject(products),
-        //     });
-
-        // } catch (err) {
-        //     res.status(401).send(err.message);
-        // }
     }
     // [POST]/checkout/store
-    store(req, res, next) {
+    async store(req, res, next) {
 
+        try {
 
-        const newOderData = {
-            ...req.body,
-            productList: JSON.parse(req.body.productList),
-            user: req.user._id,
-            status: 0,
+            const newOderData = {
+                ...req.body,
+                productList: JSON.parse(req.body.productList),
+                user: req.user? req.user._id : null,
+                status: 0,
+            }
+
+            const newOder = new SaleOder(newOderData);
+            await newOder.save();
+            res.render('client/checkoutSuccess', {
+                user: singleMongooseToObject(req.user)
+            })
+        } catch (error) {
+            res.send(error.message);
         }
-
-        const newOder = new SaleOder(newOderData);
-        newOder.save();
-        res.json(newOder);
+        // res.json(newOder);
     }
 
 }
